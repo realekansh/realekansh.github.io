@@ -1,425 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wing - About Me</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
-                        'slide-up': 'slideUp 0.5s ease-out',
-                        'fade-in': 'fadeIn 0.8s ease-out',
-                        'scale-in': 'scaleIn 0.6s ease-out'
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-20px)' }
-                        },
-                        glow: {
-                            '0%': { boxShadow: '0 0 20px rgba(147, 51, 234, 0.5)' },
-                            '100%': { boxShadow: '0 0 40px rgba(147, 51, 234, 0.8)' }
-                        },
-                        slideUp: {
-                            '0%': { opacity: '0', transform: 'translateY(30px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' }
-                        },
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' }
-                        },
-                        scaleIn: {
-                            '0%': { opacity: '0', transform: 'scale(0.9)' },
-                            '100%': { opacity: '1', transform: 'scale(1)' }
-                        }
-                    },
-                    backgroundImage: {
-                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                        'grid-pattern': 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)'
-                    }
-                }
-            }
-        }
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-            background-attachment: fixed;
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .tech-grid {
-            background-image: var(--tw-gradient-to), 
-                            linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), 
-                            linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 100% 100%, 20px 20px, 20px 20px;
-        }
-        .hover-lift {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .hover-lift:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-        }
-        .social-icon {
-            transition: all 0.3s ease;
-        }
-        .social-icon:hover {
-            transform: scale(1.2) rotate(5deg);
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ekansh Bhavik — Portfolio</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <meta name="description" content="Ekansh Bhavik — developer, theme designer, community moderator. Projects, contact, communities." />
 </head>
-<body class="min-h-screen text-white overflow-x-hidden">
-    <div class="fixed inset-0 tech-grid opacity-30 pointer-events-none"></div>
-    
-    <div class="fixed top-20 left-10 w-2 h-2 bg-purple-400 rounded-full animate-float opacity-60"></div>
-    <div class="fixed top-40 right-20 w-3 h-3 bg-blue-400 rounded-full animate-float opacity-40" style="animation-delay: -2s;"></div>
-    <div class="fixed bottom-32 left-20 w-1 h-1 bg-cyan-400 rounded-full animate-float opacity-80" style="animation-delay: -4s;"></div>
-    
-    <div class="relative z-10">
-        <header class="text-center py-20 animate-fade-in">
-            <div class="mb-8">
-                <div class="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 p-1 animate-glow">
-                    <div class="w-full h-full rounded-full bg-gray-900 flex items-center justify-center">
-                        <i class="fas fa-user-astronaut text-4xl text-white"></i>
-                    </div>
-                </div>
-            </div>
-            <h1 class="text-6xl md:text-7xl font-bold mb-4 gradient-text animate-slide-up">
-                Wing's Universe
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-300 mb-8 animate-slide-up" style="animation-delay: 0.2s;">
-                Tech Enthusiast | Developer | Vibecoder
-            </p>
-            <div class="flex justify-center space-x-6 animate-slide-up" style="animation-delay: 0.4s;">
-                <span class="px-4 py-2 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">🚀 Innovation</span>
-                <span class="px-4 py-2 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">💻 Development</span>
-                <span class="px-4 py-2 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">🎮 Gaming</span>
-            </div>
-        </header>
-
-        <div class="max-w-6xl mx-auto px-4 pb-20">
-            <section class="mb-16 animate-scale-in">
-                <div class="glass-card rounded-2xl p-8 hover-lift">
-                    <div class="flex items-center mb-6">
-                        <i class="fas fa-user-circle text-3xl text-purple-400 mr-4"></i>
-                        <h2 class="text-3xl font-bold gradient-text">Who is Wing?</h2>
-                    </div>
-                    <div class="text-gray-300 leading-relaxed text-lg">
-                        <p>Hello there! I'm <strong class="text-white">Ekansh</strong>, also known online as <strong class="text-purple-400">WingAndroid</strong> and <strong class="text-cyan-400">not_real_ekansh</strong>. I've been passionate about <strong class="text-white">technology</strong> ever since I was a kid. Over the years, I've explored <strong class="text-white">coding, gaming, Android app development</strong>, and more. I've also contributed as a <strong class="text-purple-400">Theme Designer</strong> and <strong class="text-cyan-400">Community Moderator</strong> for <strong class="text-orange-400">Xiaomi Global</strong>.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-16">
-                <h2 class="text-4xl font-bold text-center mb-12 gradient-text">About Wing</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="glass-card rounded-xl p-6 hover-lift animate-scale-in">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-id-card text-2xl text-purple-400 mr-3"></i>
-                            <h3 class="text-xl font-semibold">Identity</h3>
-                        </div>
-                        <p class="text-gray-300"><strong>Name:</strong> Ekansh Amit Bhavik</p>
-                        <p class="text-gray-300"><strong>Age:</strong> 16</p>
-                        <p class="text-gray-300"><strong>Pronouns:</strong> He/Him</p>
-                    </div>
-                    
-                    <div class="glass-card rounded-xl p-6 hover-lift animate-scale-in" style="animation-delay: 0.1s;">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-map-marker-alt text-2xl text-red-400 mr-3"></i>
-                            <h3 class="text-xl font-semibold">Location</h3>
-                        </div>
-                        <p class="text-gray-300"><strong>Country:</strong> India 🇮🇳</p>
-                        <p class="text-gray-300"><strong>Timezone:</strong> IST (UTC+5:30)</p>
-                    </div>
-
-                    <div class="glass-card rounded-xl p-6 hover-lift animate-scale-in md:col-span-2 lg:col-span-1" style="animation-delay: 0.2s;">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-briefcase text-2xl text-green-400 mr-3"></i>
-                            <h3 class="text-xl font-semibold">Roles</h3>
-                        </div>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm">Student</span>
-                            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm">Developer</span>
-                            <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-sm">Data Analyst</span>
-                            <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-sm">Designer</span>
-                            <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-sm">Blogger</span>
-                            <span class="px-3 py-1 bg-pink-500/20 text-pink-300 rounded-full text-sm">Gamer</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-16">
-                <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Tech Stack</h2>
-                <div class="glass-card rounded-2xl p-8 hover-lift">
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-                        <div class="text-center group">
-                            <div class="w-16 h-16 mx-auto mb-3 rounded-xl bg-yellow-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                <i class="fab fa-python text-2xl text-yellow-400"></i>
-                            </div>
-                            <p class="text-sm text-gray-300">Python</p>
-                        </div>
-                        <div class="text-center group">
-                            <div class="w-16 h-16 mx-auto mb-3 rounded-xl bg-orange-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                <i class="fab fa-java text-2xl text-orange-400"></i>
-                            </div>
-                            <p class="text-sm text-gray-300">Java</p>
-                        </div>
-                        <div class="text-center group">
-                            <div class="w-16 h-16 mx-auto mb-3 rounded-xl bg-red-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                <i class="fab fa-html5 text-2xl text-red-400"></i>
-                            </div>
-                            <p class="text-sm text-gray-300">HTML</p>
-                        </div>
-                        <div class="text-center group">
-                            <div class="w-16 h-16 mx-auto mb-3 rounded-xl bg-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                <i class="fas fa-terminal text-2xl text-purple-400"></i>
-                            </div>
-                            <p class="text-sm text-gray-300">Bash</p>
-                        </div>
-                        <div class="text-center group">
-                            <div class="w-16 h-16 mx-auto mb-3 rounded-xl bg-green-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                <i class="fab fa-android text-2xl text-green-400"></i>
-                            </div>
-                            <p class="text-sm text-gray-300">Kotlin</p>
-                        </div>
-                        <div class="text-center group">
-                            <div class="w-16 h-16 mx-auto mb-3 rounded-xl bg-blue-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                <i class="fas fa-paint-brush text-2xl text-blue-400"></i>
-                            </div>
-                            <p class="text-sm text-gray-300">Material 3</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-16">
-                <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Featured Projects</h2>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="glass-card rounded-xl p-6 hover-lift animate-scale-in">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-folder text-2xl text-yellow-400 mr-3"></i>
-                            <h3 class="text-xl font-semibold">Shinka FileMan</h3>
-                        </div>
-                        <p class="text-gray-300 mb-4">A smart file manager for better organization and productivity.</p>
-                        <div class="flex space-x-2">
-                            <span class="px-3 py-1 bg-yellow-500/20 text-yellow-300 rounded-full text-sm">File Manager</span>
-                            <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-sm">Productivity</span>
-                        </div>
-                    </div>
-
-                    <div class="glass-card rounded-xl p-6 hover-lift animate-scale-in" style="animation-delay: 0.1s;">
-                        <div class="flex items-center mb-4">
-                            <i class="fab fa-telegram text-2xl text-blue-400 mr-3"></i>
-                            <h3 class="text-xl font-semibold">HyperFederation Bot</h3>
-                        </div>
-                        <p class="text-gray-300 mb-4">A powerful Telegram federation management bot with advanced features.</p>
-                        <div class="flex space-x-2">
-                            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm">Telegram</span>
-                            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm">Management</span>
-                        </div>
-                    </div>
-
-                    <div class="glass-card rounded-xl p-6 hover-lift animate-scale-in" style="animation-delay: 0.2s;">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-robot text-2xl text-cyan-400 mr-3"></i>
-                            <h3 class="text-xl font-semibold">HyperGriot Bot</h3>
-                        </div>
-                        <p class="text-gray-300 mb-4">A Telegram bot designed for comprehensive group management.</p>
-                        <div class="flex space-x-2">
-                            <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-sm">Bot</span>
-                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-sm">Groups</span>
-                        </div>
-                    </div>
-
-                    <div class="glass-card rounded-xl p-6 hover-lift animate-scale-in" style="animation-delay: 0.3s;">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-rocket text-2xl text-red-400 mr-3"></i>
-                            <h3 class="text-xl font-semibold">SpaceOS</h3>
-                        </div>
-                        <p class="text-gray-300 mb-4">A custom operating system project with a unique vision for the future.</p>
-                        <div class="flex space-x-2">
-                            <span class="px-3 py-1 bg-red-500/20 text-red-300 rounded-full text-sm">OS</span>
-                            <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-sm">System</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-16">
-                <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Founded By Wing</h2>
-                <div class="glass-card rounded-2xl p-8">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="text-center">
-                            <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center">
-                                <i class="fas fa-folder-open text-2xl text-white"></i>
-                            </div>
-                            <h3 class="text-lg font-semibold mb-2">Shinka FileMan</h3>
-                            <p class="text-gray-400 text-sm">Smart File Management</p>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-red-400 to-pink-500 flex items-center justify-center">
-                                <i class="fas fa-rocket text-2xl text-white"></i>
-                            </div>
-                            <h3 class="text-lg font-semibold mb-2">SpaceOS</h3>
-                            <p class="text-gray-400 text-sm">Custom Operating System</p>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center">
-                                <i class="fas fa-users text-2xl text-white"></i>
-                            </div>
-                            <h3 class="text-lg font-semibold mb-2">HyperTech</h3>
-                            <p class="text-gray-400 text-sm">Tech Community</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-16">
-                <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Connect With Wing</h2>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="glass-card rounded-xl p-8">
-                        <h3 class="text-2xl font-semibold mb-6 flex items-center">
-                            <i class="fas fa-share-alt text-purple-400 mr-3"></i>
-                            Social Media
-                        </h3>
-                        <div class="grid grid-cols-2 gap-4">
-                            <a href="https://github.com/real-ekansh" target="_blank" class="flex items-center p-3 glass-card rounded-lg hover:bg-white/10 transition-colors social-icon">
-                                <i class="fab fa-github text-xl mr-3"></i>
-                                <span class="text-sm">GitHub</span>
-                            </a>
-                            <a href="http://t.me/not_real_ekansh" target="_blank" class="flex items-center p-3 glass-card rounded-lg hover:bg-white/10 transition-colors social-icon">
-                                <i class="fab fa-telegram text-xl text-blue-400 mr-3"></i>
-                                <span class="text-sm">Telegram</span>
-                            </a>
-                            <a href="https://www.instagram.com/not_real_ekansh" target="_blank" class="flex items-center p-3 glass-card rounded-lg hover:bg-white/10 transition-colors social-icon">
-                                <i class="fab fa-instagram text-xl text-pink-400 mr-3"></i>
-                                <span class="text-sm">Instagram</span>
-                            </a>
-                            <a href="https://x.com/Wing_Android" target="_blank" class="flex items-center p-3 glass-card rounded-lg hover:bg-white/10 transition-colors social-icon">
-                                <i class="fab fa-twitter text-xl text-blue-300 mr-3"></i>
-                                <span class="text-sm">X (Twitter)</span>
-                            </a>
-                            <a href="https://discordapp.com/users/not_real_ekansh" target="_blank" class="flex items-center p-3 glass-card rounded-lg hover:bg-white/10 transition-colors social-icon">
-                                <i class="fab fa-discord text-xl text-indigo-400 mr-3"></i>
-                                <span class="text-sm">Discord</span>
-                            </a>
-                            <a href="https://www.reddit.com/user/Dead_Rider0021/" target="_blank" class="flex items-center p-3 glass-card rounded-lg hover:bg-white/10 transition-colors social-icon">
-                                <i class="fab fa-reddit text-xl text-orange-500 mr-3"></i>
-                                <span class="text-sm">Reddit</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="space-y-6">
-                        <div class="glass-card rounded-xl p-6">
-                            <h3 class="text-xl font-semibold mb-4 flex items-center">
-                                <i class="fas fa-envelope text-green-400 mr-3"></i>
-                                Direct Contact
-                            </h3>
-                            <div class="space-y-3">
-                                <a href="https://t.me/not_real_ekansh" target="_blank" class="flex items-center p-3 glass-card rounded-lg hover:bg-white/10 transition-colors">
-                                    <i class="fab fa-telegram text-xl text-blue-400 mr-3"></i>
-                                    <span>@not_real_ekansh</span>
-                                </a>
-                                <a href="mailto:ekanshbhawik@gmail.com" target="_blank" class="flex items-center p-3 glass-card rounded-lg hover:bg-white/10 transition-colors">
-                                    <i class="fas fa-envelope text-xl text-red-400 mr-3"></i>
-                                    <span>Email Me</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="glass-card rounded-xl p-6">
-                            <h3 class="text-xl font-semibold mb-4 flex items-center">
-                                <i class="fas fa-users text-cyan-400 mr-3"></i>
-                                Communities
-                            </h3>
-                            <div class="space-y-3">
-                                <a href="https://t.me/addlist/IeEnp5q4OaE5MDY1" target="_blank" class="flex items-center p-3 glass-card rounded-lg hover:bg-white/10 transition-colors">
-                                    <i class="fab fa-telegram text-xl text-blue-400 mr-3"></i>
-                                    <span>Telegram Community</span>
-                                </a>
-                                <a href="https://discord.gg/VFQGSgnZ" target="_blank" class="flex items-center p-3 glass-card rounded-lg hover:bg-white/10 transition-colors">
-                                    <i class="fab fa-discord text-xl text-indigo-400 mr-3"></i>
-                                    <span>Discord Server</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar" id="top">
+    <div class="nav-inner container">
+      <div class="center-wrapper">
+        <div class="brand">
+          <div class="brand-avatar" id="brandAvatar" aria-hidden="false">
+            <!-- image is absolute-positioned; fallback hidden until needed -->
+            <img id="brandImg" src="avatar.jpg" alt="Ekansh avatar" />
+            <span id="brandFallback" aria-hidden="true">EB</span>
+          </div>
+          <div class="brand-text">
+            <div class="name">Ekansh Bhavik</div>
+            <div class="sub">Wing — Dev &amp; Designer</div>
+          </div>
         </div>
 
-        <footer class="text-center py-12 border-t border-white/10">
-            <div class="max-w-4xl mx-auto px-4">
-                <div class="mb-6">
-                    <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-r from-purple-400 to-pink-500 flex items-center justify-center mb-4">
-                        <i class="fas fa-heart text-xl text-white"></i>
-                    </div>
-                    <p class="text-2xl font-semibold mb-2"> Thanks for Visiting</p>
-                    <p class="text-gray-400">Signing off,</p>
-                    <p class="text-xl font-bold gradient-text">not_real_ekansh ✨</p>
-                </div>
-                <div class="flex justify-center space-x-6 text-sm text-gray-500">
-                    <span>Made with 💜 by Wing</span>
-                    <span>•</span>
-                    <span>© 2025 Wing's Universe</span>
-                </div>
-            </div>
-        </footer>
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+          <a href="#network">My Network</a>
+        </nav>
+
+        <button id="m3Toggle" class="m3-toggle" aria-pressed="false" aria-label="Toggle theme">
+          <span class="track" aria-hidden="true"></span>
+          <span class="thumb" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1zm5.657 3.343a1 1 0 0 1 1.32.083l1.414 1.414a1 1 0 0 1-1.414 1.414L17.564 7a1 1 0 0 1 .093-1.657zM21 11a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2h2z"/></svg>
+          </span>
+        </button>
+      </div>
     </div>
+  </header>
 
-    <script>
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero container">
+      <div class="hero-left">
+        <h1 class="hero-title"><span class="hi">Hey —</span> I’m <span class="gradient-name">Ekansh</span></h1>
+        <p class="hero-sub">Developer • Theme Designer • Community Moderator. I build tools, bots, and experiences that scale. Minimal, fast, and reliable — that’s the vibe.</p>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+        <div class="hero-ctas">
+          <a class="btn-primary" href="#projects">View Projects</a>
+          <a class="btn-outline" href="#contact">Contact</a>
+        </div>
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const cards = document.querySelectorAll('.glass-card');
-            cards.forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'all 0.6s ease-out';
-                observer.observe(card);
-            });
-        });
+        <div class="hero-pills">
+          <span class="pill">Student</span>
+          <span class="pill">Developer</span>
+          <span class="pill">Theme Designer</span>
+        </div>
+      </div>
 
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelectorAll('.animate-float');
-            const speed = 0.5;
+      <div class="hero-right">
+        <div class="hero-photo">
+          <img src="avatar.jpg" alt="Ekansh avatar" class="hero-img" />
+        </div>
+      </div>
+    </section>
 
-            parallax.forEach(element => {
-                const yPos = -(scrolled * speed);
-                element.style.transform = `translateY(${yPos}px)`;
-            });
-        });
-    </script>
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="heading">About Me</h2>
+
+        <div class="about-wrap">
+          <div class="card about-card">
+            <p>Hey there! I'm <strong>Ekansh Bhavik</strong> (aka <strong>notrealekansh</strong> / <strong>WingAndroid</strong>). I’ve been passionate about technology since I was a kid. Over the years I’ve explored coding, gaming, Android app development, and more. I’ve contributed as a Theme Designer and as a Community Moderator for Xiaomi Global.</p>
+
+            <p>I love building practical things — Telegram bots, Android apps, and compact web tools. I focus on minimal UI/UX and ship projects that actually help people. I also help run and moderate active communities around theming and Android development.</p>
+
+            <p class="muted-meta"><strong>Student</strong> • 16 • India (IST)</p>
+
+            <div class="tech-block">
+              <h4>Tech &amp; Tools</h4>
+
+              <div class="tech-row">
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">HTML</span>
+                <span class="tech-badge">CSS</span>
+                <span class="tech-badge">Java</span>
+                <span class="tech-badge">JavaScript</span>
+                <span class="tech-badge">SQL</span>
+                <span class="tech-badge">Bash</span>
+              </div>
+
+              <div class="tech-row">
+                <span class="tech-badge">Material 3</span>
+                <span class="tech-badge">Kotlin</span>
+              </div>
+
+              <div class="tech-row">
+                <span class="tech-badge">VS Code</span>
+                <span class="tech-badge">Git</span>
+                <span class="tech-badge">Android Studio</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="heading">Featured Projects</h2>
+
+        <div class="projects-grid">
+          <article class="card">
+            <h3>Shinka FileMan</h3>
+            <p class="muted">Smart file manager for better organization and productivity.</p>
+            <div class="card-cta"><a class="btn-outline small-cta" href="https://github.com/real-ekansh" target="_blank">Repo</a></div>
+          </article>
+
+          <article class="card">
+            <h3>HyperFederation Bot</h3>
+            <p class="muted">Telegram federation manager with advanced moderation features.</p>
+            <div class="card-cta"><a class="btn-outline small-cta" href="#" target="_blank">Repo</a></div>
+          </article>
+
+          <article class="card">
+            <h3>SpaceOS</h3>
+            <p class="muted">A custom OS project with a unique UI vision.</p>
+            <div class="card-cta"><a class="btn-outline small-cta" href="#" target="_blank">Repo</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 class="heading">Contact</h2>
+
+        <div class="contact-grid">
+          <div>
+            <div class="card">
+              <h3>Get in touch</h3>
+
+              <div class="contact-list">
+                <div class="contact-item"><i class="fas fa-envelope"></i><div><strong>Email</strong><div class="muted">ekanshbhawik@gmail.com</div></div></div>
+                <div class="contact-item"><i class="fab fa-telegram"></i><div><strong>Telegram</strong><div class="muted">@not_real_ekansh</div></div></div>
+                <div class="contact-item"><i class="fab fa-twitter"></i><div><strong>X</strong><div class="muted">@Wing_Android</div></div></div>
+                <div class="contact-item"><i class="fab fa-discord"></i><div><strong>Discord</strong><div class="muted">not_real_ekansh</div></div></div>
+                <div class="contact-item"><i class="fab fa-instagram"></i><div><strong>Instagram</strong><div class="muted">@not_real_ekansh</div></div></div>
+              </div>
+            </div>
+          </div>
+
+          <aside>
+            <div class="card quick-contact">
+              <h4>Quick contact</h4>
+              <p class="muted">Want me to help with a collab, a theme, or a bot? Send a message via Telegram or email — I reply quick.</p>
+              <a class="btn-primary" href="mailto:ekanshbhawik@gmail.com">Email Me</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+   <!-- NETWORK -->
+<section id="network" class="section">
+  <div class="container">
+    <h2 class="heading">My Network</h2>
+
+    <div class="network-grid">
+
+      <div class="card">
+        <h4>Telegram Community</h4>
+        <p class="muted">Active Android theme & dev community.</p>
+        <a class="btn-outline small-cta" href="https://t.me/addlist/IeEnp5q4OaE5MDY1" target="_blank">Join</a>
+      </div>
+
+      <div class="card">
+        <h4>Discord Server</h4>
+        <p class="muted">Chat, collabs, help, tests.</p>
+        <a class="btn-outline small-cta" href="https://discord.gg/VFQGSgnZ" target="_blank">Join</a>
+      </div>
+
+      <div class="card">
+        <h4>GitHub Profile</h4>
+        <p class="muted">Explore my projects, experiments and open-source work.</p>
+        <a class="btn-outline small-cta" href="https://github.com/real-ekansh" target="_blank">View on GitHub</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>Made with 💜 by Wing</div>
+      <div class="muted">© 2025 Wing's Universe</div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Theme toggle + avatar fallback + nav highlighting
+    const m3Toggle = document.getElementById('m3Toggle');
+    const bodyEl = document.body;
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const brandImg = document.getElementById('brandImg');
+    const brandFallback = document.getElementById('brandFallback');
+
+    // init theme
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') bodyEl.classList.add('light');
+
+    function updateToggle() {
+      m3Toggle.setAttribute('aria-pressed', bodyEl.classList.contains('light') ? 'true' : 'false');
+    }
+    updateToggle();
+
+    m3Toggle.addEventListener('click', () => {
+      bodyEl.classList.toggle('light');
+      localStorage.setItem('theme', bodyEl.classList.contains('light') ? 'light' : 'dark');
+      updateToggle();
+    });
+
+    // robust avatar fallback
+    if (brandImg) {
+      // hide fallback initially
+      if (brandFallback) brandFallback.style.display = 'none';
+
+      brandImg.addEventListener('load', () => {
+        brandImg.style.display = 'block';
+        if (brandFallback) brandFallback.style.display = 'none';
+      });
+
+      brandImg.addEventListener('error', () => {
+        brandImg.style.display = 'none';
+        if (brandFallback) brandFallback.style.display = 'inline-flex';
+      });
+
+      // if src missing
+      if (!brandImg.getAttribute('src')) {
+        brandImg.style.display = 'none';
+        if (brandFallback) brandFallback.style.display = 'inline-flex';
+      }
+    }
+
+    // nav active highlight (scroll)
+    function onScroll() {
+      const fromTop = window.scrollY + 120;
+      navLinks.forEach(link => {
+        const section = document.querySelector(link.getAttribute('href'));
+        if (!section) return;
+        if (section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
+          link.classList.add('active');
+        } else link.classList.remove('active');
+      });
+    }
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+  </script>
 </body>
 </html>
