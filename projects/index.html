@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0f14">
+  <title>Projects &mdash; Ekansh Bhavik</title>
+  <meta name="description" content="Projects by Ekansh Bhavik across HyperCore, Hyprland Rice, Telegram automation, downloader tools, shell utilities, and file organization.">
+  <link rel="canonical" href="https://ekansh.dev/projects">
+  <meta property="og:title" content="Projects &mdash; Ekansh Bhavik">
+  <meta property="og:description" content="Practical software projects, open-source tooling, and automation systems.">
+  <meta property="og:image" content="https://ekansh.dev/assets/avatar.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Projects &mdash; Ekansh Bhavik">
+  <meta name="twitter:description" content="Practical software projects, open-source tooling, and automation systems.">
+  <meta name="twitter:image" content="https://ekansh.dev/assets/avatar.jpg">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/avatar.jpg">
+  <link rel="manifest" href="/assets/icons/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/themes.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <script type="module" src="/js/main.js"></script>
+</head>
+<body data-page="projects">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-navbar>
+    <div class="container nav-shell">
+      <a class="brand-mark" href="/" aria-label="Ekansh Bhavik home">
+        <img src="/assets/avatar.jpg" alt="Ekansh Bhavik avatar" width="44" height="44">
+      </a>
+      <nav class="nav-links" id="primary-nav" aria-label="Primary navigation" data-primary-nav>
+        <a class="nav-link" href="/" data-nav-link="home">Home</a>
+        <a class="nav-link" href="/about/" data-nav-link="about">About</a>
+        <a class="nav-link" href="/projects/" data-nav-link="projects">Projects</a>
+        <a class="nav-link" href="/communities/" data-nav-link="communities">Communities</a>
+        <a class="nav-link" href="/contact/" data-nav-link="contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-button" type="button" data-theme-toggle aria-label="Switch theme" aria-pressed="false">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#moon"></use></svg>
+        </button>
+        <button class="icon-button nav-toggle" type="button" data-nav-toggle aria-label="Open navigation" aria-controls="primary-nav" aria-expanded="false">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#menu"></use></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main" id="main">
+    <section class="page-hero container reveal" aria-labelledby="projects-title">
+      <p class="page-kicker">Projects</p>
+      <h1 class="page-title" id="projects-title">Proof of work through practical systems.</h1>
+      <p class="page-lede">These projects focus on reusable bot infrastructure, Linux workflow customization, Telegram automation, developer utilities, and desktop cleanup tools.</p>
+    </section>
+
+    <section class="section container" aria-label="Project list">
+      <div class="projects-grid">
+        <article class="card featured-card span-all reveal">
+          <div class="visual-panel" aria-hidden="true">
+            <span class="visual-label">HyperCore</span>
+            <div class="visual-terminal">
+              <div class="terminal-line"><span class="terminal-dot"></span><span>core.load_plugins()</span></div>
+              <div class="terminal-line"><span class="terminal-dot"></span><span>telethon + python-telegram-bot</span></div>
+              <div class="terminal-line"><span class="terminal-dot"></span><span>focus on features, not boilerplate</span></div>
+            </div>
+          </div>
+          <div class="card-copy">
+            <div class="card-title-row">
+              <h2>HyperCore</h2>
+              <span class="tag tag-accent">Active</span>
+            </div>
+            <div class="card-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Telethon</span>
+              <span class="tag">Open Source</span>
+              <span class="tag">Bot Core</span>
+            </div>
+            <p class="card-description">Minimal reusable core engine for building Telegram bots and userbots with Python, Telethon, and python-telegram-bot. It abstracts setup boilerplate so developers can focus on features.</p>
+            <p><strong>Why it matters:</strong> It standardizes bot development patterns and gives community projects a cleaner foundation.</p>
+            <div class="card-actions">
+              <a class="button button-primary" href="/projects/hypercore/">Learn more</a>
+              <a class="button button-outline" href="https://github.com/realekansh/HyperCore" target="_blank" rel="noopener noreferrer">
+                Repository
+                <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#external"></use></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card medium-card reveal">
+          <div class="card-copy">
+            <h3>Hyprland Rice</h3>
+            <div class="card-tags">
+              <span class="tag">Bash</span>
+              <span class="tag">Linux</span>
+              <span class="tag">Wayland</span>
+            </div>
+            <p class="card-description">A modular, distro-aware Hyprland setup with a safe installer, configs, and documentation for Arch Linux ecosystems.</p>
+            <div class="card-actions">
+              <a class="button button-primary" href="/projects/hyprland-rice/">Learn more</a>
+              <a class="button button-outline" href="https://github.com/realekansh/Hyprland-Rice" target="_blank" rel="noopener noreferrer">Repository</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card medium-card reveal">
+          <div class="card-copy">
+            <h3>Post Management Bot</h3>
+            <div class="card-tags">
+              <span class="tag">Python</span>
+              <span class="tag">SQLite</span>
+              <span class="tag">Automation</span>
+            </div>
+            <p class="card-description">Telegram post management bot by Team HyperTech for drafting, previewing, publishing, and scheduling channel posts with delivery tracking.</p>
+            <div class="card-actions">
+              <a class="button button-primary" href="/projects/post-management-bot/">Learn more</a>
+              <a class="button button-outline" href="https://github.com/realekansh/PostManager-Bot" target="_blank" rel="noopener noreferrer">Repository</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card small-card reveal">
+          <div class="card-copy">
+            <h3>Shell Bot</h3>
+            <p class="card-description">A developer utility bot that executes Python snippets and Bash commands directly inside Telegram for quick testing.</p>
+            <div class="card-actions">
+              <a class="button button-primary" href="/projects/shell-bot/">Learn more</a>
+              <a class="button button-outline" href="https://github.com/realekansh/Shell-Bot" target="_blank" rel="noopener noreferrer">Repository</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card small-card reveal">
+          <div class="card-copy">
+            <h3>Downloader Bot</h3>
+            <p class="card-description">A robust media downloader bot designed to securely fetch and deliver files from platform URLs directly via Telegram.</p>
+            <div class="card-actions">
+              <a class="button button-primary" href="/projects/downloader-bot/">Learn more</a>
+              <a class="button button-outline" href="https://github.com/realekansh/Downloader-Bot" target="_blank" rel="noopener noreferrer">Repository</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card small-card reveal">
+          <div class="card-copy">
+            <h3>File Organizer</h3>
+            <p class="card-description">An interactive CLI tool that automatically cleans up directories and sorts files into readable groups.</p>
+            <div class="card-actions">
+              <a class="button button-primary" href="/projects/file-organizer/">Learn more</a>
+              <a class="button button-outline" href="https://github.com/realekansh/FileOrganizer" target="_blank" rel="noopener noreferrer">Repository</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2026 Ekansh Bhavik.</p>
+      <p>Built with minimal aesthetics and maximum utility.</p>
+    </div>
+  </footer>
+</body>
+</html>

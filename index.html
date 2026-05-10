@@ -1,306 +1,126 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ekansh Bhavik — Portfolio</title>
-
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-
-  <meta name="description" content="Ekansh Bhavik — developer, theme designer, community moderator. Projects, contact, communities." />
-
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FT0T5Y0BMF"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-FT0T5Y0BMF');
-</script>
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0f14">
+  <title>Ekansh Bhavik &mdash; Portfolio</title>
+  <meta name="description" content="Ekansh Bhavik is a student developer building practical systems, open-source tooling, Linux workflows, and automation tools.">
+  <meta name="keywords" content="Ekansh Bhavik, notrealekansh, student developer, open source developer, Linux enthusiast, FOSS developer, frontend developer, developer portfolio, freelance developer, HyperTech Foundation">
+  <link rel="canonical" href="https://ekansh.dev/">
+  <meta property="og:title" content="Ekansh Bhavik &mdash; Portfolio">
+  <meta property="og:description" content="A calm, technical portfolio for practical systems, open-source tooling, and thoughtful engineering.">
+  <meta property="og:image" content="https://ekansh.dev/assets/avatar.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Ekansh Bhavik &mdash; Portfolio">
+  <meta name="twitter:description" content="Student developer building practical software tools and automation systems.">
+  <meta name="twitter:image" content="https://ekansh.dev/assets/avatar.jpg">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/avatar.jpg">
+  <link rel="manifest" href="/assets/icons/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/themes.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <script type="module" src="/js/main.js"></script>
 </head>
-<body>
-  <!-- NAVBAR -->
-  <header class="navbar" id="top">
-    <div class="nav-inner container">
-      <div class="center-wrapper">
-        <div class="brand">
-          <div class="brand-avatar" id="brandAvatar" aria-hidden="false">
-            <!-- image is absolute-positioned; fallback hidden until needed -->
-            <img id="brandImg" src="avatar.jpg" alt="Ekansh avatar" />
-            <span id="brandFallback" aria-hidden="true">EB</span>
-          </div>
-          <div class="brand-text">
-            <div class="name">Ekansh Bhavik</div>
-            <div class="sub">Wing — Dev &amp; Designer</div>
-          </div>
-        </div>
-
-        <nav class="nav-links" aria-label="Main navigation">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-          <a href="#network">Network</a>
-        </nav>
-
-        <button id="m3Toggle" class="m3-toggle" aria-pressed="false" aria-label="Toggle theme">
-          <span class="track" aria-hidden="true"></span>
-          <span class="thumb" aria-hidden="true">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1zm5.657 3.343a1 1 0 0 1 1.32.083l1.414 1.414a1 1 0 0 1-1.414 1.414L17.564 7a1 1 0 0 1 .093-1.657zM21 11a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2h2z"/></svg>
-          </span>
+<body data-page="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-navbar>
+    <div class="container nav-shell">
+      <a class="brand-mark" href="/" aria-label="Ekansh Bhavik home">
+        <img src="/assets/avatar.jpg" alt="Ekansh Bhavik avatar" width="44" height="44">
+      </a>
+      <nav class="nav-links" id="primary-nav" aria-label="Primary navigation" data-primary-nav>
+        <a class="nav-link" href="/" data-nav-link="home">Home</a>
+        <a class="nav-link" href="/about/" data-nav-link="about">About</a>
+        <a class="nav-link" href="/projects/" data-nav-link="projects">Projects</a>
+        <a class="nav-link" href="/communities/" data-nav-link="communities">Communities</a>
+        <a class="nav-link" href="/contact/" data-nav-link="contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-button" type="button" data-theme-toggle aria-label="Switch theme" aria-pressed="false">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#moon"></use></svg>
+        </button>
+        <button class="icon-button nav-toggle" type="button" data-nav-toggle aria-label="Open navigation" aria-controls="primary-nav" aria-expanded="false">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#menu"></use></svg>
         </button>
       </div>
     </div>
   </header>
 
-  <main>
-    <!-- HERO -->
-    <section id="home" class="hero container">
-      <div class="hero-left">
-        <h1 class="hero-title"><span class="hi">Hey —</span> I’m <span class="gradient-name">Ekansh</span></h1>
-        <p class="hero-sub">Developer • Theme Designer • Community Moderator. I build tools, bots, and experiences that scale. Minimal, fast, and reliable — that’s the vibe.</p>
-
-        <div class="hero-ctas">
-          <a class="btn-primary" href="#projects">View Projects</a>
-          <a class="btn-outline" href="#contact">Contact</a>
-        </div>
-
-        <div class="hero-pills">
-          <span class="pill">Student</span>
-          <span class="pill">Developer</span>
-          <span class="pill">Designer</span>
-        </div>
-      </div>
-
-      <div class="hero-right">
-        <div class="hero-photo">
-          <img src="avatar.jpg" alt="Ekansh avatar" class="hero-img" />
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" class="section">
-      <div class="container">
-        <h2 class="heading">About Me</h2>
-
-        <div class="about-wrap">
-          <div class="card about-card">
-            <p>Hey there! I'm <strong>Ekansh Bhavik</strong> (aka <strong>notrealekansh</strong>). I’ve been passionate about technology since I was a kid. Over the years I’ve explored coding, gaming, Android app development, and more. I’ve contributed as a Theme Designer and as a Community Moderator for Xiaomi Global.</p>
-
-            <p>I love building practical things — Telegram bots, Android apps, and compact web tools. I focus on minimal UI/UX and ship projects that actually help people. I also help run and moderate active communities around theming and Android development.</p>
-
-            <p class="muted-meta"><strong>Student</strong> • 16 • India (IST)</p>
-
-            <div class="tech-block">
-              <h4>Tech &amp; Tools</h4>
-
-              <div class="tech-row">
-                <span class="tech-badge">Python</span>
-                <span class="tech-badge">HTML</span>
-                <span class="tech-badge">CSS</span>
-                <span class="tech-badge">Java</span>
-                <span class="tech-badge">JavaScript</span>
-                <span class="tech-badge">SQL</span>
-                <span class="tech-badge">Bash</span>
-              </div>
-
-              <div class="tech-row">
-                <span class="tech-badge">Material 3</span>
-                <span class="tech-badge">Kotlin</span>
-              </div>
-
-              <div class="tech-row">
-                <span class="tech-badge">VS Code</span>
-                <span class="tech-badge">Git</span>
-                <span class="tech-badge">Android Studio</span>
-              </div>
-            </div>
+  <main id="main">
+    <section class="hero container" aria-labelledby="hero-title">
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <h1 class="hero-heading" id="hero-title">
+            <span class="intro">Hey, It's me</span>
+            <span class="accent">Ekansh!</span>
+          </h1>
+          <div class="pill-row" aria-label="Roles">
+            <span class="pill">Student</span>
+            <span class="pill">Developer</span>
+            <span class="pill">Designer</span>
+          </div>
+          <p class="hero-description">
+            I build practical systems, open-source tooling, Linux workflows, and automation utilities with a bias for clarity over noise.
+          </p>
+          <div class="hero-socials" aria-label="Social links">
+            <a class="social-link social-link--github" href="https://github.com/realekansh" target="_blank" rel="noopener noreferrer">
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#github"></use></svg>
+              <span>GitHub</span>
+            </a>
+            <a class="social-link" href="https://x.com/notrealekansh" target="_blank" rel="noopener noreferrer" aria-label="X">
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#x"></use></svg>
+            </a>
+            <a class="social-link" href="https://t.me/notrealekansh" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#telegram"></use></svg>
+            </a>
+	       <a class="social-link" href="https://linkedin.com/in/notrealekansh" target="_blank" rel="noopener noreferrer" aria-label="Linkedin">
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#linkedin"></use></svg>
+            </a>
+             <a class="social-link" href="https://discord.com/not_real_ekansh" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#discord"></use></svg>
+            </a>
+            <a class="social-link" href="https://instagram.com/anonxansh" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#instagram"></use></svg>
+            </a>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects" class="section">
-      <div class="container">
-        <h2 class="heading">Featured Projects</h2>
-
-        <div class="projects-grid">
-          <article class="card">
-            <h3>RainDrops File Manager</h3>
-            <p class="muted">A simple Material 3 Designed manager for better organization and productivity.</p>
-            <div class="card-cta"><a class="btn-outline small-cta" href="https://github.com/raindropsfm" target="_blank">Repo</a></div>
-          </article>
-
-          <article class="card">
-            <h3>Hyper Federation Bot</h3>
-            <p class="muted">A Simple Telegram Bot which helps you to Managing Appeals for your Federation. </p>
-            <div class="card-cta"><a class="btn-outline small-cta" href="https://github.com/realekansh/Fedbot" target="_blank">Repo</a></div>
-          </article>
-
-          <article class="card">
-            <h3>Shell Bot</h3>
-            <p class="muted">A simple bot to evaluate python codes and bash commands inside telegram. </p>
-            <div class="card-cta"><a class="btn-outline small-cta" href="https://github.com/realekansh/Shell-Bot" target="_blank">Repo</a></div>
-          </article>
+        <div class="hero-visual reveal">
+          <figure class="avatar-frame">
+            <img src="/assets/avatar.jpg" alt="Anime-style profile avatar in a calm blue landscape" width="640" height="640" fetchpriority="high">
+          </figure>
         </div>
       </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="section">
-      <div class="container">
-        <h2 class="heading">Contact</h2>
-
-        <div class="contact-grid">
-          <div>
-            <div class="card">
-              <h3>Get in touch</h3>
-
-              <div class="contact-list">
-                <div class="contact-item"><i class="fas fa-envelope"></i><div><strong>Email</strong><div class="muted">ekanshbhawik@icloud.com</div></div></div>
-                <div class="contact-item"><i class="fab fa-telegram"></i><div><strong>Telegram</strong><div class="muted">@not_real_ekansh</div></div></div>
-                <div class="contact-item"><i class="fab fa-twitter"></i><div><strong>X</strong><div class="muted">@notrealekansh</div></div></div>
-                <div class="contact-item"><i class="fab fa-discord"></i><div><strong>Discord</strong><div class="muted">@not_real_ekansh</div></div></div>
-                <div class="contact-item"><i class="fab fa-instagram"></i><div><strong>Instagram</strong><div class="muted">@notrealekansh</div></div></div>
-              </div>
-            </div>
-          </div>
-
-          <aside>
-            <div class="card quick-contact">
-              <h4>Quick contact</h4>
-              <p class="muted">Want me to help with a collab, a theme, or a bot? Send a message via Telegram or email — I reply quick.</p>
-              <a class="btn-primary" href="mailto:ekanshbhawik@gmail.com">Email Me</a>
-            </div>
-          </aside>
-        </div>
+      <div class="hero-bottom-actions reveal" aria-label="Explore portfolio">
+        <a class="button button-primary button-large" href="/projects/">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#arrow"></use></svg>
+          Projects
+        </a>
+        <a class="button button-outline button-large" href="/about/">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#user"></use></svg>
+          About
+        </a>
+        <a class="button button-outline button-large" href="/contact/">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#mail"></use></svg>
+          Contact
+        </a>
       </div>
     </section>
-
-   <!-- NETWORK -->
-<section id="network" class="section">
-  <div class="container">
-    <h2 class="heading">My Network</h2>
-    <div class="network-grid">
-
-      <div class="card">
-        <h4>HyperTech FOSS & Updates</h4>
-        <p class="muted">A space for tech news, updates, some refershing open-source apps.</p>
-        <a class="btn-outline small-cta" href="https://t.me/HyperTechUpdates" target="_blank">Join Now</a>
-        <a class="btn-primary small-cta" href="https://t.meme/HyperTechChat" target="_blank">Discussion Chat</a>
-      </div>
-
-      <div class="card">
-        <h4>HyperTech Walls</h4>
-        <p class="muted">A fresh and aesthetic place where you will find amazing wallpapers for you device.</p>
-        <a class="btn-outline small-cta" href="https://t.me/HyperTechWalls" target="_blank">Join Now</a>
-        <a class="btn-primary small-cta" href="https://t.meme/HyperTechChat" target="_blank">Discussion Chat</a>
-      </div>
-
-      <div class="card">
-        <h4>Wing's Underground Basement</h4>
-        <p class="muted">Explore my behind the seens of projects, experiments and open-source work.</p>
-          <a class="btn-outline small-cta" href="https://t.me/WingsBasement" target="_blank">View on Telegram</a>
-          <a class="btn-primary small-cta" href="https://t.me/+WrkvKX2sk8plMDI9" target="_blank">Discussion Chat</a>
-      </div>
-
-      <div class="card">
-        <h4>Off-Topic Land</h4>
-        <p class="muted">A chill zone where you can hang out, make friends, share random stuff, and have fun.</p>
-          <a class="btn-outline small-cta" href="https://t.me/HyperTechOT" target="_blank">Off-Topic</a>
-          <a class="btn-primary small-cta" href="https://discord.gg/WUzmDTGy" target="_blank">Discord Server</a>
-      </div>
-
-      <div class="card">
-        <h4>Hyper Federation</h4>
-        <p class="muted">A federation established safeguard from spammers, scammers, trolls, ego-driven users, content thieves, and suspicious bots.</p>
-          <a class="btn-outline small-cta" href="https://t.me/HyperFederation" target="_blank">About Federation</a>
-          <a class="btn-primary small-cta" href="https:/t.me/HyperFedSupport" target="_blank">Chat Support</a>
-      </div>
-
-       <div class="card">
-        <h4>HyperTech Foundation</h4>
-        <p class="muted">HyperTech Foundation stands as a premier hub dedicated to fostering strong, secure, and welcoming online communities.</p>
-          <a class="btn-outline small-cta" href="https://t.me/hyperTechFounds" target="_blank">About Foundation</a>
-          <a class="btn-primary small-cta" href="" target="_blank">Chat Support</a>
-      </div>
-      
-  </div>
-</section>
-
   </main>
 
-  <footer>
+  <footer class="site-footer">
     <div class="container footer-inner">
-      <div>Made with 💜 by notrealekansh</div>
-      <div class="muted">© 2026 <b>HyperTech Foundation</b> </div>
+      <p>&copy; 2026 Ekansh Bhavik.</p>
+      <p>Built with minimal aesthetics and maximum utility.</p>
     </div>
   </footer>
-
-  <!-- SCRIPTS -->
-  <script>
-    // Theme toggle + avatar fallback + nav highlighting
-    const m3Toggle = document.getElementById('m3Toggle');
-    const bodyEl = document.body;
-    const navLinks = document.querySelectorAll('.nav-links a');
-    const brandImg = document.getElementById('brandImg');
-    const brandFallback = document.getElementById('brandFallback');
-
-    // init theme
-    const saved = localStorage.getItem('theme');
-    if (saved === 'light') bodyEl.classList.add('light');
-
-    function updateToggle() {
-      m3Toggle.setAttribute('aria-pressed', bodyEl.classList.contains('light') ? 'true' : 'false');
-    }
-    updateToggle();
-
-    m3Toggle.addEventListener('click', () => {
-      bodyEl.classList.toggle('light');
-      localStorage.setItem('theme', bodyEl.classList.contains('light') ? 'light' : 'dark');
-      updateToggle();
-    });
-
-    // robust avatar fallback
-    if (brandImg) {
-      // hide fallback initially
-      if (brandFallback) brandFallback.style.display = 'none';
-
-      brandImg.addEventListener('load', () => {
-        brandImg.style.display = 'block';
-        if (brandFallback) brandFallback.style.display = 'none';
-      });
-
-      brandImg.addEventListener('error', () => {
-        brandImg.style.display = 'none';
-        if (brandFallback) brandFallback.style.display = 'inline-flex';
-      });
-
-      // if src missing
-      if (!brandImg.getAttribute('src')) {
-        brandImg.style.display = 'none';
-        if (brandFallback) brandFallback.style.display = 'inline-flex';
-      }
-    }
-
-    // nav active highlight (scroll)
-    function onScroll() {
-      const fromTop = window.scrollY + 120;
-      navLinks.forEach(link => {
-        const section = document.querySelector(link.getAttribute('href'));
-        if (!section) return;
-        if (section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
-          link.classList.add('active');
-        } else link.classList.remove('active');
-      });
-    }
-    window.addEventListener('scroll', onScroll);
-    onScroll();
-  </script>
 </body>
 </html>

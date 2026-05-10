@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0f14">
+  <title>HyperCore &mdash; Ekansh Bhavik</title>
+  <meta name="description" content="HyperCore is a reusable Python core engine for building Telegram bots and userbots with Telethon and python-telegram-bot.">
+  <link rel="canonical" href="https://ekansh.dev/projects/hypercore">
+  <meta property="og:title" content="HyperCore &mdash; Ekansh Bhavik">
+  <meta property="og:description" content="A reusable core engine for Telegram bots and userbots.">
+  <meta property="og:image" content="https://ekansh.dev/assets/avatar.jpg">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="HyperCore &mdash; Ekansh Bhavik">
+  <meta name="twitter:description" content="Reusable Python infrastructure for Telegram bot development.">
+  <meta name="twitter:image" content="https://ekansh.dev/assets/avatar.jpg">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/avatar.jpg">
+  <link rel="manifest" href="/assets/icons/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/themes.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <script type="module" src="/js/main.js"></script>
+</head>
+<body data-page="projects">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-navbar>
+    <div class="container nav-shell">
+      <a class="brand-mark" href="/" aria-label="Ekansh Bhavik home"><img src="/assets/avatar.jpg" alt="Ekansh Bhavik avatar" width="44" height="44"></a>
+      <nav class="nav-links" id="primary-nav" aria-label="Primary navigation" data-primary-nav>
+        <a class="nav-link" href="/" data-nav-link="home">Home</a>
+        <a class="nav-link" href="/about/" data-nav-link="about">About</a>
+        <a class="nav-link" href="/projects/" data-nav-link="projects">Projects</a>
+        <a class="nav-link" href="/communities/" data-nav-link="communities">Communities</a>
+        <a class="nav-link" href="/contact/" data-nav-link="contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-button" type="button" data-theme-toggle aria-label="Switch theme" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#moon"></use></svg></button>
+        <button class="icon-button nav-toggle" type="button" data-nav-toggle aria-label="Open navigation" aria-controls="primary-nav" aria-expanded="false"><svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#menu"></use></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main" id="main">
+    <section class="page-hero container reveal">
+      <p class="page-kicker">Featured Project</p>
+      <h1 class="page-title">HyperCore</h1>
+      <p class="page-lede">A minimal reusable core engine for building Telegram bots and userbots with Python, Telethon, and python-telegram-bot.</p>
+    </section>
+
+    <section class="section container">
+      <div class="detail-grid">
+        <article class="detail-content">
+          <section class="essay-section reveal">
+            <h2>Overview</h2>
+            <p>HyperCore abstracts the repeated setup work around Telegram automation so each bot can focus on its behavior instead of rebuilding the same foundation.</p>
+          </section>
+          <section class="essay-section reveal">
+            <h2>Problem Solved</h2>
+            <p>Telegram projects often repeat plugin loading, command registration, configuration, client setup, and utility patterns. HyperCore turns those recurring pieces into one reusable layer.</p>
+          </section>
+          <section class="essay-section reveal">
+            <h2>Screenshot</h2>
+            <figure class="screenshot-panel" aria-label="HyperCore technical preview">
+              <div class="screenshot-chrome"><span></span><span></span><span></span></div>
+              <div class="screenshot-body">
+                <div class="screenshot-line"></div>
+                <div class="screenshot-line"></div>
+                <div class="screenshot-line"></div>
+              </div>
+            </figure>
+          </section>
+          <section class="essay-section reveal">
+            <h2>Architecture</h2>
+            <ul class="detail-list">
+              <li>Python core layer for shared bot behavior.</li>
+              <li>Telethon and python-telegram-bot integration points.</li>
+              <li>Plugin-oriented structure for feature isolation.</li>
+              <li>Reusable utilities for community bot projects.</li>
+            </ul>
+          </section>
+          <section class="essay-section reveal">
+            <h2>Technical Decisions</h2>
+            <p>The project favors a small core, explicit extension points, and documentation over a heavy framework. That keeps the system understandable for people building on top of it.</p>
+          </section>
+          <section class="essay-section reveal">
+            <h2>Challenges</h2>
+            <p>The main challenge is balancing reuse with flexibility: a core engine should remove boilerplate without forcing every bot into the same shape.</p>
+          </section>
+          <section class="essay-section reveal">
+            <h2>Lessons Learned</h2>
+            <p>Good infrastructure is quiet. It helps developers move faster without becoming the center of the project.</p>
+          </section>
+        </article>
+
+        <aside class="detail-aside reveal">
+          <div class="aside-card">
+            <h2>Project Facts</h2>
+            <ul class="stat-list">
+              <li><span>Status</span><strong>Active</strong></li>
+              <li><span>Stack</span><strong>Python, Telethon</strong></li>
+              <li><span>Type</span><strong>Open Source Core</strong></li>
+            </ul>
+          </div>
+          <div class="aside-card">
+            <h2>Links</h2>
+            <div class="card-actions">
+              <a class="button button-primary" href="https://github.com/realekansh/HyperCore" target="_blank" rel="noopener noreferrer">Repository</a>
+              <a class="button button-outline" href="https://github.com/realekansh/HyperCore/wiki" target="_blank" rel="noopener noreferrer">Wiki</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2026 Ekansh Bhavik.</p>
+      <p>Built with minimal aesthetics and maximum utility.</p>
+    </div>
+  </footer>
+</body>
+</html>

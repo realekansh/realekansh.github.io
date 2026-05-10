@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0f14">
+  <title>Contact &mdash; Ekansh Bhavik</title>
+  <meta name="description" content="Contact Ekansh Bhavik for project inquiries, open-source collaboration, freelance work, internships, and technical networking.">
+  <link rel="canonical" href="https://ekansh.dev/contact">
+  <meta property="og:title" content="Contact &mdash; Ekansh Bhavik">
+  <meta property="og:description" content="A clean, intentional contact form for project inquiries and collaboration.">
+  <meta property="og:image" content="https://ekansh.dev/assets/avatar.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Contact &mdash; Ekansh Bhavik">
+  <meta name="twitter:description" content="Reach out for project inquiries, collaboration, and technical networking.">
+  <meta name="twitter:image" content="https://ekansh.dev/assets/avatar.jpg">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/avatar.jpg">
+  <link rel="manifest" href="/assets/icons/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/themes.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <script type="module" src="/js/main.js"></script>
+</head>
+<body data-page="contact">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-navbar>
+    <div class="container nav-shell">
+      <a class="brand-mark" href="/" aria-label="Ekansh Bhavik home">
+        <img src="/assets/avatar.jpg" alt="Ekansh Bhavik avatar" width="44" height="44">
+      </a>
+      <nav class="nav-links" id="primary-nav" aria-label="Primary navigation" data-primary-nav>
+        <a class="nav-link" href="/" data-nav-link="home">Home</a>
+        <a class="nav-link" href="/about/" data-nav-link="about">About</a>
+        <a class="nav-link" href="/projects/" data-nav-link="projects">Projects</a>
+        <a class="nav-link" href="/communities/" data-nav-link="communities">Communities</a>
+        <a class="nav-link" href="/contact/" data-nav-link="contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-button" type="button" data-theme-toggle aria-label="Switch theme" aria-pressed="false">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#moon"></use></svg>
+        </button>
+        <button class="icon-button nav-toggle" type="button" data-nav-toggle aria-label="Open navigation" aria-controls="primary-nav" aria-expanded="false">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#menu"></use></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main" id="main">
+    <section class="page-hero container reveal" aria-labelledby="contact-title">
+      <p class="page-kicker">Contact</p>
+      <h1 class="page-title" id="contact-title">A direct path for useful conversations.</h1>
+      <p class="page-lede">Send a short message for project inquiries, collaboration, internships, freelance work, or technical networking. Telegram is the fastest fallback.</p>
+    </section>
+
+    <section class="section container">
+      <div class="contact-layout">
+        <aside class="essay reveal" aria-label="Contact notes">
+          <section class="essay-section">
+            <h2>Reach Me</h2>
+            <p>The best way to reach me is through Telegram. Email also works for project briefs, collaboration ideas, or anything that needs a little more context.</p>
+          </section>
+          <section class="essay-section">
+            <h2>Direct Links</h2>
+            <div class="card-actions">
+              <a class="button button-outline" href="mailto:notrealekansh@proton.me">
+                <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#mail"></use></svg>
+                Email
+              </a>
+              <a class="button button-outline" href="https://t.me/not_real_ekansh" target="_blank" rel="noopener noreferrer">
+                <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#telegram"></use></svg>
+                Telegram
+              </a>
+            </div>
+          </section>
+        </aside>
+
+        <form class="contact-form reveal" action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="post" data-contact-form>
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required placeholder="Your name">
+          </div>
+
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+          </div>
+
+          <div class="field">
+            <label for="social-handle">Social Handle</label>
+            <div class="social-input-group">
+              <input id="social-handle" name="social_handle" type="text" autocomplete="off" required placeholder="Profile Link or Username" data-social-handle data-platform="telegram" value="t.me/">
+              <div class="platform-selector" data-platform-selector aria-label="Choose social platform">
+                <button class="platform-button" type="button" data-platform="x" aria-label="X" aria-pressed="false">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#x"></use></svg>
+                </button>
+                <button class="platform-button" type="button" data-platform="instagram" aria-label="Instagram" aria-pressed="false">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#instagram"></use></svg>
+                </button>
+                <button class="platform-button is-selected" type="button" data-platform="telegram" aria-label="Telegram" aria-pressed="true">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#telegram"></use></svg>
+                </button>
+                <button class="platform-button" type="button" data-platform="linkedin" aria-label="LinkedIn" aria-pressed="false">
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#linkedin"></use></svg>
+                </button>
+              </div>
+            </div>
+            <input type="hidden" name="platform" value="telegram" data-platform-input>
+          </div>
+
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required placeholder="What would you like to build, discuss, or collaborate on?"></textarea>
+          </div>
+
+          <label class="honeypot" for="website">Website</label>
+          <input class="honeypot" id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+
+          <button class="button button-primary" type="submit">Send Message</button>
+          <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2026 Ekansh Bhavik.</p>
+      <p>Built with minimal aesthetics and maximum utility.</p>
+    </div>
+  </footer>
+</body>
+</html>

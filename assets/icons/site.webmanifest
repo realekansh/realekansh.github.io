@@ -1,0 +1,20 @@
+{
+  "name": "Ekansh Bhavik Portfolio",
+  "short_name": "Ekansh",
+  "icons": [
+    {
+      "src": "/assets/icons/favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/assets/avatar.jpg",
+      "sizes": "640x640",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#0b0f14",
+  "background_color": "#0b0f14",
+  "display": "standalone"
+}

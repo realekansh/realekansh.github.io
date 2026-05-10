@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0f14">
+  <title>Post Management Bot &mdash; Ekansh Bhavik</title>
+  <meta name="description" content="Post Management Bot helps Telegram teams draft, preview, publish, schedule, and track channel posts.">
+  <link rel="canonical" href="https://ekansh.dev/projects/post-management-bot">
+  <meta property="og:title" content="Post Management Bot &mdash; Ekansh Bhavik">
+  <meta property="og:description" content="A Telegram automation tool for structured channel publishing.">
+  <meta property="og:image" content="https://ekansh.dev/assets/avatar.jpg">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Post Management Bot &mdash; Ekansh Bhavik">
+  <meta name="twitter:description" content="Draft, preview, publish, schedule, and track Telegram posts.">
+  <meta name="twitter:image" content="https://ekansh.dev/assets/avatar.jpg">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/avatar.jpg">
+  <link rel="manifest" href="/assets/icons/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/themes.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <script type="module" src="/js/main.js"></script>
+</head>
+<body data-page="projects">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-navbar>
+    <div class="container nav-shell">
+      <a class="brand-mark" href="/" aria-label="Ekansh Bhavik home"><img src="/assets/avatar.jpg" alt="Ekansh Bhavik avatar" width="44" height="44"></a>
+      <nav class="nav-links" id="primary-nav" aria-label="Primary navigation" data-primary-nav>
+        <a class="nav-link" href="/" data-nav-link="home">Home</a>
+        <a class="nav-link" href="/about/" data-nav-link="about">About</a>
+        <a class="nav-link" href="/projects/" data-nav-link="projects">Projects</a>
+        <a class="nav-link" href="/communities/" data-nav-link="communities">Communities</a>
+        <a class="nav-link" href="/contact/" data-nav-link="contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-button" type="button" data-theme-toggle aria-label="Switch theme" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#moon"></use></svg></button>
+        <button class="icon-button nav-toggle" type="button" data-nav-toggle aria-label="Open navigation" aria-controls="primary-nav" aria-expanded="false"><svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#menu"></use></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main" id="main">
+    <section class="page-hero container reveal">
+      <p class="page-kicker">Telegram Automation</p>
+      <h1 class="page-title">Post Management Bot</h1>
+      <p class="page-lede">A Team HyperTech bot for drafting, previewing, publishing, scheduling, and tracking Telegram channel posts.</p>
+    </section>
+
+    <section class="section container">
+      <div class="detail-grid">
+        <article class="detail-content">
+          <section class="essay-section reveal"><h2>Overview</h2><p>The bot gives Telegram channel teams a more controlled publishing workflow, from draft preparation to delivery tracking.</p></section>
+          <section class="essay-section reveal"><h2>Problem Solved</h2><p>Manual channel posting can be messy when posts need review, formatting, scheduling, and confirmation. This bot creates a clearer workflow around those steps.</p></section>
+          <section class="essay-section reveal"><h2>Screenshot</h2><figure class="screenshot-panel" aria-label="Post Management Bot technical preview"><div class="screenshot-chrome"><span></span><span></span><span></span></div><div class="screenshot-body"><div class="screenshot-line"></div><div class="screenshot-line"></div><div class="screenshot-line"></div></div></figure></section>
+          <section class="essay-section reveal"><h2>Architecture</h2><ul class="detail-list"><li>Python bot layer for Telegram interactions.</li><li>SQLite-backed storage for drafts, schedules, and state.</li><li>Publishing workflow built around preview and confirmation.</li><li>Delivery tracking for channel operations.</li></ul></section>
+          <section class="essay-section reveal"><h2>Technical Decisions</h2><p>SQLite keeps the deployment lightweight while still giving the bot persistent state for drafts and scheduling.</p></section>
+          <section class="essay-section reveal"><h2>Challenges</h2><p>The key challenge is making automation feel safe: users need previews, confirmation, and predictable handling before a post reaches a channel.</p></section>
+          <section class="essay-section reveal"><h2>Lessons Learned</h2><p>Automation is strongest when it slows down the risky steps and speeds up the repetitive ones.</p></section>
+        </article>
+        <aside class="detail-aside reveal">
+          <div class="aside-card"><h2>Project Facts</h2><ul class="stat-list"><li><span>Status</span><strong>Maintained</strong></li><li><span>Stack</span><strong>Python, SQLite</strong></li><li><span>Type</span><strong>Publishing Bot</strong></li></ul></div>
+          <div class="aside-card"><h2>Links</h2><div class="card-actions"><a class="button button-primary" href="https://github.com/realekansh/PostManager-Bot" target="_blank" rel="noopener noreferrer">Repository</a><a class="button button-outline" href="https://github.com/realekansh/PostManager-Bot?tab=readme-ov-file" target="_blank" rel="noopener noreferrer">Readme</a></div></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-inner"><p>&copy; 2026 Ekansh Bhavik.</p><p>Built with minimal aesthetics and maximum utility.</p></div></footer>
+</body>
+</html>

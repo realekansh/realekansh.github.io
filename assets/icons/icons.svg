@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <symbol id="moon" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+  </symbol>
+  <symbol id="sun" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="5" fill="currentColor" />
+    <path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+  </symbol>
+  <symbol id="menu" viewBox="0 0 24 24">
+    <path d="M4 7h16v2H4V7Zm0 4h16v2H4v-2Zm0 4h16v2H4v-2Z"/>
+  </symbol>
+  <symbol id="close" viewBox="0 0 24 24">
+    <path d="m6.4 5 12.6 12.6-1.4 1.4L5 6.4 6.4 5Zm12.6 1.4L6.4 19 5 17.6 17.6 5 19 6.4Z"/>
+  </symbol>
+  <symbol id="arrow" viewBox="0 0 24 24">
+    <path d="M13.2 5.3 20 12l-6.8 6.7-1.4-1.4 4.4-4.3H4v-2h12.2l-4.4-4.3 1.4-1.4Z"/>
+  </symbol>
+  <symbol id="mail" viewBox="0 0 24 24">
+    <path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 3.2V17h16V8.2l-8 5.1-8-5.1ZM5.2 7l6.8 4.3L18.8 7H5.2Z"/>
+  </symbol>
+  <symbol id="github" viewBox="0 0 24 24">
+    <path d="M12 .8a11.2 11.2 0 0 0-3.5 21.8c.6.1.8-.2.8-.5v-2c-3.3.7-4-1.4-4-1.4-.5-1.3-1.2-1.7-1.2-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.7 2.7 1.2 3.3.9.1-.7.4-1.2.7-1.5-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.3v3.4c0 .3.2.6.8.5A11.2 11.2 0 0 0 12 .8Z"/>
+  </symbol>
+  <symbol id="x" viewBox="0 0 24 24">
+    <path d="M14.2 10.4 22.7 1h-2l-7.4 8.2L7.4 1H.6l8.9 12.6L.6 23h2.1l7.7-8.5 6.2 8.5h6.8l-9.2-12.6Zm-2.7 3-1-1.4L3.3 2.6h3.1l5.8 7.6 1 1.3 7.6 10h-3.1l-6.2-8.1Z"/>
+  </symbol>
+  <symbol id="telegram" viewBox="0 0 24 24">
+    <path d="M21.7 3.3 18.4 21c-.2 1-1.1 1.2-1.8.8l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.3-5.1 9.3-8.4c.4-.4-.1-.6-.6-.3L5.7 14.3.8 12.8c-1-.3-1-1 .2-1.5L20.2 3c.9-.3 1.7.2 1.5 1.3Z"/>
+  </symbol>
+  <symbol id="linkedin" viewBox="0 0 24 24">
+    <path d="M4.9 7.7H1.4V23h3.5V7.7ZM3.1 1A2.1 2.1 0 1 0 3 5.2 2.1 2.1 0 0 0 3.1 1Zm19.5 13.2c0-4.1-2.2-6.8-5.6-6.8-2 0-3.1 1.1-3.7 2V7.7H9.9V23h3.5v-8c0-2.1 1-3.8 3-3.8 1.8 0 2.7 1.2 2.7 3.6V23h3.5v-8.8Z"/>
+  </symbol>
+  <symbol id="discord" viewBox="0 0 24 24">
+    <path d="M19.6 4.7A16 16 0 0 0 15.7 3l-.5 1.1a14.7 14.7 0 0 0-6.4 0L8.3 3a16 16 0 0 0-3.9 1.7C2 8.3 1.4 11.8 1.8 15.3A16 16 0 0 0 6.6 18l1-1.4c-.6-.2-1.1-.5-1.6-.8l.4-.3a11.5 11.5 0 0 0 11.2 0l.4.3c-.5.3-1 .6-1.6.8l1 1.4a16 16 0 0 0 4.8-2.7c.5-4.1-.6-7.5-2.6-10.6ZM8.6 13.8c-.9 0-1.7-.8-1.7-1.9S7.6 10 8.6 10s1.7.8 1.7 1.9-.8 1.9-1.7 1.9Zm6.8 0c-.9 0-1.7-.8-1.7-1.9s.8-1.9 1.7-1.9 1.7.8 1.7 1.9-.8 1.9-1.7 1.9Z"/>
+  </symbol>
+  <symbol id="instagram" viewBox="0 0 24 24">
+    <path d="M7.2 2h9.6A5.2 5.2 0 0 1 22 7.2v9.6a5.2 5.2 0 0 1-5.2 5.2H7.2A5.2 5.2 0 0 1 2 16.8V7.2A5.2 5.2 0 0 1 7.2 2Zm0 2A3.2 3.2 0 0 0 4 7.2v9.6A3.2 3.2 0 0 0 7.2 20h9.6a3.2 3.2 0 0 0 3.2-3.2V7.2A3.2 3.2 0 0 0 16.8 4H7.2Zm4.8 3.2A4.8 4.8 0 1 1 12 16.8 4.8 4.8 0 0 1 12 7.2Zm0 2A2.8 2.8 0 1 0 12 14.8 2.8 2.8 0 0 0 12 9.2Zm5-2.4a1.1 1.1 0 1 1-1.1 1.1A1.1 1.1 0 0 1 17 6.8Z"/>
+  </symbol>
+  <symbol id="external" viewBox="0 0 24 24">
+    <path d="M14 4h6v6h-2V7.4l-7.3 7.3-1.4-1.4L16.6 6H14V4ZM5 6h6v2H7v9h9v-4h2v6H5V6Z"/>
+  </symbol>
+  <symbol id="user" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+    <circle fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" cx="12" cy="7" r="4" />
+  </symbol>
+  <symbol id="map-pin" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+    <circle fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" cx="12" cy="10" r="3" />
+  </symbol>
+  <symbol id="calendar" viewBox="0 0 24 24">
+    <rect fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" x="3" y="4" width="18" height="18" rx="2" ry="2" />
+    <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M16 2v4M8 2v4M3 10h18" />
+  </symbol>
+  <symbol id="terminal" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 17l6-6-6-6M12 19h8" />
+  </symbol>
+</svg>
