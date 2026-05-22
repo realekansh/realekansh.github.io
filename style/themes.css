@@ -1,0 +1,85 @@
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #fdfdfd;
+  --bg-soft: #f4f5f7;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --surface-hover: #f1f5f9;
+  --text: #0f172a;
+  --text-muted: #475569;
+  --text-soft: #334155;
+  --accent: #0f172a;
+  --accent-strong: #020617;
+  --accent-soft: rgba(15, 23, 42, 0.08);
+  --border: rgba(15, 23, 42, 0.12);
+  --border-strong: rgba(15, 23, 42, 0.24);
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 20px 48px rgba(15, 23, 42, 0.1);
+}
+
+[data-theme="light"] body {
+  background:
+    linear-gradient(180deg, rgba(226, 232, 240, 0.5), rgba(253, 253, 253, 0) 420px),
+    var(--bg);
+}
+
+[data-theme="light"] .icon-button[data-theme-toggle] {
+  color: var(--text);
+}
+
+[data-theme="light"] .icon-button[data-theme-toggle]:hover {
+  color: var(--accent-strong);
+  transform: scale(1.15) rotate(-12deg);
+}
+
+[data-theme="light"] .visual-panel {
+  background:
+    linear-gradient(135deg, rgba(56, 189, 248, 0.14), transparent 34%),
+    linear-gradient(180deg, #161d26, #0d1117);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .visual-panel .visual-label {
+  color: #ffffff;
+  background: rgba(11, 15, 20, 0.6);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .visual-panel .terminal-dot {
+  background: #ffffff;
+}
+
+[data-theme="light"] .visual-panel .visual-terminal {
+  color: #cbd5e1;
+}
+
+[data-theme="light"] .visual-panel::before {
+  background: rgba(11, 15, 20, 0.42);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .hypercore-gears {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+[data-theme="light"] .button-primary {
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.12);
+}
+
+[data-theme="light"] .card {
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="light"] .card:hover {
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
+}
+
+[data-theme="light"] .nav-shell {
+  backdrop-filter: blur(16px);
+}
+
+[data-theme="light"] .site-header.is-scrolled .nav-shell {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 1px 6px rgba(15, 23, 42, 0.06);
+}

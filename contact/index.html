@@ -22,12 +22,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/base.css">
-  <link rel="stylesheet" href="/css/themes.css">
-  <link rel="stylesheet" href="/css/layout.css">
-  <link rel="stylesheet" href="/css/components.css">
-  <link rel="stylesheet" href="/css/animations.css">
-  <script type="module" src="/js/main.js"></script>
+  <link rel="stylesheet" href="/style/base.css">
+  <link rel="stylesheet" href="/style/themes.css">
+  <link rel="stylesheet" href="/style/layout.css">
+  <link rel="stylesheet" href="/style/components.css">
+  <link rel="stylesheet" href="/style/animations.css">
+  <script type="module" src="/script/main.js"></script>
 </head>
 <body data-page="contact">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -61,6 +61,7 @@
       <p class="page-lede">Send a short message for project inquiries, collaboration, internships, freelance work, or technical networking. Telegram is the fastest fallback.</p>
     </section>
 
+
     <section class="section container">
       <div class="contact-layout">
         <aside class="essay reveal" aria-label="Contact notes">
@@ -71,7 +72,7 @@
           <section class="essay-section">
             <h2>Direct Links</h2>
             <div class="card-actions">
-              <a class="button button-outline" href="mailto:notrealekansh@proton.me">
+              <a class="button button-outline" href="mailto:contact@realekansh.xyz">
                 <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#mail"></use></svg>
                 Email
               </a>
@@ -83,7 +84,7 @@
           </section>
         </aside>
 
-        <form class="contact-form reveal" action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="post" data-contact-form>
+        <form class="contact-form reveal" action="/api/send" method="post" data-contact-form>
           <div class="field">
             <label for="name">Name</label>
             <input id="name" name="name" type="text" autocomplete="name" required placeholder="Your name">
@@ -97,7 +98,7 @@
           <div class="field">
             <label for="social-handle">Social Handle</label>
             <div class="social-input-group">
-              <input id="social-handle" name="social_handle" type="text" autocomplete="off" required placeholder="Profile Link or Username" data-social-handle data-platform="telegram" value="t.me/">
+              <input id="social-handle" name="social_handle" type="text" autocomplete="off" required placeholder="Profile Link or Username" data-social-handle data-platform="" value="">
               <div class="platform-selector" data-platform-selector aria-label="Choose social platform">
                 <button class="platform-button" type="button" data-platform="x" aria-label="X" aria-pressed="false">
                   <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#x"></use></svg>
@@ -105,7 +106,7 @@
                 <button class="platform-button" type="button" data-platform="instagram" aria-label="Instagram" aria-pressed="false">
                   <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#instagram"></use></svg>
                 </button>
-                <button class="platform-button is-selected" type="button" data-platform="telegram" aria-label="Telegram" aria-pressed="true">
+                <button class="platform-button" type="button" data-platform="telegram" aria-label="Telegram" aria-pressed="false">
                   <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#telegram"></use></svg>
                 </button>
                 <button class="platform-button" type="button" data-platform="linkedin" aria-label="LinkedIn" aria-pressed="false">
@@ -113,7 +114,7 @@
                 </button>
               </div>
             </div>
-            <input type="hidden" name="platform" value="telegram" data-platform-input>
+            <input type="hidden" name="platform" value="" data-platform-input>
           </div>
 
           <div class="field">
@@ -139,3 +140,5 @@
   </footer>
 </body>
 </html>
+
+
