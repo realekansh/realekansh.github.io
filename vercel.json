@@ -1,24 +1,34 @@
 {
   "rewrites": [
     {
-      "source": "/",
+      "source": "/:path*",
       "has": [
         {
           "type": "host",
           "value": "about.realekansh.xyz"
         }
       ],
-      "destination": "/about"
+      "destination": "/about/:path*"
     },
     {
-      "source": "/",
+      "source": "/:path*",
       "has": [
         {
           "type": "host",
           "value": "projects.realekansh.xyz"
         }
       ],
-      "destination": "/projects"
+      "destination": "/projects/:path*"
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "communities.realekansh.xyz"
+        }
+      ],
+      "destination": "/communities/:path*"
     }
   ]
 }
