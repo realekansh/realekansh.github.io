@@ -1,0 +1,24 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "about.realekansh.xyz"
+        }
+      ],
+      "destination": "/about"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "projects.realekansh.xyz"
+        }
+      ],
+      "destination": "/projects"
+    }
+  ]
+}
