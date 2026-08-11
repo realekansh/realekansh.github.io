@@ -7,7 +7,7 @@ updated: "2026-08-11"
 author: "Ekansh Bhavik"
 tags: ["Hyprland","Wayland","Customization"]
 status: "published"
-cover: "https://github.com/realekansh/realekansh.github.io/blob/main/assets/blog/my-hyprland-setup-journey/a8f5f167f44f4964e6c998dee82711dfcba7bb42f4c29759.png"
+cover: "https://github.com/realekansh/realekansh.github.io/blob/main/assets/blog/my-hyprland-setup-journey/a8f5f167f44f4964e6c998dee82711dfcba7bb42f4c29759.jpg?raw=true"
 ---
 
 So, welcome to my first blog post! Today, I'll share my Hyprland setup journey, about how I came till here and how I made a decent, good-looking setup (not for larp, but for productivity) while keeping aesthetics.
