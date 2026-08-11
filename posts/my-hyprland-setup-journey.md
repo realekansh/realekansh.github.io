@@ -5,7 +5,7 @@ description: "A small story about how I discovered Hyprland, messed up my first 
 date: "2026-08-11"
 updated: "2026-08-11"
 author: "Ekansh Bhavik"
-tags: ["Hyprland. Wayland","Customization"]
+tags: ["Hyprland","Wayland","Customization"]
 status: "published"
 cover: "/assets/blog/my-hyprland-setup-journey/1786462167303-b0a878dc325a.jpg"
 ---
