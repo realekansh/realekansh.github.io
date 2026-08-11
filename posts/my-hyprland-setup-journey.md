@@ -7,7 +7,7 @@ updated: "2026-08-11"
 author: "Ekansh Bhavik"
 tags: ["Hyprland","Wayland","Customization"]
 status: "published"
-cover: "https://canva.link/ia1hwbvo86tx7s1"
+cover: ""
 ---
 
 So, welcome to my first blog post! Today, I'll share my Hyprland setup journey, about how I came till here and how I made a decent, good-looking setup (not for larp, but for productivity) while keeping aesthetics.
