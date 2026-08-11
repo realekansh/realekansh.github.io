@@ -1,16 +1,10 @@
-<<<<<<< HEAD
-import { createReadStream, existsSync, statSync } from "node:fs";
-=======
 import { createReadStream, existsSync, statSync, readFileSync } from "node:fs";
->>>>>>> 2a37c1d (feat: launch portfolio with major fixes and improvements)
 import { createServer } from "node:http";
 import { extname, join, resolve } from "node:path";
 
 const root = process.cwd();
 const port = Number(process.env.PORT || 4173);
 
-<<<<<<< HEAD
-=======
 // Automatically load local .env variables into process.env if .env exists
 const envPath = resolve(root, ".env");
 if (existsSync(envPath)) {
@@ -37,15 +31,19 @@ if (existsSync(envPath)) {
   }
 }
 
->>>>>>> 2a37c1d (feat: launch portfolio with major fixes and improvements)
 const mime = {
   ".html": "text/html; charset=utf-8",
   ".css": "text/css; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
+  ".json": "application/json; charset=utf-8",
   ".svg": "image/svg+xml",
   ".jpg": "image/jpeg",
+  ".png": "image/png",
+  ".webp": "image/webp",
+  ".gif": "image/gif",
   ".ico": "image/x-icon",
   ".xml": "application/xml; charset=utf-8",
+  ".xsl": "application/xml; charset=utf-8",
   ".txt": "text/plain; charset=utf-8",
   ".webmanifest": "application/manifest+json; charset=utf-8",
 };
@@ -58,10 +56,8 @@ createServer((request, response) => {
     relativePath = relativePath.slice(1);
   }
 
-<<<<<<< HEAD
-=======
-  // Intercept and emulate Vercel's POST /api/send serverless endpoint
-  if (request.method === "POST" && (relativePath === "api/send" || relativePath === "api/send/")) {
+  // Intercept and emulate Vercel's POST /api/* serverless endpoints dynamically
+  if (relativePath.startsWith("api/")) {
     let body = "";
     request.on("data", (chunk) => {
       body += chunk;
@@ -72,7 +68,6 @@ createServer((request, response) => {
       try {
         parsedBody = JSON.parse(body);
       } catch (err) {
-        // Fallback for form URLencoded body if needed
         try {
           const params = new URLSearchParams(body);
           parsedBody = Object.fromEntries(params.entries());
@@ -81,37 +76,81 @@ createServer((request, response) => {
 
       // Mock Vercel's req & res objects
       const reqMock = {
-        method: "POST",
+        method: request.method,
+        headers: request.headers,
+        url: request.url,
+        query: Object.fromEntries(url.searchParams.entries()),
+        cookies: parseCookies(request.headers.cookie || ""),
         body: parsedBody,
       };
 
       const resMock = {
+        statusCode: 200,
+        headers: {},
+        setHeader(name, val) {
+          this.headers[name] = val;
+          return this;
+        },
         status(code) {
-          response.writeHead(code, {
-            "Content-Type": "application/json; charset=utf-8",
-            "Cache-Control": "no-store",
-          });
+          this.statusCode = code;
           return this;
         },
         json(data) {
+          this.setHeader("Content-Type", "application/json; charset=utf-8");
+          response.writeHead(this.statusCode, this.headers);
           response.end(JSON.stringify(data));
+          return this;
         },
+        redirect(urlStr) {
+          response.writeHead(302, { Location: urlStr, ...this.headers });
+          response.end();
+          return this;
+        },
+        send(data) {
+          response.writeHead(this.statusCode, this.headers);
+          response.end(data);
+          return this;
+        }
       };
 
+      function parseCookies(cookieHeader) {
+        const list = {};
+        if (!cookieHeader) return list;
+        cookieHeader.split(";").forEach((cookie) => {
+          let [name, ...rest] = cookie.split("=");
+          name = name?.trim();
+          if (!name) return;
+          const val = rest.join("=").trim();
+          list[name] = decodeURIComponent(val);
+        });
+        return list;
+      }
+
       try {
-        const apiPath = resolve(root, "api/send.js");
-        const { default: handler } = await import(apiPath);
-        await handler(reqMock, resMock);
+        // Resolve API module path: e.g., api/send -> api/send.js, api/auth/login -> api/auth/login.js
+        let subPath = relativePath.slice(4).replace(/\/$/, "");
+        if (!subPath.endsWith(".js")) {
+          subPath += ".js";
+        }
+        const apiPath = resolve(root, "api", subPath);
+        if (existsSync(apiPath)) {
+          const { default: handler } = await import(`file://${apiPath}?update=${Date.now()}`);
+          await handler(reqMock, resMock);
+          return;
+        }
       } catch (err) {
         console.error("Local API execution error:", err);
         response.writeHead(500, { "Content-Type": "application/json; charset=utf-8" });
         response.end(JSON.stringify({ message: "Local API execution failed: " + err.message }));
+        return;
       }
+
+      response.writeHead(404, { "Content-Type": "application/json; charset=utf-8" });
+      response.end(JSON.stringify({ message: "API route not found" }));
     });
     return;
   }
 
->>>>>>> 2a37c1d (feat: launch portfolio with major fixes and improvements)
   let filePath = resolve(root, relativePath);
   if (!filePath.startsWith(root)) {
     response.writeHead(403);
@@ -124,6 +163,13 @@ createServer((request, response) => {
   }
 
   if (!existsSync(filePath)) {
+    // 404 Fallback
+    const custom404 = resolve(root, "404.html");
+    if (existsSync(custom404)) {
+      response.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
+      createReadStream(custom404).pipe(response);
+      return;
+    }
     response.writeHead(404);
     response.end("Not found");
     return;
@@ -135,8 +181,5 @@ createServer((request, response) => {
   createReadStream(filePath).pipe(response);
 }).listen(port, "127.0.0.1", () => {
   console.log(`Portfolio preview running at http://127.0.0.1:${port}`);
-<<<<<<< HEAD
-=======
-  console.log(`Form submission endpoint is active at http://127.0.0.1:${port}/api/send`);
->>>>>>> 2a37c1d (feat: launch portfolio with major fixes and improvements)
+  console.log(`API Router emulation active under http://127.0.0.1:${port}/api/*`);
 });

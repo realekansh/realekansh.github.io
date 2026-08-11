@@ -9,10 +9,6 @@ export default async function handler(req, res) {
     return res.status(200).json({ message: "Success" });
   }
 
-<<<<<<< HEAD
-  if (!name || !email || !message) {
-    return res.status(400).json({ message: "Missing required fields" });
-=======
   if (!name || !email || !social_handle || !message) {
     return res.status(400).json({ message: "Please fill in all required fields." });
   }
@@ -22,9 +18,7 @@ export default async function handler(req, res) {
   }
 
   if (message.length < 12) {
-    return res.status(400).json({ message: "Please include a little more context in your message." });
->>>>>>> 2a37c1d (feat: launch portfolio with major fixes and improvements)
-  }
+    return res.status(400).json({ message: "Please include a little more context in your message." });  }
 
   try {
     const response = await fetch("https://api.resend.com/emails", {
