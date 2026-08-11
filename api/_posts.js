@@ -182,38 +182,49 @@ export async function commitToGitHub(filePath, content, commitMessage) {
 
   if (!token) return false;
 
-  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
-  let sha = null;
-
   try {
-    const getRes = await fetch(url, {
+    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+    let sha = null;
+
+    try {
+      const getRes = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "User-Agent": "realekansh-portfolio-blog",
+        },
+      });
+      if (getRes.ok) {
+        const getData = await getRes.json();
+        sha = getData.sha;
+      }
+    } catch (e) {}
+
+    const bodyData = {
+      message: commitMessage,
+      content: Buffer.from(content).toString("base64"),
+      branch: "main",
+    };
+    if (sha) bodyData.sha = sha;
+
+    const putRes = await fetch(url, {
+      method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
         "User-Agent": "realekansh-portfolio-blog",
       },
+      body: JSON.stringify(bodyData),
     });
-    if (getRes.ok) {
-      const getData = await getRes.json();
-      sha = getData.sha;
+
+    if (!putRes.ok) {
+      const errText = await putRes.text();
+      console.warn(`GitHub API commit returned HTTP ${putRes.status}:`, errText);
+      return false;
     }
-  } catch (e) {}
 
-  const bodyData = {
-    message: commitMessage,
-    content: Buffer.from(content).toString("base64"),
-    branch: "main",
-  };
-  if (sha) bodyData.sha = sha;
-
-  const putRes = await fetch(url, {
-    method: "PUT",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-      "User-Agent": "realekansh-portfolio-blog",
-    },
-    body: JSON.stringify(bodyData),
-  });
-
-  return putRes.ok;
+    return true;
+  } catch (err) {
+    console.warn("GitHub API sync failed:", err.message);
+    return false;
+  }
 }

@@ -731,53 +731,84 @@
         });
 
         async function uploadAndInsertFile(file) {
+          if (!file) return;
+
           if (file.size > 5 * 1024 * 1024) {
-            alert("File size exceeds maximum limit of 5 MB.");
+            const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+            const errMsg = `File size (${sizeMB} MB) exceeds maximum allowed limit of 5 MB.`;
+            statusMsg.textContent = errMsg;
+            statusMsg.style.color = "#ef4444";
+            alert(errMsg);
             return;
           }
 
           statusMsg.textContent = "Uploading asset securely...";
+          statusMsg.style.color = "var(--text-muted)";
           const reader = new FileReader();
+
+          reader.onerror = () => {
+            const errMsg = "Failed to read local file.";
+            statusMsg.textContent = errMsg;
+            statusMsg.style.color = "#ef4444";
+            alert(errMsg);
+          };
+
           reader.onload = async () => {
             const base64Data = reader.result;
             const currentSlug = originalSlug || generateSlug(titleInput.value);
+            const fileName = file.name || "pasted-image.png";
+            const fileType = file.type || "image/png";
 
             try {
               const uploadRes = await fetch("/api/upload/image", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                  filename: file.name || "pasted-image.png",
-                  contentType: file.type || "image/png",
+                  filename: fileName,
+                  contentType: fileType,
                   base64Data,
                   postSlug: currentSlug,
                 }),
               });
 
-              const uploadData = await uploadRes.json();
-              if (uploadRes.ok && uploadData.url) {
-                const fileMD =
-                  file.type && file.type.startsWith("image")
-                    ? `\n![${file.name || "Image"}](${uploadData.url})\n`
-                    : `\n[📎 Download ${file.name || "Attachment"}](${uploadData.url})\n`;
+              let uploadData = {};
+              try {
+                uploadData = await uploadRes.json();
+              } catch (parseErr) {
+                uploadData = { message: await uploadRes.text() };
+              }
 
-                const pos = markdownInput.selectionStart;
+              if (uploadRes.ok && uploadData.url) {
+                const isImg = fileType.startsWith("image") || /\.(png|jpe?g|webp|gif|svg)$/i.test(fileName);
+                const fileMD = isImg
+                  ? `\n![${fileName}](${uploadData.url})\n`
+                  : `\n[📎 Download ${fileName}](${uploadData.url})\n`;
+
+                const pos = markdownInput.selectionStart || 0;
                 markdownInput.value =
                   markdownInput.value.slice(0, pos) +
                   fileMD +
                   markdownInput.value.slice(pos);
                 updatePreview();
+
+                if (!coverInput.value && isImg) {
+                  coverInput.value = uploadData.url;
+                }
+
                 statusMsg.textContent = "Asset uploaded successfully!";
+                statusMsg.style.color = "#22c55e";
               } else {
-                alert(
-                  "Upload failed: " + (uploadData.message || "Unknown error"),
-                );
-                statusMsg.textContent = "";
+                const errMsg = uploadData.message || `HTTP ${uploadRes.status} Upload Error`;
+                statusMsg.textContent = "Upload failed: " + errMsg;
+                statusMsg.style.color = "#ef4444";
+                alert("Upload failed: " + errMsg);
               }
             } catch (err) {
               console.error("Upload error:", err);
-              alert("Upload request failed.");
-              statusMsg.textContent = "";
+              const errMsg = err.message || "Network request failed";
+              statusMsg.textContent = "Upload request failed: " + errMsg;
+              statusMsg.style.color = "#ef4444";
+              alert("Upload request failed: " + errMsg);
             }
           };
           reader.readAsDataURL(file);
@@ -826,12 +857,16 @@
           const content = markdownInput.value.trim();
 
           if (!title || !content) {
-            alert("Please provide both a Post Title and Markdown content.");
+            const msg = "Please provide both a Post Title and Markdown content.";
+            statusMsg.textContent = msg;
+            statusMsg.style.color = "#eab308";
+            alert(msg);
             return;
           }
 
           statusMsg.textContent =
             action === "publish" ? "Publishing article..." : "Saving draft...";
+          statusMsg.style.color = "var(--text-muted)";
           publishBtn.disabled = true;
           saveDraftBtn.disabled = true;
 
@@ -851,24 +886,35 @@
               }),
             });
 
-            const resData = await saveRes.json();
+            let resData = {};
+            try {
+              resData = await saveRes.json();
+            } catch (parseErr) {
+              resData = { message: await saveRes.text() };
+            }
+
             if (saveRes.ok) {
               statusMsg.textContent = "Saved successfully!";
+              statusMsg.style.color = "#22c55e";
               setTimeout(() => {
                 window.location.href = "/admin/";
               }, 600);
             } else {
-              alert("Save failed: " + (resData.message || "Unknown error"));
+              const errMsg = resData.message || `HTTP ${saveRes.status} Save Error`;
+              statusMsg.textContent = "Save failed: " + errMsg;
+              statusMsg.style.color = "#ef4444";
+              alert("Save failed: " + errMsg);
               publishBtn.disabled = false;
               saveDraftBtn.disabled = false;
-              statusMsg.textContent = "";
             }
           } catch (err) {
             console.error("Save article error:", err);
-            alert("Save request failed.");
+            const errMsg = err.message || "Network error";
+            statusMsg.textContent = "Save request failed: " + errMsg;
+            statusMsg.style.color = "#ef4444";
+            alert("Save request failed: " + errMsg);
             publishBtn.disabled = false;
             saveDraftBtn.disabled = false;
-            statusMsg.textContent = "";
           }
         }
 

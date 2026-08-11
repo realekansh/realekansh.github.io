@@ -24,11 +24,24 @@ export default async function handler(req, res) {
 
   const { filename, base64Data, contentType, postSlug } = req.body || {};
 
-  if (!base64Data || !filename) {
-    return res.status(400).json({ message: "Missing upload payload or filename." });
+  if (!base64Data) {
+    return res.status(400).json({ message: "Missing upload payload (base64Data)." });
   }
 
-  const ext = extname(filename).toLowerCase();
+  // Infer filename & extension if missing or pasting raw clipboard blobs
+  let safeFilename = (filename || "").trim();
+  if (!safeFilename) {
+    const extFromType = contentType === "image/png" ? ".png" : contentType === "image/webp" ? ".webp" : contentType === "image/jpeg" ? ".jpg" : ".png";
+    safeFilename = `pasted-image-${Date.now()}${extFromType}`;
+  }
+
+  let ext = extname(safeFilename).toLowerCase();
+  if (!ext || ext === ".") {
+    const extFromType = contentType === "image/png" ? ".png" : contentType === "image/webp" ? ".webp" : contentType === "image/jpeg" ? ".jpg" : ".png";
+    ext = extFromType;
+    safeFilename += ext;
+  }
+
   if (!ALLOWED_EXTENSIONS.has(ext)) {
     return res.status(400).json({
       message: `Invalid file extension '${ext}'. Allowed extensions: ${Array.from(ALLOWED_EXTENSIONS).join(", ")}`,
@@ -36,13 +49,22 @@ export default async function handler(req, res) {
   }
 
   // Prevent executable extensions explicitly
-  if (/\.(php|js|sh|exe|pl|py|cgi|html|htm|jar|bat|cmd)$/i.test(filename)) {
+  if (/\.(php|js|sh|exe|pl|py|cgi|html|htm|jar|bat|cmd)$/i.test(safeFilename)) {
     return res.status(400).json({ message: "Executable and script file uploads are strictly forbidden." });
   }
 
   // Decode Base64 buffer
   const cleanBase64 = base64Data.replace(/^data:[^;]+;base64,/, "");
-  const buffer = Buffer.from(cleanBase64, "base64");
+  let buffer;
+  try {
+    buffer = Buffer.from(cleanBase64, "base64");
+  } catch (err) {
+    return res.status(400).json({ message: "Corrupted or invalid Base64 image payload." });
+  }
+
+  if (!buffer || buffer.length === 0) {
+    return res.status(400).json({ message: "Empty or zero-byte file payload." });
+  }
 
   if (buffer.length > MAX_FILE_SIZE) {
     return res.status(400).json({
@@ -78,10 +100,14 @@ export default async function handler(req, res) {
     // Write file locally
     writeFileSync(targetPath, buffer);
 
-    // Commit via GitHub API if GITHUB_TOKEN is available
+    // Commit via GitHub API if GITHUB_TOKEN is available (non-blocking)
     if (process.env.GITHUB_TOKEN) {
-      const gitPath = `assets/blog/${safeSlug}/${uuidName}`;
-      await commitToGitHub(gitPath, buffer.toString("base64"), `feat(blog): upload attachment ${uuidName}`);
+      try {
+        const gitPath = `assets/blog/${safeSlug}/${uuidName}`;
+        await commitToGitHub(gitPath, buffer.toString("base64"), `feat(blog): upload attachment ${uuidName}`);
+      } catch (gitErr) {
+        console.warn("Optional GitHub remote asset sync skipped:", gitErr.message);
+      }
     }
 
     return res.status(200).json({
@@ -91,6 +117,6 @@ export default async function handler(req, res) {
     });
   } catch (err) {
     console.error("Upload error:", err);
-    return res.status(500).json({ message: "Failed to process file upload." });
+    return res.status(500).json({ message: `Failed to process file upload: ${err.message}` });
   }
 }

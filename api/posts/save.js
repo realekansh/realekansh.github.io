@@ -1,7 +1,7 @@
-import { writeFileSync, existsSync, mkdirSync, unlinkSync } from "node:fs";
+import { writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { resolve, join } from "node:path";
 import { requireAdminAuth } from "../_auth.js";
-import { stringifyFrontMatter, updatePostsManifest, commitToGitHub, parseFrontMatter } from "../_posts.js";
+import { stringifyFrontMatter, updatePostsManifest, commitToGitHub } from "../_posts.js";
 
 const root = process.cwd();
 const postsDir = resolve(root, "posts");
@@ -30,8 +30,12 @@ export default async function handler(req, res) {
 
   const { title, originalSlug, description, date, tags, status, cover, content, action } = req.body || {};
 
-  if (!title || typeof title !== "string" || !content) {
-    return res.status(400).json({ message: "Title and content are required." });
+  if (!title || typeof title !== "string" || !title.trim()) {
+    return res.status(400).json({ message: "Post title is required." });
+  }
+
+  if (!content || typeof content !== "string" || !content.trim()) {
+    return res.status(400).json({ message: "Markdown article content is required." });
   }
 
   // Slug derivation rule:
@@ -61,6 +65,12 @@ export default async function handler(req, res) {
     ? tags.split(",").map((t) => t.trim()).filter(Boolean)
     : [];
 
+  // Sanitize cover URL: if base64 data URI is provided in cover input field, warn or format safely
+  let coverUrl = (cover || "").trim();
+  if (coverUrl.startsWith("data:image")) {
+    console.warn("Cover image is a raw Base64 data URI string.");
+  }
+
   const frontmatter = {
     title: title.trim(),
     slug: safeSlug,
@@ -70,7 +80,7 @@ export default async function handler(req, res) {
     author: "Ekansh Bhavik",
     tags: postTags,
     status: targetStatus,
-    cover: cover || "",
+    cover: coverUrl,
   };
 
   const fileContent = stringifyFrontMatter(frontmatter, content);
@@ -87,10 +97,14 @@ export default async function handler(req, res) {
     writeFileSync(absoluteFilePath, fileContent, "utf-8");
     updatePostsManifest();
 
-    // Commit via GitHub API if GITHUB_TOKEN is available
+    // Commit via GitHub API if GITHUB_TOKEN is available (non-blocking)
     if (process.env.GITHUB_TOKEN) {
-      const commitMsg = `feat(blog): ${targetStatus === "draft" ? "save draft" : "publish"} '${title}'`;
-      await commitToGitHub(relativeFilePath, fileContent, commitMsg);
+      try {
+        const commitMsg = `feat(blog): ${targetStatus === "draft" ? "save draft" : "publish"} '${title}'`;
+        await commitToGitHub(relativeFilePath, fileContent, commitMsg);
+      } catch (gitErr) {
+        console.warn("Optional GitHub remote post sync skipped:", gitErr.message);
+      }
     }
 
     return res.status(200).json({
@@ -101,6 +115,6 @@ export default async function handler(req, res) {
     });
   } catch (err) {
     console.error("Error saving post:", err);
-    return res.status(500).json({ message: "Failed to save post." });
+    return res.status(500).json({ message: `Failed to save post: ${err.message}` });
   }
 }
