@@ -107,14 +107,6 @@ Instead, it prioritizes:
 ## Folder Structure
 
 ```txt
-<<<<<<< HEAD
-/assets
-/css
-/js
-/pages
-/projects
-/components
-=======
 /assets       - Static assets (avatars, icons, SVGs, site.webmanifest)
 /style        - Modular CSS stylesheets (base, themes, layout, components, animations)
 /script       - Vanilla JavaScript interaction layers (main, theme, navbar, contact, transitions)
@@ -126,4 +118,3 @@ Instead, it prioritizes:
 /functions    - Cloudflare Pages serverless functions (`api/send.js`)
 /tools        - Local preview server tooling (`local-server.mjs`)
 ```
->>>>>>> 2a37c1d (feat: launch portfolio with major fixes and improvements)

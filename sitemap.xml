@@ -1,18 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<<<<<<< HEAD
-  <url><loc>https://ekansh.xyz/</loc></url>
-  <url><loc>https://ekansh.xyz/about</loc></url>
-  <url><loc>https://ekansh.xyz/projects</loc></url>
-  <url><loc>https://ekansh.xyz/projects/hypercore</loc></url>
-  <url><loc>https://ekansh.xyz/projects/hyprland-rice</loc></url>
-  <url><loc>https://ekansh.xyz/projects/post-management-bot</loc></url>
-  <url><loc>https://ekansh.xyz/projects/shell-bot</loc></url>
-  <url><loc>https://ekansh.xyz/projects/downloader-bot</loc></url>
-  <url><loc>https://ekansh.xyz/projects/file-organizer</loc></url>
-  <url><loc>https://ekansh.xyz/communities</loc></url>
-  <url><loc>https://ekansh.xyz/contact</loc></url>
-=======
   <url><loc>https://realekansh.xyz/</loc></url>
   <url><loc>https://realekansh.xyz/about/</loc></url>
   <url><loc>https://realekansh.xyz/projects/</loc></url>
@@ -23,6 +10,6 @@
   <url><loc>https://realekansh.xyz/projects/downloader-bot/</loc></url>
   <url><loc>https://realekansh.xyz/projects/file-organizer/</loc></url>
   <url><loc>https://realekansh.xyz/communities/</loc></url>
+  <url><loc>https://realekansh.xyz/blogs/</loc></url>
   <url><loc>https://realekansh.xyz/contact/</loc></url>
->>>>>>> 2a37c1d (feat: launch portfolio with major fixes and improvements)
 </urlset>

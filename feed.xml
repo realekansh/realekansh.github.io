@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/assets/feed.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ekansh Bhavik Blog</title>
+    <link>https://realekansh.xyz/blogs/</link>
+    <description>Technical essays, system architecture notes, open-source tooling, and Linux workflow insights by Ekansh Bhavik.</description>
+    <language>en-us</language>
+    <atom:link href="https://realekansh.xyz/feed.xml" rel="self" type="application/rss+xml"/>
+
+  </channel>
+</rss>

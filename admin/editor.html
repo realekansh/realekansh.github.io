@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0f14">
+  <title>Writing Workspace &mdash; Personal Publishing Console</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style/base.css">
+  <link rel="stylesheet" href="/style/themes.css">
+  <link rel="stylesheet" href="/style/layout.css">
+  <link rel="stylesheet" href="/style/components.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body data-page="admin-editor">
+  <!-- Clean Top Bar Workspace Header -->
+  <header class="site-header" style="border-bottom: 1px solid var(--border);">
+    <div class="container nav-shell" style="max-width: 1200px;">
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <a class="button button-outline button-small" href="/admin/" id="back-btn">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#arrow-left"></use></svg>
+          <span>Back</span>
+        </a>
+        <div style="font-weight: var(--fw-bold); font-size: var(--fz-md);" id="editor-page-heading">New Post</div>
+        <span class="pill" id="post-status-badge" style="background: rgba(234, 179, 8, 0.15); color: #eab308; font-weight: var(--fw-semibold);">DRAFT</span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button type="button" class="button button-outline" id="save-draft-btn">Save Draft</button>
+        <button type="button" class="button button-primary" id="publish-btn">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#check"></use></svg>
+          <span id="publish-btn-text">Publish</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main" id="main" style="padding-top: 80px; padding-bottom: 60px;">
+    <div class="container" style="max-width: 1200px;">
+      
+      <!-- Article Title Header Input Area -->
+      <div style="margin-bottom: 24px;">
+        <input type="text" id="post-title-input" placeholder="Post title..." style="width: 100%; padding: 12px 0; background: transparent; border: none; border-bottom: 2px solid var(--border); color: var(--text); font-size: 2.2rem; font-weight: 800; outline: none; line-height: 1.2;" required autofocus>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: var(--fz-xs); color: var(--text-muted);">
+          <div>
+            URL: <code id="slug-preview" style="background: var(--bg-soft); padding: 2px 6px; border-radius: 4px; color: var(--accent);">/blogs/?post=...</code>
+          </div>
+          <div id="word-count-badge">0 words &bull; 0 min read</div>
+        </div>
+      </div>
+
+      <!-- Main Editor & Live Preview Grid -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start;">
+        
+        <!-- Left: Writing Area -->
+        <div class="aside-card" style="padding: 20px; display: flex; flex-direction: column;">
+          
+          <!-- Formatting Toolbar -->
+          <div id="editor-toolbar" style="display: flex; gap: 6px; flex-wrap: wrap; padding-bottom: 12px; margin-bottom: 16px; border-bottom: 1px solid var(--border); align-items: center;">
+            <button type="button" class="button button-outline button-small" data-fmt="bold" title="Bold (Ctrl+B)"><strong>B</strong></button>
+            <button type="button" class="button button-outline button-small" data-fmt="italic" title="Italic (Ctrl+I)"><em>I</em></button>
+            <button type="button" class="button button-outline button-small" data-fmt="strike" title="Strikethrough"><s>S</s></button>
+            <span style="border-right: 1px solid var(--border); height: 20px; margin-inline: 4px;"></span>
+            <button type="button" class="button button-outline button-small" data-fmt="h1" title="Heading 1">H1</button>
+            <button type="button" class="button button-outline button-small" data-fmt="h2" title="Heading 2">H2</button>
+            <button type="button" class="button button-outline button-small" data-fmt="h3" title="Heading 3">H3</button>
+            <span style="border-right: 1px solid var(--border); height: 20px; margin-inline: 4px;"></span>
+            <button type="button" class="button button-outline button-small" data-fmt="bullet" title="Bullet List">&bull; List</button>
+            <button type="button" class="button button-outline button-small" data-fmt="number" title="Numbered List">1. List</button>
+            <button type="button" class="button button-outline button-small" data-fmt="task" title="Task List">[ ] Task</button>
+            <button type="button" class="button button-outline button-small" data-fmt="quote" title="Blockquote">&ldquo;&rdquo;</button>
+            <button type="button" class="button button-outline button-small" data-fmt="code" title="Inline Code">`code`</button>
+            <button type="button" class="button button-outline button-small" data-fmt="codeblock" title="Fenced Code Block">```</button>
+            <button type="button" class="button button-outline button-small" data-fmt="link" title="Insert Link (Ctrl+K)">Link</button>
+            <button type="button" class="button button-outline button-small" data-fmt="hr" title="Horizontal Line">&mdash;</button>
+            <span style="border-right: 1px solid var(--border); height: 20px; margin-inline: 4px;"></span>
+            <label class="button button-outline button-small" style="cursor: pointer; display: inline-flex; align-items: center; gap: 4px; color: var(--accent);">
+              <span>📷 Add Image</span>
+              <input type="file" id="image-upload-file" accept="image/*,.pdf,.txt,.md,.zip" style="display: none;">
+            </label>
+          </div>
+
+          <!-- Markdown Writing Textarea -->
+          <textarea id="markdown-input" rows="26" placeholder="Start writing your essay in Markdown here... (Drag & Drop or Paste images directly)" style="width: 100%; padding: 14px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); font-family: 'Fira Code', monospace; font-size: 0.92rem; line-height: 1.6; resize: vertical; outline: none;" required></textarea>
+        </div>
+
+        <!-- Right: Live Synchronized Preview & Metadata Panel -->
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <!-- Metadata Collapsible Drawer -->
+          <div class="aside-card" style="padding: 20px;">
+            <h3 style="font-size: 1rem; margin-bottom: 14px; font-weight: var(--fw-bold);">Article Metadata</h3>
+
+            <div style="margin-bottom: 14px;">
+              <label style="display: block; font-size: var(--fz-xs); font-weight: var(--fw-bold); color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase;">Description / Excerpt</label>
+              <textarea id="post-desc-input" rows="2" placeholder="Brief summary for SEO and Open Graph social cards..." style="width: 100%; padding: 8px 12px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); font-size: 0.88rem; font-family: inherit; resize: vertical;"></textarea>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+              <div>
+                <label style="display: block; font-size: var(--fz-xs); font-weight: var(--fw-bold); color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase;">Category / Tags</label>
+                <input type="text" id="post-tags-input" placeholder="Architecture, Security" style="width: 100%; padding: 8px 12px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); font-size: 0.88rem;">
+              </div>
+              <div>
+                <label style="display: block; font-size: var(--fz-xs); font-weight: var(--fw-bold); color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase;">Publish Date</label>
+                <input type="date" id="post-date-input" style="width: 100%; padding: 8px 12px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); font-size: 0.88rem;">
+              </div>
+            </div>
+
+            <div>
+              <label style="display: block; font-size: var(--fz-xs); font-weight: var(--fw-bold); color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase;">Cover Image URL</label>
+              <input type="text" id="post-cover-input" placeholder="/assets/blog/my-slug/cover.webp" style="width: 100%; padding: 8px 12px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); font-size: 0.88rem;">
+            </div>
+
+            <div id="status-msg" style="margin-top: 12px; font-size: var(--fz-xs); color: var(--text-muted); text-align: center;"></div>
+          </div>
+
+          <!-- Live Rendered Preview Panel -->
+          <div class="aside-card" style="padding: 20px;">
+            <h3 style="font-size: 1rem; margin-bottom: 14px; font-weight: var(--fw-bold); color: var(--text-muted); text-transform: uppercase;">Live Rendered Output</h3>
+            <div id="live-preview-box" class="detail-content essay-body" style="padding: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); min-height: 480px; max-height: 620px; overflow-y: auto;">
+              <p style="color: var(--text-muted); font-style: italic;">Rendered preview will appear as you type...</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    import { renderMarkdown } from "/script/blog.js";
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      // Server-Side Auth Check
+      const authRes = await fetch("/api/auth/user");
+      const authData = await authRes.json();
+
+      if (!authData.authenticated || !authData.isOwner) {
+        window.location.href = "/admin/";
+        return;
+      }
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const editSlug = urlParams.get("edit");
+
+      const titleInput = document.getElementById("post-title-input");
+      const slugPreview = document.getElementById("slug-preview");
+      const dateInput = document.getElementById("post-date-input");
+      const descInput = document.getElementById("post-desc-input");
+      const tagsInput = document.getElementById("post-tags-input");
+      const coverInput = document.getElementById("post-cover-input");
+      const markdownInput = document.getElementById("markdown-input");
+      const previewBox = document.getElementById("live-preview-box");
+      const statusBadge = document.getElementById("post-status-badge");
+      const wordCountBadge = document.getElementById("word-count-badge");
+      const statusMsg = document.getElementById("status-msg");
+
+      const publishBtn = document.getElementById("publish-btn");
+      const saveDraftBtn = document.getElementById("save-draft-btn");
+      const imageFileInput = document.getElementById("image-upload-file");
+
+      let originalSlug = editSlug || "";
+      let currentPostStatus = "draft";
+
+      // Set default date
+      dateInput.value = new Date().toISOString().split("T")[0];
+
+      // Deterministic Slug Generator
+      function generateSlug(title) {
+        if (!title) return "untitled-post";
+        return title
+          .toLowerCase()
+          .trim()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/[^a-z0-9\s-]/g, "")
+          .replace(/\s+/g, "-")
+          .replace(/-+/g, "-")
+          .replace(/^-|-$/g, "");
+      }
+
+      // Title input -> auto update slug if NEW post
+      titleInput.addEventListener("input", () => {
+        if (!originalSlug) {
+          const derived = generateSlug(titleInput.value);
+          slugPreview.textContent = `/blogs/?post=${derived}`;
+        }
+        updatePreview();
+      });
+
+      markdownInput.addEventListener("input", updatePreview);
+
+      function updatePreview() {
+        const text = markdownInput.value;
+        previewBox.innerHTML = renderMarkdown(text) || "<p style='color: var(--text-muted); font-style: italic;'>Rendered preview will appear as you type...</p>";
+
+        const wordCount = text.trim() ? text.trim().split(/\s+/).length : 0;
+        const readTime = Math.max(1, Math.ceil(wordCount / 200));
+        wordCountBadge.textContent = `${wordCount} words \u2022 ${readTime} min read`;
+      }
+
+      // Markdown auto-list continuation on Enter
+      markdownInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          const pos = markdownInput.selectionStart;
+          const val = markdownInput.value;
+          const lineStart = val.lastIndexOf("\n", pos - 1) + 1;
+          const currentLine = val.substring(lineStart, pos);
+
+          const bulletMatch = currentLine.match(/^(\s*[\-\*]\s+)/);
+          const numberMatch = currentLine.match(/^(\s*(\d+)\.\s+)/);
+          const taskMatch = currentLine.match(/^(\s*[\-\*]\s+\[[\s\x]\]\s+)/);
+
+          if (taskMatch) {
+            e.preventDefault();
+            const insertText = "\n- [ ] ";
+            markdownInput.value = val.slice(0, pos) + insertText + val.slice(pos);
+            markdownInput.selectionStart = markdownInput.selectionEnd = pos + insertText.length;
+            updatePreview();
+          } else if (bulletMatch) {
+            e.preventDefault();
+            const prefix = bulletMatch[1];
+            const insertText = "\n" + prefix;
+            markdownInput.value = val.slice(0, pos) + insertText + val.slice(pos);
+            markdownInput.selectionStart = markdownInput.selectionEnd = pos + insertText.length;
+            updatePreview();
+          } else if (numberMatch) {
+            e.preventDefault();
+            const nextNum = parseInt(numberMatch[2], 10) + 1;
+            const insertText = `\n${nextNum}. `;
+            markdownInput.value = val.slice(0, pos) + insertText + val.slice(pos);
+            markdownInput.selectionStart = markdownInput.selectionEnd = pos + insertText.length;
+            updatePreview();
+          }
+        }
+
+        // Keyboard Shortcuts
+        if (e.ctrlKey || e.metaKey) {
+          if (e.key === "b" || e.key === "B") {
+            e.preventDefault();
+            applyFormat("bold");
+          } else if (e.key === "i" || e.key === "I") {
+            e.preventDefault();
+            applyFormat("italic");
+          } else if (e.key === "k" || e.key === "K") {
+            e.preventDefault();
+            applyFormat("link");
+          }
+        }
+      });
+
+      // Toolbar action handlers
+      document.querySelectorAll("[data-fmt]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const type = btn.getAttribute("data-fmt");
+          applyFormat(type);
+        });
+      });
+
+      function applyFormat(type) {
+        const start = markdownInput.selectionStart;
+        const end = markdownInput.selectionEnd;
+        const text = markdownInput.value;
+        const selected = text.slice(start, end);
+        let inserted = "";
+
+        switch (type) {
+          case "bold": inserted = `**${selected || "bold text"}**`; break;
+          case "italic": inserted = `*${selected || "italic text"}*`; break;
+          case "strike": inserted = `~~${selected || "strikethrough text"}~~`; break;
+          case "h1": inserted = `\n# ${selected || "Heading 1"}\n`; break;
+          case "h2": inserted = `\n## ${selected || "Heading 2"}\n`; break;
+          case "h3": inserted = `\n### ${selected || "Heading 3"}\n`; break;
+          case "bullet": inserted = `\n- ${selected || "List item"}\n`; break;
+          case "number": inserted = `\n1. ${selected || "List item"}\n`; break;
+          case "task": inserted = `\n- [ ] ${selected || "Task item"}\n`; break;
+          case "quote": inserted = `\n> ${selected || "Quote block"}\n`; break;
+          case "code": inserted = `\`${selected || "inline code"}\``; break;
+          case "codeblock": inserted = `\n\`\`\`javascript\n${selected || "// Code block"}\n\`\`\`\n`; break;
+          case "hr": inserted = `\n---\n`; break;
+          case "link":
+            const url = prompt("Enter URL:", "https://");
+            if (url) inserted = `[${selected || "Link text"}](${url})`;
+            else return;
+            break;
+        }
+
+        markdownInput.value = text.slice(0, start) + inserted + text.slice(end);
+        markdownInput.focus();
+        updatePreview();
+      }
+
+      // Drag & Drop / Paste Image Upload Handling
+      markdownInput.addEventListener("dragover", (e) => e.preventDefault());
+      markdownInput.addEventListener("drop", (e) => {
+        e.preventDefault();
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          uploadAndInsertFile(e.dataTransfer.files[0]);
+        }
+      });
+
+      markdownInput.addEventListener("paste", (e) => {
+        const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+        for (let item of items) {
+          if (item.kind === "file") {
+            const blob = item.getAsFile();
+            uploadAndInsertFile(blob);
+          }
+        }
+      });
+
+      imageFileInput.addEventListener("change", (e) => {
+        if (e.target.files && e.target.files[0]) {
+          uploadAndInsertFile(e.target.files[0]);
+        }
+      });
+
+      async function uploadAndInsertFile(file) {
+        if (file.size > 5 * 1024 * 1024) {
+          alert("File size exceeds maximum limit of 5 MB.");
+          return;
+        }
+
+        statusMsg.textContent = "Uploading asset securely...";
+        const reader = new FileReader();
+        reader.onload = async () => {
+          const base64Data = reader.result;
+          const currentSlug = originalSlug || generateSlug(titleInput.value);
+
+          try {
+            const uploadRes = await fetch("/api/upload/image", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                filename: file.name || "pasted-image.png",
+                contentType: file.type || "image/png",
+                base64Data,
+                postSlug: currentSlug,
+              }),
+            });
+
+            const uploadData = await uploadRes.json();
+            if (uploadRes.ok && uploadData.url) {
+              const fileMD = file.type && file.type.startsWith("image")
+                ? `\n![${file.name || "Image"}](${uploadData.url})\n`
+                : `\n[📎 Download ${file.name || "Attachment"}](${uploadData.url})\n`;
+
+              const pos = markdownInput.selectionStart;
+              markdownInput.value = markdownInput.value.slice(0, pos) + fileMD + markdownInput.value.slice(pos);
+              updatePreview();
+              statusMsg.textContent = "Asset uploaded successfully!";
+            } else {
+              alert("Upload failed: " + (uploadData.message || "Unknown error"));
+              statusMsg.textContent = "";
+            }
+          } catch (err) {
+            console.error("Upload error:", err);
+            alert("Upload request failed.");
+            statusMsg.textContent = "";
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+
+      // Load post for editing if edit query parameter present
+      if (editSlug) {
+        document.getElementById("editor-page-heading").textContent = "Edit Article";
+        originalSlug = editSlug;
+
+        try {
+          const getRes = await fetch(`/api/posts/get?slug=${encodeURIComponent(editSlug)}`);
+          if (getRes.ok) {
+            const data = await getRes.json();
+            const fm = data.frontmatter || {};
+            titleInput.value = fm.title || editSlug;
+            slugPreview.textContent = `/blogs/?post=${editSlug}`;
+            dateInput.value = fm.date || "";
+            descInput.value = fm.description || "";
+            tagsInput.value = Array.isArray(fm.tags) ? fm.tags.join(", ") : "";
+            coverInput.value = fm.cover || "";
+            currentPostStatus = fm.status || "draft";
+            markdownInput.value = data.body || "";
+
+            statusBadge.textContent = currentPostStatus.toUpperCase();
+            if (currentPostStatus === "published") {
+              statusBadge.style.background = "rgba(34, 197, 94, 0.15)";
+              statusBadge.style.color = "#22c55e";
+              document.getElementById("publish-btn-text").textContent = "Update Published";
+            }
+            updatePreview();
+          }
+        } catch (err) {
+          console.error("Error loading article for editing:", err);
+        }
+      }
+
+      async function saveArticle(action) {
+        const title = titleInput.value.trim();
+        const content = markdownInput.value.trim();
+
+        if (!title || !content) {
+          alert("Please provide both a Post Title and Markdown content.");
+          return;
+        }
+
+        statusMsg.textContent = action === "publish" ? "Publishing article..." : "Saving draft...";
+        publishBtn.disabled = true;
+        saveDraftBtn.disabled = true;
+
+        try {
+          const saveRes = await fetch("/api/posts/save", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              title,
+              originalSlug,
+              description: descInput.value,
+              date: dateInput.value,
+              tags: tagsInput.value,
+              cover: coverInput.value,
+              content,
+              action, // "publish" or "draft"
+            }),
+          });
+
+          const resData = await saveRes.json();
+          if (saveRes.ok) {
+            statusMsg.textContent = "Saved successfully!";
+            setTimeout(() => {
+              window.location.href = "/admin/";
+            }, 600);
+          } else {
+            alert("Save failed: " + (resData.message || "Unknown error"));
+            publishBtn.disabled = false;
+            saveDraftBtn.disabled = false;
+            statusMsg.textContent = "";
+          }
+        } catch (err) {
+          console.error("Save article error:", err);
+          alert("Save request failed.");
+          publishBtn.disabled = false;
+          saveDraftBtn.disabled = false;
+          statusMsg.textContent = "";
+        }
+      }
+
+      publishBtn.addEventListener("click", () => saveArticle("publish"));
+      saveDraftBtn.addEventListener("click", () => saveArticle("draft"));
+    });
+  </script>
+</body>
+</html>
