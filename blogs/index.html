@@ -1,121 +1,235 @@
 <!doctype html>
 <html lang="en" data-theme="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b0f14">
-  <title>Blog &mdash; Ekansh Bhavik</title>
-  <meta name="description" content="Technical writing, system architecture notes, open-source tooling, and Linux workflow essays by Ekansh Bhavik.">
-  <link rel="canonical" href="https://realekansh.xyz/blogs/">
-  <meta property="og:title" content="Blog &mdash; Ekansh Bhavik">
-  <meta property="og:description" content="Technical essays, system architecture notes, and open-source tooling insights.">
-  <meta property="og:image" content="https://realekansh.xyz/assets/avatar.jpg">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Blog &mdash; Ekansh Bhavik">
-  <meta name="twitter:description" content="Technical essays, system architecture notes, and open-source tooling insights.">
-  <meta name="twitter:image" content="https://realekansh.xyz/assets/avatar.jpg">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/assets/avatar.jpg">
-  <link rel="manifest" href="/assets/icons/site.webmanifest">
-  <link rel="alternate" type="application/rss+xml" title="Ekansh Bhavik Blog RSS Feed" href="/feed.xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style/base.css">
-  <link rel="stylesheet" href="/style/themes.css">
-  <link rel="stylesheet" href="/style/layout.css">
-  <link rel="stylesheet" href="/style/components.css">
-  <link rel="stylesheet" href="/style/animations.css">
-  <script type="module" src="/script/main.js"></script>
-</head>
-<body data-page="blogs">
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header" data-navbar>
-    <div class="container nav-shell">
-      <a class="brand-mark" href="/" aria-label="Ekansh Bhavik home">
-        <img src="/assets/avatar.jpg" alt="Ekansh Bhavik avatar" width="44" height="44">
-      </a>
-      <nav class="nav-links" id="primary-nav" aria-label="Primary navigation" data-primary-nav>
-        <a class="nav-link" href="/" data-nav-link="home">Home</a>
-        <a class="nav-link" href="/about/" data-nav-link="about">About</a>
-        <a class="nav-link" href="/projects/" data-nav-link="projects">Projects</a>
-        <a class="nav-link active" href="/blogs/" data-nav-link="blogs">Blog</a>
-        <a class="nav-link" href="/communities/" data-nav-link="communities">Communities</a>
-        <a class="nav-link" href="/contact/" data-nav-link="contact">Contact</a>
-      </nav>
-      <div class="nav-actions">
-        <button class="icon-button" type="button" data-theme-toggle aria-label="Switch to light theme" aria-pressed="false">
-          <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#sun"></use></svg>
-        </button>
-        <button class="icon-button nav-toggle" type="button" data-nav-toggle aria-label="Open navigation" aria-controls="primary-nav" aria-expanded="false">
-          <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#menu"></use></svg>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main class="main" id="main">
-    <!-- Post List View -->
-    <div id="blog-list-view">
-      <section class="page-hero container reveal">
-        <p class="page-kicker">Writing & Blogs</p>
-        <h1 class="page-title">Technical Writing & System Notes</h1>
-        <p class="page-lede">Practical insights on software architecture, automation, Linux environments, and building sustainable developer tools.</p>
-      </section>
-
-      <section class="section container">
-        <div class="blog-controls reveal" style="margin-bottom: 24px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between;">
-          <div class="tag-filters" id="tag-filters" style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <button class="pill active" data-filter="all">All Posts</button>
-          </div>
-          <a class="button button-outline button-small" href="/feed.xml" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px;">
-            <svg class="icon" aria-hidden="true" style="width: 14px; height: 14px;"><use href="/assets/icons/icons.svg#external"></use></svg>
-            <span>RSS Feed</span>
-          </a>
-        </div>
-
-        <div class="project-grid" id="posts-container" style="display: grid; gap: 24px; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));">
-          <p class="text-muted">Loading posts...</p>
-        </div>
-      </section>
-    </div>
-
-    <!-- Single Post Reader View -->
-    <div id="blog-post-view" style="display: none;">
-      <section class="page-hero container reveal">
-        <a class="back-link" href="/blogs/" id="back-to-blogs">
-          <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#arrow-left"></use></svg>
-          <span>Back to All Posts</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b0f14" />
+    <title>Blog &mdash; Ekansh Bhavik</title>
+    <meta
+      name="description"
+      content="Technical writing, system architecture notes, open-source tooling, and Linux workflow essays by Ekansh Bhavik."
+    />
+    <link rel="canonical" href="https://realekansh.xyz/blogs/" />
+    <meta property="og:title" content="Blog &mdash; Ekansh Bhavik" />
+    <meta
+      property="og:description"
+      content="Technical essays, system architecture notes, and open-source tooling insights."
+    />
+    <meta
+      property="og:image"
+      content="https://realekansh.xyz/assets/avatar.jpg"
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Blog &mdash; Ekansh Bhavik" />
+    <meta
+      name="twitter:description"
+      content="Technical essays, system architecture notes, and open-source tooling insights."
+    />
+    <meta
+      name="twitter:image"
+      content="https://realekansh.xyz/assets/avatar.jpg"
+    />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/avatar.jpg" />
+    <link rel="manifest" href="/assets/icons/site.webmanifest" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Ekansh Bhavik Blog RSS Feed"
+      href="/feed.xml"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style/base.css" />
+    <link rel="stylesheet" href="/style/themes.css" />
+    <link rel="stylesheet" href="/style/layout.css" />
+    <link rel="stylesheet" href="/style/components.css" />
+    <link rel="stylesheet" href="/style/animations.css" />
+    <script type="module" src="/script/main.js"></script>
+  </head>
+  <body data-page="blogs">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" data-navbar>
+      <div class="container nav-shell">
+        <a class="brand-mark" href="/" aria-label="Ekansh Bhavik home">
+          <img
+            src="/assets/avatar.jpg"
+            alt="Ekansh Bhavik avatar"
+            width="44"
+            height="44"
+          />
         </a>
-        <p class="page-kicker" id="post-category">Technical Essay</p>
-        <h1 class="page-title" id="post-title">Post Title</h1>
-        <div class="post-meta" style="display: flex; gap: 16px; font-size: var(--fz-sm); color: var(--text-muted); margin-top: 12px; flex-wrap: wrap;">
-          <span id="post-date">Date</span>
-          <span>&bull;</span>
-          <span id="post-reading-time">5 min read</span>
-          <span>&bull;</span>
-          <span id="post-author">Ekansh Bhavik</span>
+        <nav
+          class="nav-links"
+          id="primary-nav"
+          aria-label="Primary navigation"
+          data-primary-nav
+        >
+          <a class="nav-link" href="/" data-nav-link="home">Home</a>
+          <a class="nav-link" href="/about/" data-nav-link="about">About</a>
+          <a class="nav-link" href="/projects/" data-nav-link="projects"
+            >Projects</a
+          >
+          <a class="nav-link active" href="/blogs/" data-nav-link="blogs"
+            >Blog</a
+          >
+          <a class="nav-link" href="/communities/" data-nav-link="communities"
+            >Communities</a
+          >
+          <a class="nav-link" href="/contact/" data-nav-link="contact"
+            >Contact</a
+          >
+        </nav>
+        <div class="nav-actions">
+          <button
+            class="icon-button"
+            type="button"
+            data-theme-toggle
+            aria-label="Switch to light theme"
+            aria-pressed="false"
+          >
+            <svg class="icon" aria-hidden="true">
+              <use href="/assets/icons/icons.svg#sun"></use>
+            </svg>
+          </button>
+          <button
+            class="icon-button nav-toggle"
+            type="button"
+            data-nav-toggle
+            aria-label="Open navigation"
+            aria-controls="primary-nav"
+            aria-expanded="false"
+          >
+            <svg class="icon" aria-hidden="true">
+              <use href="/assets/icons/icons.svg#menu"></use>
+            </svg>
+          </button>
         </div>
-      </section>
+      </div>
+    </header>
 
-      <section class="section container">
-        <article class="detail-content essay-body" id="post-body-container" style="max-width: 780px; margin-inline: auto;">
-          <p>Loading article content...</p>
-        </article>
-        <div id="post-nav-container" style="max-width: 780px; margin-inline: auto;"></div>
-      </section>
-    </div>
-  </main>
+    <main class="main" id="main">
+      <!-- Post List View -->
+      <div id="blog-list-view">
+        <section class="page-hero container reveal">
+          <p class="page-kicker">Writing & Blogs</p>
+          <h1 class="page-title">Technical Writing & System Notes</h1>
+          <p class="page-lede">
+            Practical insights on software architecture, automation, Linux
+            environments, and building sustainable developer tools.
+          </p>
+        </section>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>&copy; 2026 Ekansh Bhavik.</p>
-      <p>Built with minimal aesthetics and maximum utility.</p>
-    </div>
-  </footer>
+        <section class="section container">
+          <div
+            class="blog-controls reveal"
+            style="
+              margin-bottom: 24px;
+              display: flex;
+              gap: 12px;
+              flex-wrap: wrap;
+              align-items: center;
+              justify-content: space-between;
+            "
+          >
+            <div
+              class="tag-filters"
+              id="tag-filters"
+              style="display: flex; gap: 8px; flex-wrap: wrap"
+            >
+              <button class="pill active" data-filter="all">All Posts</button>
+            </div>
+            <a
+              class="button button-outline button-small"
+              href="/feed.xml"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="display: inline-flex; align-items: center; gap: 6px"
+            >
+              <svg
+                class="icon"
+                aria-hidden="true"
+                style="width: 14px; height: 14px"
+              >
+                <use href="/assets/icons/icons.svg#external"></use>
+              </svg>
+              <span>RSS Feed</span>
+            </a>
+          </div>
 
-  <script type="module" src="/script/blog.js"></script>
-</body>
+          <div
+            class="project-grid"
+            id="posts-container"
+            style="
+              display: grid;
+              gap: 24px;
+              grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            "
+          >
+            <p class="text-muted">Loading posts...</p>
+          </div>
+        </section>
+      </div>
+
+      <!-- Single Post Reader View -->
+      <div id="blog-post-view" style="display: none">
+        <section class="page-hero container reveal">
+          <a class="back-link" href="/blogs/" id="back-to-blogs">
+            <svg class="icon" aria-hidden="true">
+              <use href="/assets/icons/icons.svg#arrow-left"></use>
+            </svg>
+            <span>Back to All Posts</span>
+          </a>
+          <p class="page-kicker" id="post-category">Technical Essay</p>
+          <h1 class="page-title" id="post-title">Post Title</h1>
+          <div
+            class="post-meta"
+            style="
+              display: flex;
+              gap: 16px;
+              font-size: var(--fz-sm);
+              color: var(--text-muted);
+              margin-top: 12px;
+              flex-wrap: wrap;
+            "
+          >
+            <span id="post-date">Date</span>
+            <span>&bull;</span>
+            <span id="post-reading-time">5 min read</span>
+            <span>&bull;</span>
+            <span id="post-author">Ekansh Bhavik</span>
+          </div>
+        </section>
+
+        <section class="section container">
+          <article
+            class="detail-content essay-body"
+            id="post-body-container"
+            style="max-width: 780px; margin-inline: auto"
+          >
+            <p>Loading article content...</p>
+          </article>
+          <div
+            id="post-nav-container"
+            style="max-width: 780px; margin-inline: auto"
+          ></div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>&copy; 2026 Ekansh Bhavik.</p>
+        <p>Built with minimal aesthetics and maximum utility.</p>
+      </div>
+    </footer>
+
+    <script type="module" src="/script/blog.js"></script>
+  </body>
 </html>

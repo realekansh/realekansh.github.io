@@ -1,211 +1,392 @@
 <!doctype html>
 <html lang="en" data-theme="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b0f14">
-  <title>Blog Publishing Admin &mdash; Ekansh Bhavik</title>
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/style/base.css">
-  <link rel="stylesheet" href="/style/themes.css">
-  <link rel="stylesheet" href="/style/layout.css">
-  <link rel="stylesheet" href="/style/components.css">
-</head>
-<body data-page="admin">
-  <header class="site-header">
-    <div class="container nav-shell" style="display: flex; justify-content: space-between; align-items: center;">
-      <div style="display: flex; align-items: center; gap: 16px;">
-        <a class="brand-mark" href="/" aria-label="Ekansh Bhavik home">
-          <img src="/assets/avatar.jpg" alt="Ekansh Bhavik avatar" width="44" height="44">
-        </a>
-        <div style="font-weight: var(--fw-bold); font-size: var(--fz-md); white-space: nowrap;">Blog Publishing Console</div>
-      </div>
-      <div class="nav-actions" id="admin-header-actions" style="display: none; align-items: center; gap: 12px;">
-        <span id="user-badge" style="font-size: var(--fz-xs); color: var(--text-muted); padding: 4px 10px; background: var(--bg-soft); border-radius: var(--radius-full); border: 1px solid var(--border);"></span>
-        <button class="button button-outline button-small" type="button" id="logout-btn">Logout</button>
-      </div>
-    </div>
-  </header>
-
-  <main class="main" id="main">
-    <!-- Unauthenticated View -->
-    <div id="login-view" class="container" style="display: none; max-width: 540px; margin-top: 40px;">
-      <div class="aside-card" style="padding: 40px; text-align: center;">
-        <svg class="icon" aria-hidden="true" style="width: 48px; height: 48px; margin-bottom: 16px; color: var(--accent);"><use href="/assets/icons/icons.svg#github"></use></svg>
-        <h1 style="font-size: 1.6rem; margin-bottom: 8px;">Blog Publishing Admin</h1>
-        <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem;">Authentication required. Log in with your GitHub identity to access administrative functions.</p>
-        <a class="button button-primary button-large" href="/api/auth/login" style="width: 100%; justify-content: center;">
-          <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#github"></use></svg>
-          <span>Log in with GitHub</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Authenticated Non-Owner (403 Access Denied) View -->
-    <div id="forbidden-view" class="container" style="display: none; max-width: 540px; margin-top: 40px;">
-      <div class="aside-card" style="padding: 40px; text-align: center; border-color: rgba(239, 68, 68, 0.4);">
-        <div style="font-size: 2.5rem; margin-bottom: 8px;">🚫</div>
-        <h1 style="font-size: 1.6rem; margin-bottom: 8px; color: #ef4444;">403 Access Denied</h1>
-        <p style="color: var(--text-muted); margin-bottom: 16px; font-size: 0.95rem;">
-          Identity verified: <strong id="forbidden-user-name" style="color: var(--text);"></strong>
-        </p>
-        <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.9rem; line-height: 1.6;">
-          Only the portfolio owner (<strong>realekansh</strong>) is authorized to access the administration dashboard, edit articles, publish drafts, or upload media.
-        </p>
-        <button class="button button-outline button-large" type="button" id="forbidden-logout-btn" style="width: 100%; justify-content: center;">
-          Log Out & Return
-        </button>
-      </div>
-    </div>
-
-    <!-- Authenticated Owner (realekansh) Admin Dashboard View -->
-    <div id="dashboard-view" class="container" style="display: none;">
-      <section class="page-hero container" style="padding-bottom: 16px;">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; width: 100%;">
-          <div>
-            <p class="page-kicker">Personal Publishing Console</p>
-            <h1 class="page-title">Articles & Drafts</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b0f14" />
+    <title>Blog Publishing Admin &mdash; Ekansh Bhavik</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/style/base.css" />
+    <link rel="stylesheet" href="/style/themes.css" />
+    <link rel="stylesheet" href="/style/layout.css" />
+    <link rel="stylesheet" href="/style/components.css" />
+  </head>
+  <body data-page="admin">
+    <header class="site-header">
+      <div
+        class="container nav-shell"
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        <div style="display: flex; align-items: center; gap: 16px">
+          <a class="brand-mark" href="/" aria-label="Ekansh Bhavik home">
+            <img
+              src="/assets/avatar.jpg"
+              alt="Ekansh Bhavik avatar"
+              width="44"
+              height="44"
+            />
+          </a>
+          <div
+            style="
+              font-weight: var(--fw-bold);
+              font-size: var(--fz-md);
+              white-space: nowrap;
+            "
+          >
+            Blog Publishing Console
           </div>
-          <a class="button button-primary button-large" href="/admin/editor.html">
-            <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#check"></use></svg>
-            <span>+ New Post</span>
+        </div>
+        <div
+          class="nav-actions"
+          id="admin-header-actions"
+          style="display: none; align-items: center; gap: 12px"
+        >
+          <span
+            id="user-badge"
+            style="
+              font-size: var(--fz-xs);
+              color: var(--text-muted);
+              padding: 4px 10px;
+              background: var(--bg-soft);
+              border-radius: var(--radius-full);
+              border: 1px solid var(--border);
+            "
+          ></span>
+          <button
+            class="button button-outline button-small"
+            type="button"
+            id="logout-btn"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="main" id="main">
+      <!-- Unauthenticated View -->
+      <div
+        id="login-view"
+        class="container"
+        style="display: none; max-width: 540px; margin-top: 40px"
+      >
+        <div class="aside-card" style="padding: 40px; text-align: center">
+          <svg
+            class="icon"
+            aria-hidden="true"
+            style="
+              width: 48px;
+              height: 48px;
+              margin-bottom: 16px;
+              color: var(--accent);
+            "
+          >
+            <use href="/assets/icons/icons.svg#github"></use>
+          </svg>
+          <h1 style="font-size: 1.6rem; margin-bottom: 8px">
+            Blog Publishing Admin
+          </h1>
+          <p
+            style="
+              color: var(--text-muted);
+              margin-bottom: 24px;
+              font-size: 0.95rem;
+            "
+          >
+            Authentication required. Log in with your GitHub identity to access
+            administrative functions.
+          </p>
+          <a
+            class="button button-primary button-large"
+            href="/api/auth/login"
+            style="width: 100%; justify-content: center"
+          >
+            <svg class="icon" aria-hidden="true">
+              <use href="/assets/icons/icons.svg#github"></use>
+            </svg>
+            <span>Log in with GitHub</span>
           </a>
         </div>
-      </section>
+      </div>
 
-      <!-- Filter Tabs -->
-      <section class="section container" style="padding-top: 0;">
-        <div style="display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 12px;">
-          <button class="pill active" id="tab-all" data-tab="all">All Posts (<span id="count-all">0</span>)</button>
-          <button class="pill" id="tab-published" data-tab="published">Published (<span id="count-published">0</span>)</button>
-          <button class="pill" id="tab-drafts" data-tab="drafts">Drafts (<span id="count-drafts">0</span>)</button>
+      <!-- Authenticated Non-Owner (403 Access Denied) View -->
+      <div
+        id="forbidden-view"
+        class="container"
+        style="display: none; max-width: 540px; margin-top: 40px"
+      >
+        <div
+          class="aside-card"
+          style="
+            padding: 40px;
+            text-align: center;
+            border-color: rgba(239, 68, 68, 0.4);
+          "
+        >
+          <div style="font-size: 2.5rem; margin-bottom: 8px">🚫</div>
+          <h1 style="font-size: 1.6rem; margin-bottom: 8px; color: #ef4444">
+            403 Access Denied
+          </h1>
+          <p
+            style="
+              color: var(--text-muted);
+              margin-bottom: 16px;
+              font-size: 0.95rem;
+            "
+          >
+            Identity verified:
+            <strong
+              id="forbidden-user-name"
+              style="color: var(--text)"
+            ></strong>
+          </p>
+          <p
+            style="
+              color: var(--text-muted);
+              margin-bottom: 24px;
+              font-size: 0.9rem;
+              line-height: 1.6;
+            "
+          >
+            Only the portfolio owner (<strong>realekansh</strong>) is authorized
+            to access the administration dashboard, edit articles, publish
+            drafts, or upload media.
+          </p>
+          <button
+            class="button button-outline button-large"
+            type="button"
+            id="forbidden-logout-btn"
+            style="width: 100%; justify-content: center"
+          >
+            Log Out & Return
+          </button>
         </div>
+      </div>
 
-        <div class="aside-card" style="padding: 24px; overflow-x: auto;">
-          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
-            <thead>
-              <tr style="border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: var(--fz-xs); text-transform: uppercase; letter-spacing: 0.05em;">
-                <th style="padding: 12px;">Title</th>
-                <th style="padding: 12px;">Status</th>
-                <th style="padding: 12px;">Publish Date</th>
-                <th style="padding: 12px;">Tags</th>
-                <th style="padding: 12px; text-align: right;">Actions</th>
-              </tr>
-            </thead>
-            <tbody id="posts-table-body">
-              <tr>
-                <td colspan="5" style="padding: 24px; text-align: center; color: var(--text-muted);">Loading articles...</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </div>
-  </main>
+      <!-- Authenticated Owner (realekansh) Admin Dashboard View -->
+      <div id="dashboard-view" class="container" style="display: none">
+        <section class="page-hero container" style="padding-bottom: 16px">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-start;
+              flex-wrap: wrap;
+              gap: 16px;
+              width: 100%;
+            "
+          >
+            <div>
+              <p class="page-kicker">Personal Publishing Console</p>
+              <h1 class="page-title">Articles & Drafts</h1>
+            </div>
+            <a
+              class="button button-primary button-large"
+              href="/admin/editor.html"
+            >
+              <svg class="icon" aria-hidden="true">
+                <use href="/assets/icons/icons.svg#check"></use>
+              </svg>
+              <span>+ New Post</span>
+            </a>
+          </div>
+        </section>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", async () => {
-      const loginView = document.getElementById("login-view");
-      const forbiddenView = document.getElementById("forbidden-view");
-      const dashboardView = document.getElementById("dashboard-view");
-      const adminHeaderActions = document.getElementById("admin-header-actions");
-      const userBadge = document.getElementById("user-badge");
-      const forbiddenUserName = document.getElementById("forbidden-user-name");
-      const tableBody = document.getElementById("posts-table-body");
-      const logoutBtn = document.getElementById("logout-btn");
-      const forbiddenLogoutBtn = document.getElementById("forbidden-logout-btn");
+        <!-- Filter Tabs -->
+        <section class="section container" style="padding-top: 0">
+          <div
+            style="
+              display: flex;
+              gap: 8px;
+              margin-bottom: 20px;
+              border-bottom: 1px solid var(--border);
+              padding-bottom: 12px;
+            "
+          >
+            <button class="pill active" id="tab-all" data-tab="all">
+              All Posts (<span id="count-all">0</span>)
+            </button>
+            <button class="pill" id="tab-published" data-tab="published">
+              Published (<span id="count-published">0</span>)
+            </button>
+            <button class="pill" id="tab-drafts" data-tab="drafts">
+              Drafts (<span id="count-drafts">0</span>)
+            </button>
+          </div>
 
-      let currentTab = "all";
-      let allFetchedPosts = [];
+          <div class="aside-card" style="padding: 24px; overflow-x: auto">
+            <table
+              style="
+                width: 100%;
+                border-collapse: collapse;
+                text-align: left;
+                font-size: 0.95rem;
+              "
+            >
+              <thead>
+                <tr
+                  style="
+                    border-bottom: 1px solid var(--border);
+                    color: var(--text-muted);
+                    font-size: var(--fz-xs);
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                  "
+                >
+                  <th style="padding: 12px">Title</th>
+                  <th style="padding: 12px">Status</th>
+                  <th style="padding: 12px">Publish Date</th>
+                  <th style="padding: 12px">Tags</th>
+                  <th style="padding: 12px; text-align: right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="posts-table-body">
+                <tr>
+                  <td
+                    colspan="5"
+                    style="
+                      padding: 24px;
+                      text-align: center;
+                      color: var(--text-muted);
+                    "
+                  >
+                    Loading articles...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
 
-      try {
-        const authRes = await fetch("/api/auth/user");
-        const authData = await authRes.json();
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        const loginView = document.getElementById("login-view");
+        const forbiddenView = document.getElementById("forbidden-view");
+        const dashboardView = document.getElementById("dashboard-view");
+        const adminHeaderActions = document.getElementById(
+          "admin-header-actions",
+        );
+        const userBadge = document.getElementById("user-badge");
+        const forbiddenUserName = document.getElementById(
+          "forbidden-user-name",
+        );
+        const tableBody = document.getElementById("posts-table-body");
+        const logoutBtn = document.getElementById("logout-btn");
+        const forbiddenLogoutBtn = document.getElementById(
+          "forbidden-logout-btn",
+        );
 
-        if (!authData.authenticated) {
-          loginView.style.display = "block";
-          forbiddenView.style.display = "none";
-          dashboardView.style.display = "none";
-          adminHeaderActions.style.display = "none";
-          return;
-        }
+        let currentTab = "all";
+        let allFetchedPosts = [];
 
-        if (!authData.isOwner) {
+        try {
+          const authRes = await fetch("/api/auth/user");
+          const authData = await authRes.json();
+
+          if (!authData.authenticated) {
+            loginView.style.display = "block";
+            forbiddenView.style.display = "none";
+            dashboardView.style.display = "none";
+            adminHeaderActions.style.display = "none";
+            return;
+          }
+
+          if (!authData.isOwner) {
+            loginView.style.display = "none";
+            forbiddenView.style.display = "block";
+            dashboardView.style.display = "none";
+            adminHeaderActions.style.display = "flex";
+            userBadge.textContent = `@${authData.user}`;
+            forbiddenUserName.textContent = `@${authData.user}`;
+
+            forbiddenLogoutBtn.addEventListener("click", async () => {
+              await fetch("/api/auth/logout", { method: "POST" });
+              window.location.reload();
+            });
+            logoutBtn.addEventListener("click", async () => {
+              await fetch("/api/auth/logout", { method: "POST" });
+              window.location.reload();
+            });
+            return;
+          }
+
           loginView.style.display = "none";
-          forbiddenView.style.display = "block";
-          dashboardView.style.display = "none";
+          forbiddenView.style.display = "none";
+          dashboardView.style.display = "block";
           adminHeaderActions.style.display = "flex";
           userBadge.textContent = `@${authData.user}`;
-          forbiddenUserName.textContent = `@${authData.user}`;
 
-          forbiddenLogoutBtn.addEventListener("click", async () => {
-            await fetch("/api/auth/logout", { method: "POST" });
-            window.location.reload();
-          });
           logoutBtn.addEventListener("click", async () => {
             await fetch("/api/auth/logout", { method: "POST" });
             window.location.reload();
           });
-          return;
-        }
 
-        loginView.style.display = "none";
-        forbiddenView.style.display = "none";
-        dashboardView.style.display = "block";
-        adminHeaderActions.style.display = "flex";
-        userBadge.textContent = `@${authData.user}`;
+          const postsRes = await fetch("/api/posts/list");
+          allFetchedPosts = await postsRes.json();
 
-        logoutBtn.addEventListener("click", async () => {
-          await fetch("/api/auth/logout", { method: "POST" });
-          window.location.reload();
-        });
+          const publishedCount = allFetchedPosts.filter(
+            (p) => p.status === "published",
+          ).length;
+          const draftsCount = allFetchedPosts.filter(
+            (p) => p.status === "draft",
+          ).length;
 
-        const postsRes = await fetch("/api/posts/list");
-        allFetchedPosts = await postsRes.json();
+          document.getElementById("count-all").textContent =
+            allFetchedPosts.length;
+          document.getElementById("count-published").textContent =
+            publishedCount;
+          document.getElementById("count-drafts").textContent = draftsCount;
 
-        const publishedCount = allFetchedPosts.filter(p => p.status === "published").length;
-        const draftsCount = allFetchedPosts.filter(p => p.status === "draft").length;
-
-        document.getElementById("count-all").textContent = allFetchedPosts.length;
-        document.getElementById("count-published").textContent = publishedCount;
-        document.getElementById("count-drafts").textContent = draftsCount;
-
-        document.querySelectorAll("[data-tab]").forEach(tabBtn => {
-          tabBtn.addEventListener("click", () => {
-            document.querySelectorAll("[data-tab]").forEach(b => b.classList.remove("active"));
-            tabBtn.classList.add("active");
-            currentTab = tabBtn.getAttribute("data-tab");
-            renderTable();
+          document.querySelectorAll("[data-tab]").forEach((tabBtn) => {
+            tabBtn.addEventListener("click", () => {
+              document
+                .querySelectorAll("[data-tab]")
+                .forEach((b) => b.classList.remove("active"));
+              tabBtn.classList.add("active");
+              currentTab = tabBtn.getAttribute("data-tab");
+              renderTable();
+            });
           });
-        });
 
-        renderTable();
+          renderTable();
 
-        function renderTable() {
-          let displayed = allFetchedPosts;
-          if (currentTab === "published") displayed = allFetchedPosts.filter(p => p.status === "published");
-          if (currentTab === "drafts") displayed = allFetchedPosts.filter(p => p.status === "draft");
+          function renderTable() {
+            let displayed = allFetchedPosts;
+            if (currentTab === "published")
+              displayed = allFetchedPosts.filter(
+                (p) => p.status === "published",
+              );
+            if (currentTab === "drafts")
+              displayed = allFetchedPosts.filter((p) => p.status === "draft");
 
-          if (!displayed || displayed.length === 0) {
-            tableBody.innerHTML = `
+            if (!displayed || displayed.length === 0) {
+              tableBody.innerHTML = `
               <tr>
                 <td colspan="5" style="padding: 32px; text-align: center; color: var(--text-muted);">
                   No articles found in <strong>${currentTab}</strong>. Click <strong>+ New Post</strong> to write one.
                 </td>
               </tr>
             `;
-            return;
-          }
+              return;
+            }
 
-          tableBody.innerHTML = displayed.map(post => `
+            tableBody.innerHTML = displayed
+              .map(
+                (post) => `
             <tr style="border-bottom: 1px solid var(--border);">
               <td style="padding: 16px 12px; font-weight: var(--fw-semibold);">
                 <a href="/blogs/?post=${post.slug}" target="_blank" style="color: var(--text); text-decoration: none;">${post.title}</a>
               </td>
               <td style="padding: 16px 12px;">
-                <span class="pill" style="${post.status === 'draft' ? 'background: rgba(234, 179, 8, 0.15); color: #eab308;' : 'background: rgba(34, 197, 94, 0.15); color: #22c55e;'}">
+                <span class="pill" style="${post.status === "draft" ? "background: rgba(234, 179, 8, 0.15); color: #eab308;" : "background: rgba(34, 197, 94, 0.15); color: #22c55e;"}">
                   ${post.status.toUpperCase()}
                 </span>
               </td>
@@ -215,63 +396,69 @@
                 <div style="display: inline-flex; gap: 6px; flex-wrap: nowrap; align-items: center; justify-content: flex-end;">
                   <a class="button button-outline button-small" href="/admin/editor.html?edit=${post.slug}">Edit</a>
                   <a class="button button-outline button-small" href="/blogs/?post=${post.slug}" target="_blank">Preview</a>
-                  ${post.status === 'draft'
-                    ? `<button class="button button-outline button-small publish-btn" data-slug="${post.slug}" style="color: #22c55e; border-color: rgba(34, 197, 94, 0.4);">Publish</button>`
-                    : `<button class="button button-outline button-small unpublish-btn" data-slug="${post.slug}" style="color: #eab308; border-color: rgba(234, 179, 8, 0.4);">Unpublish</button>`
+                  ${
+                    post.status === "draft"
+                      ? `<button class="button button-outline button-small publish-btn" data-slug="${post.slug}" style="color: #22c55e; border-color: rgba(34, 197, 94, 0.4);">Publish</button>`
+                      : `<button class="button button-outline button-small unpublish-btn" data-slug="${post.slug}" style="color: #eab308; border-color: rgba(234, 179, 8, 0.4);">Unpublish</button>`
                   }
                   <button class="button button-outline button-small delete-btn" data-slug="${post.slug}" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.4);">Delete</button>
                 </div>
               </td>
             </tr>
-          `).join("");
+          `,
+              )
+              .join("");
 
-          tableBody.querySelectorAll(".publish-btn").forEach(btn => {
-            btn.addEventListener("click", async () => {
-              const slug = btn.getAttribute("data-slug");
-              const pubRes = await fetch("/api/posts/publish", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ slug }),
-              });
-              if (pubRes.ok) window.location.reload();
-              else alert("Failed to publish post.");
-            });
-          });
-
-          tableBody.querySelectorAll(".unpublish-btn").forEach(btn => {
-            btn.addEventListener("click", async () => {
-              const slug = btn.getAttribute("data-slug");
-              const unpubRes = await fetch("/api/posts/unpublish", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ slug }),
-              });
-              if (unpubRes.ok) window.location.reload();
-              else alert("Failed to unpublish post.");
-            });
-          });
-
-          // Fixes Bug 2: POST /api/posts/delete with JSON body { slug }
-          tableBody.querySelectorAll(".delete-btn").forEach(btn => {
-            btn.addEventListener("click", async () => {
-              const slug = btn.getAttribute("data-slug");
-              if (confirm(`Are you sure you want to delete '${slug}'? This action cannot be undone.`)) {
-                const delRes = await fetch("/api/posts/delete", {
+            tableBody.querySelectorAll(".publish-btn").forEach((btn) => {
+              btn.addEventListener("click", async () => {
+                const slug = btn.getAttribute("data-slug");
+                const pubRes = await fetch("/api/posts/publish", {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify({ slug }),
                 });
-                if (delRes.ok) window.location.reload();
-                else alert("Failed to delete post.");
-              }
+                if (pubRes.ok) window.location.reload();
+                else alert("Failed to publish post.");
+              });
             });
-          });
-        }
 
-      } catch (err) {
-        console.error("Admin dashboard init error:", err);
-      }
-    });
-  </script>
-</body>
+            tableBody.querySelectorAll(".unpublish-btn").forEach((btn) => {
+              btn.addEventListener("click", async () => {
+                const slug = btn.getAttribute("data-slug");
+                const unpubRes = await fetch("/api/posts/unpublish", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ slug }),
+                });
+                if (unpubRes.ok) window.location.reload();
+                else alert("Failed to unpublish post.");
+              });
+            });
+
+            // Fixes Bug 2: POST /api/posts/delete with JSON body { slug }
+            tableBody.querySelectorAll(".delete-btn").forEach((btn) => {
+              btn.addEventListener("click", async () => {
+                const slug = btn.getAttribute("data-slug");
+                if (
+                  confirm(
+                    `Are you sure you want to delete '${slug}'? This action cannot be undone.`,
+                  )
+                ) {
+                  const delRes = await fetch("/api/posts/delete", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ slug }),
+                  });
+                  if (delRes.ok) window.location.reload();
+                  else alert("Failed to delete post.");
+                }
+              });
+            });
+          }
+        } catch (err) {
+          console.error("Admin dashboard init error:", err);
+        }
+      });
+    </script>
+  </body>
 </html>
