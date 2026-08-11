@@ -80,7 +80,6 @@ export default async function handler(req, res) {
   };
 
   const fileContent = stringifyFrontMatter(frontmatter, content);
-
   const relativeFilePath = `posts/${safeSlug}.md`;
   const absoluteFilePath = join(postsDir, `${safeSlug}.md`);
 
@@ -93,37 +92,42 @@ export default async function handler(req, res) {
     updatePostsManifest();
     localWriteSuccess = true;
   } catch (fsErr) {
-    console.warn("Serverless local filesystem write skipped (/var/task read-only):", fsErr.message);
+    console.warn("Local filesystem write skipped (serverless environment):", fsErr.message);
   }
 
   // Commit via GitHub API for permanent production persistence
-  let gitCommitSuccess = false;
-  if (process.env.GITHUB_TOKEN) {
-    try {
-      const commitMsg = `feat(blog): ${targetStatus === "draft" ? "save draft" : "publish"} '${title}'`;
-      gitCommitSuccess = await commitToGitHub(relativeFilePath, fileContent, commitMsg);
-    } catch (gitErr) {
-      console.warn("GitHub remote post commit failed:", gitErr.message);
-    }
+  const commitMsg = `feat(blog): ${targetStatus === "draft" ? "save draft" : "publish"} '${title}'`;
+  const gitResult = await commitToGitHub(relativeFilePath, fileContent, commitMsg);
+
+  if (localWriteSuccess) {
+    return res.status(200).json({
+      message: `Post ${targetStatus === "draft" ? "saved as draft" : "published"} successfully!`,
+      slug: safeSlug,
+      status: targetStatus,
+      url: `/blogs/?post=${safeSlug}`,
+    });
   }
 
-  // If neither local filesystem nor GitHub storage succeeded, return detailed error
-  if (!localWriteSuccess && !gitCommitSuccess) {
-    if (process.env.VERCEL || process.env.NODE_ENV === "production") {
-      return res.status(500).json({
-        message: "Production storage failure: Serverless filesystem is read-only (/var/task) and GITHUB_TOKEN is missing or unauthorized for permanent repository commit.",
-      });
-    } else {
-      return res.status(500).json({
-        message: "Failed to save post file to local disk or GitHub repository.",
-      });
-    }
+  if (gitResult && gitResult.ok) {
+    return res.status(200).json({
+      message: `Post ${targetStatus === "draft" ? "saved as draft" : "published"} successfully to repository!`,
+      slug: safeSlug,
+      status: targetStatus,
+      url: `/blogs/?post=${safeSlug}`,
+    });
   }
 
-  return res.status(200).json({
-    message: `Post ${targetStatus === "draft" ? "saved as draft" : "published"} successfully!`,
-    slug: safeSlug,
-    status: targetStatus,
-    url: `/blogs/?post=${safeSlug}`,
+  if (gitResult && gitResult.reason === "missing_token") {
+    return res.status(500).json({
+      message: "Production storage failure: Serverless filesystem is read-only (/var/task) and GITHUB_TOKEN environment variable is missing from server configuration.",
+    });
+  } else if (gitResult && (gitResult.reason === "auth_failed" || gitResult.status === 401 || gitResult.status === 403)) {
+    return res.status(500).json({
+      message: "Production storage failure: GITHUB_TOKEN exists but GitHub API returned 401/403 Unauthorized. Ensure the token has 'Contents: Read and write' permission.",
+    });
+  }
+
+  return res.status(500).json({
+    message: `Production post storage failure: ${gitResult?.reason || "Unable to commit post file to repository."}`,
   });
 }

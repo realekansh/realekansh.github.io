@@ -176,11 +176,14 @@ export function updatePostsManifest() {
 }
 
 export async function commitToGitHub(filePath, content, commitMessage) {
-  const token = process.env.GITHUB_TOKEN;
+  const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN || process.env.VERCEL_GITHUB_TOKEN || process.env.GITHUB_PAT;
   const owner = process.env.GITHUB_OWNER || "realekansh";
   const repo = process.env.GITHUB_REPO || "realekansh.github.io";
 
-  if (!token) return false;
+  if (!token) {
+    console.warn("GitHub commit skipped: No GITHUB_TOKEN environment variable found.");
+    return { ok: false, reason: "missing_token" };
+  }
 
   try {
     const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
@@ -191,17 +194,33 @@ export async function commitToGitHub(filePath, content, commitMessage) {
         headers: {
           Authorization: `Bearer ${token}`,
           "User-Agent": "realekansh-portfolio-blog",
+          Accept: "application/vnd.github.v3+json",
         },
       });
       if (getRes.ok) {
         const getData = await getRes.json();
         sha = getData.sha;
+      } else if (getRes.status === 401 || getRes.status === 403) {
+        console.warn(`GitHub API GET returned HTTP ${getRes.status}: Unauthorized/Forbidden.`);
+        return { ok: false, status: getRes.status, reason: "auth_failed" };
       }
     } catch (e) {}
 
+    let base64Content = "";
+    if (Buffer.isBuffer(content)) {
+      base64Content = content.toString("base64");
+    } else if (typeof content === "string") {
+      const isBase64 = /^[A-Za-z0-9+/=]+\s*$/.test(content.trim()) && content.length % 4 === 0;
+      if (isBase64) {
+        base64Content = content.trim();
+      } else {
+        base64Content = Buffer.from(content, "utf-8").toString("base64");
+      }
+    }
+
     const bodyData = {
       message: commitMessage,
-      content: Buffer.from(content).toString("base64"),
+      content: base64Content,
       branch: "main",
     };
     if (sha) bodyData.sha = sha;
@@ -212,6 +231,7 @@ export async function commitToGitHub(filePath, content, commitMessage) {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
         "User-Agent": "realekansh-portfolio-blog",
+        Accept: "application/vnd.github.v3+json",
       },
       body: JSON.stringify(bodyData),
     });
@@ -219,12 +239,12 @@ export async function commitToGitHub(filePath, content, commitMessage) {
     if (!putRes.ok) {
       const errText = await putRes.text();
       console.warn(`GitHub API commit returned HTTP ${putRes.status}:`, errText);
-      return false;
+      return { ok: false, status: putRes.status, reason: errText };
     }
 
-    return true;
+    return { ok: true };
   } catch (err) {
     console.warn("GitHub API sync failed:", err.message);
-    return false;
+    return { ok: false, reason: err.message };
   }
 }

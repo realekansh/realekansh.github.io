@@ -100,36 +100,43 @@ export default async function handler(req, res) {
     writeFileSync(targetPath, buffer);
     localWriteSuccess = true;
   } catch (fsErr) {
-    console.warn("Serverless local filesystem write skipped (/var/task read-only):", fsErr.message);
+    console.warn("Local filesystem write skipped (serverless environment):", fsErr.message);
   }
 
   // Commit via GitHub API for permanent production persistence
-  let gitCommitSuccess = false;
-  if (process.env.GITHUB_TOKEN) {
-    try {
-      const gitPath = `assets/blog/${safeSlug}/${uuidName}`;
-      gitCommitSuccess = await commitToGitHub(gitPath, buffer.toString("base64"), `feat(blog): upload attachment ${uuidName}`);
-    } catch (gitErr) {
-      console.warn("GitHub remote asset commit failed:", gitErr.message);
-    }
+  const gitPath = `assets/blog/${safeSlug}/${uuidName}`;
+  const gitResult = await commitToGitHub(gitPath, buffer, `feat(blog): upload attachment ${uuidName}`);
+
+  // If local filesystem succeeded, report success
+  if (localWriteSuccess) {
+    return res.status(200).json({
+      message: "File uploaded successfully",
+      url: relativeAssetPath,
+      filename: uuidName,
+    });
   }
 
-  // If neither local filesystem nor GitHub storage succeeded, fail with clear diagnostic message
-  if (!localWriteSuccess && !gitCommitSuccess) {
-    if (process.env.VERCEL || process.env.NODE_ENV === "production") {
-      return res.status(500).json({
-        message: "Production storage failure: Serverless filesystem is read-only (/var/task) and GITHUB_TOKEN is missing or unauthorized for permanent repository commit.",
-      });
-    } else {
-      return res.status(500).json({
-        message: "Failed to write file to local disk or GitHub repository.",
-      });
-    }
+  // If local write failed (read-only /var/task on Vercel), require GitHub commit success
+  if (gitResult && gitResult.ok) {
+    return res.status(200).json({
+      message: "File uploaded successfully to repository",
+      url: relativeAssetPath,
+      filename: uuidName,
+    });
   }
 
-  return res.status(200).json({
-    message: "File uploaded successfully",
-    url: relativeAssetPath,
-    filename: uuidName,
+  // Production failure diagnostics without exposing secrets
+  if (gitResult && gitResult.reason === "missing_token") {
+    return res.status(500).json({
+      message: "Production storage failure: Serverless filesystem is read-only (/var/task) and GITHUB_TOKEN environment variable is missing from server configuration.",
+    });
+  } else if (gitResult && (gitResult.reason === "auth_failed" || gitResult.status === 401 || gitResult.status === 403)) {
+    return res.status(500).json({
+      message: "Production storage failure: GITHUB_TOKEN exists but GitHub API returned 401/403 Unauthorized. Ensure the token has 'Contents: Read and write' permission.",
+    });
+  }
+
+  return res.status(500).json({
+    message: `Production asset storage failure: ${gitResult?.reason || "Unable to commit file to repository."}`,
   });
 }
