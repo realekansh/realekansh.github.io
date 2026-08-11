@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0f14">
+  <title>404 — Page Not Found &mdash; Ekansh Bhavik</title>
+  <meta name="description" content="The page you are looking for does not exist or has been moved. Return to Ekansh Bhavik's developer portfolio.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/avatar.jpg">
+  <link rel="manifest" href="/assets/icons/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style/base.css">
+  <link rel="stylesheet" href="/style/themes.css">
+  <link rel="stylesheet" href="/style/layout.css">
+  <link rel="stylesheet" href="/style/components.css">
+  <link rel="stylesheet" href="/style/animations.css">
+  <script type="module" src="/script/main.js"></script>
+</head>
+<body data-page="404">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-navbar>
+    <div class="container nav-shell">
+      <a class="brand-mark" href="/" aria-label="Ekansh Bhavik home">
+        <img src="/assets/avatar.jpg" alt="Ekansh Bhavik avatar" width="44" height="44">
+      </a>
+      <nav class="nav-links" id="primary-nav" aria-label="Primary navigation" data-primary-nav>
+        <a class="nav-link" href="/" data-nav-link="home">Home</a>
+        <a class="nav-link" href="/about/" data-nav-link="about">About</a>
+        <a class="nav-link" href="/projects/" data-nav-link="projects">Projects</a>
+        <a class="nav-link" href="/communities/" data-nav-link="communities">Communities</a>
+        <a class="nav-link" href="/contact/" data-nav-link="contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-button" type="button" data-theme-toggle aria-label="Switch to light theme" aria-pressed="false">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#sun"></use></svg>
+        </button>
+        <button class="icon-button nav-toggle" type="button" data-nav-toggle aria-label="Open navigation" aria-controls="primary-nav" aria-expanded="false">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#menu"></use></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main" id="main">
+    <section class="page-hero container reveal" aria-labelledby="not-found-title">
+      <p class="page-kicker">404 Error</p>
+      <h1 class="page-title" id="not-found-title">Page not found.</h1>
+      <p class="page-lede">The path you requested could not be located. It may have moved or never existed.</p>
+    </section>
+
+    <section class="section container">
+      <div class="hero-bottom-actions reveal" aria-label="Navigation choices">
+        <a class="button button-primary button-large" href="/">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#arrow"></use></svg>
+          Return Home
+        </a>
+        <a class="button button-outline button-large" href="/projects/">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#user"></use></svg>
+          Explore Projects
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2026 Ekansh Bhavik.</p>
+      <p>Built with minimal aesthetics and maximum utility.</p>
+    </div>
+  </footer>
+</body>
+</html>

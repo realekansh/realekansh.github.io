@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+<<<<<<< HEAD
 Sitemap: https://ekansh.dev/sitemap.xml
+=======
+Sitemap: https://realekansh.xyz/sitemap.xml
+>>>>>>> 2a37c1d (feat: launch portfolio with major fixes and improvements)

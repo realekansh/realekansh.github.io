@@ -9,6 +9,12 @@
 }
 
 .page-hero {
+<<<<<<< HEAD
+=======
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+>>>>>>> 2a37c1d (feat: launch portfolio with major fixes and improvements)
   padding: var(--sp-7) 0 var(--sp-5);
 }
 
