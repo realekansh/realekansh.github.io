@@ -92,31 +92,44 @@ export default async function handler(req, res) {
   const targetPath = join(targetDir, uuidName);
   const relativeAssetPath = `/assets/blog/${safeSlug}/${uuidName}`;
 
+  let localWriteSuccess = false;
   try {
     if (!existsSync(targetDir)) {
       mkdirSync(targetDir, { recursive: true });
     }
-
-    // Write file locally
     writeFileSync(targetPath, buffer);
-
-    // Commit via GitHub API if GITHUB_TOKEN is available (non-blocking)
-    if (process.env.GITHUB_TOKEN) {
-      try {
-        const gitPath = `assets/blog/${safeSlug}/${uuidName}`;
-        await commitToGitHub(gitPath, buffer.toString("base64"), `feat(blog): upload attachment ${uuidName}`);
-      } catch (gitErr) {
-        console.warn("Optional GitHub remote asset sync skipped:", gitErr.message);
-      }
-    }
-
-    return res.status(200).json({
-      message: "File uploaded successfully",
-      url: relativeAssetPath,
-      filename: uuidName,
-    });
-  } catch (err) {
-    console.error("Upload error:", err);
-    return res.status(500).json({ message: `Failed to process file upload: ${err.message}` });
+    localWriteSuccess = true;
+  } catch (fsErr) {
+    console.warn("Serverless local filesystem write skipped (/var/task read-only):", fsErr.message);
   }
+
+  // Commit via GitHub API for permanent production persistence
+  let gitCommitSuccess = false;
+  if (process.env.GITHUB_TOKEN) {
+    try {
+      const gitPath = `assets/blog/${safeSlug}/${uuidName}`;
+      gitCommitSuccess = await commitToGitHub(gitPath, buffer.toString("base64"), `feat(blog): upload attachment ${uuidName}`);
+    } catch (gitErr) {
+      console.warn("GitHub remote asset commit failed:", gitErr.message);
+    }
+  }
+
+  // If neither local filesystem nor GitHub storage succeeded, fail with clear diagnostic message
+  if (!localWriteSuccess && !gitCommitSuccess) {
+    if (process.env.VERCEL || process.env.NODE_ENV === "production") {
+      return res.status(500).json({
+        message: "Production storage failure: Serverless filesystem is read-only (/var/task) and GITHUB_TOKEN is missing or unauthorized for permanent repository commit.",
+      });
+    } else {
+      return res.status(500).json({
+        message: "Failed to write file to local disk or GitHub repository.",
+      });
+    }
+  }
+
+  return res.status(200).json({
+    message: "File uploaded successfully",
+    url: relativeAssetPath,
+    filename: uuidName,
+  });
 }

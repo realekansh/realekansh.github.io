@@ -65,11 +65,7 @@ export default async function handler(req, res) {
     ? tags.split(",").map((t) => t.trim()).filter(Boolean)
     : [];
 
-  // Sanitize cover URL: if base64 data URI is provided in cover input field, warn or format safely
   let coverUrl = (cover || "").trim();
-  if (coverUrl.startsWith("data:image")) {
-    console.warn("Cover image is a raw Base64 data URI string.");
-  }
 
   const frontmatter = {
     title: title.trim(),
@@ -85,36 +81,49 @@ export default async function handler(req, res) {
 
   const fileContent = stringifyFrontMatter(frontmatter, content);
 
-  if (!existsSync(postsDir)) {
-    mkdirSync(postsDir, { recursive: true });
-  }
-
   const relativeFilePath = `posts/${safeSlug}.md`;
   const absoluteFilePath = join(postsDir, `${safeSlug}.md`);
 
+  let localWriteSuccess = false;
   try {
-    // Write locally
+    if (!existsSync(postsDir)) {
+      mkdirSync(postsDir, { recursive: true });
+    }
     writeFileSync(absoluteFilePath, fileContent, "utf-8");
     updatePostsManifest();
-
-    // Commit via GitHub API if GITHUB_TOKEN is available (non-blocking)
-    if (process.env.GITHUB_TOKEN) {
-      try {
-        const commitMsg = `feat(blog): ${targetStatus === "draft" ? "save draft" : "publish"} '${title}'`;
-        await commitToGitHub(relativeFilePath, fileContent, commitMsg);
-      } catch (gitErr) {
-        console.warn("Optional GitHub remote post sync skipped:", gitErr.message);
-      }
-    }
-
-    return res.status(200).json({
-      message: `Post ${targetStatus === "draft" ? "saved as draft" : "published"} successfully!`,
-      slug: safeSlug,
-      status: targetStatus,
-      url: `/blogs/?post=${safeSlug}`,
-    });
-  } catch (err) {
-    console.error("Error saving post:", err);
-    return res.status(500).json({ message: `Failed to save post: ${err.message}` });
+    localWriteSuccess = true;
+  } catch (fsErr) {
+    console.warn("Serverless local filesystem write skipped (/var/task read-only):", fsErr.message);
   }
+
+  // Commit via GitHub API for permanent production persistence
+  let gitCommitSuccess = false;
+  if (process.env.GITHUB_TOKEN) {
+    try {
+      const commitMsg = `feat(blog): ${targetStatus === "draft" ? "save draft" : "publish"} '${title}'`;
+      gitCommitSuccess = await commitToGitHub(relativeFilePath, fileContent, commitMsg);
+    } catch (gitErr) {
+      console.warn("GitHub remote post commit failed:", gitErr.message);
+    }
+  }
+
+  // If neither local filesystem nor GitHub storage succeeded, return detailed error
+  if (!localWriteSuccess && !gitCommitSuccess) {
+    if (process.env.VERCEL || process.env.NODE_ENV === "production") {
+      return res.status(500).json({
+        message: "Production storage failure: Serverless filesystem is read-only (/var/task) and GITHUB_TOKEN is missing or unauthorized for permanent repository commit.",
+      });
+    } else {
+      return res.status(500).json({
+        message: "Failed to save post file to local disk or GitHub repository.",
+      });
+    }
+  }
+
+  return res.status(200).json({
+    message: `Post ${targetStatus === "draft" ? "saved as draft" : "published"} successfully!`,
+    slug: safeSlug,
+    status: targetStatus,
+    url: `/blogs/?post=${safeSlug}`,
+  });
 }
