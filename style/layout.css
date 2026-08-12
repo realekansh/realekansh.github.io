@@ -300,6 +300,12 @@
   margin-bottom: 0;
 }
 
+.blog-posts-grid {
+  display: grid;
+  gap: var(--sp-4);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
 .projects-grid,
 .communities-grid {
   display: grid;
@@ -492,7 +498,8 @@
   }
 
   .projects-grid,
-  .communities-grid {
+  .communities-grid,
+  .blog-posts-grid {
     grid-template-columns: 1fr;
   }
 
