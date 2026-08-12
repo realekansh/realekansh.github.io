@@ -711,7 +711,7 @@
   }
 }
 
-@media (max-width: 820px) {
+@media (max-width: 900px) {
   .nav-toggle {
     display: inline-grid;
   }
@@ -729,6 +729,104 @@
 
   .contact-form {
     padding: var(--sp-4);
+  }
+}
+
+/* Article Markdown & Code Block Responsive Formatting */
+.article-container {
+  max-width: 780px;
+  margin-inline: auto;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.article-container pre,
+.article-content pre {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: pre;
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.article-container code,
+.article-content code {
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-size: 0.9em;
+}
+
+.article-container pre code,
+.article-content pre code {
+  white-space: pre;
+  word-break: normal;
+}
+
+.article-container table,
+.article-content table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-collapse: collapse;
+  margin-block: 16px;
+}
+
+.article-container th,
+.article-container td,
+.article-content th,
+.article-content td {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+}
+
+.article-container img,
+.article-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+  margin-block: 16px;
+}
+
+.article-container blockquote,
+.article-content blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 16px;
+  margin-inline: 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Admin Editor Responsive Grid Utility Classes */
+.editor-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.metadata-fields-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 1024px) {
+  .editor-main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .metadata-fields-grid {
+    grid-template-columns: 1fr;
   }
 }
 

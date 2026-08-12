@@ -53,6 +53,7 @@ html {
   min-width: 320px;
   scroll-behavior: smooth;
   font-feature-settings: "cv11", "ss01";
+  overflow-x: hidden;
 }
 
 body {
@@ -66,6 +67,8 @@ body {
     var(--bg);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-wrap: break-word;
+  word-break: break-word;
   transition:
     background var(--medium) var(--ease),
     color var(--medium) var(--ease);
@@ -92,11 +95,11 @@ button {
 }
 
 img,
-svg {
+svg,
+video,
+iframe,
+canvas {
   display: block;
-}
-
-img {
   max-width: 100%;
   height: auto;
 }
