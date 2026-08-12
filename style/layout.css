@@ -21,8 +21,10 @@
   gap: var(--sp-2);
   margin-bottom: var(--sp-3);
   color: var(--accent);
-  font-size: var(--fs-small);
-  font-weight: 700;
+  font-size: var(--fs-label);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
 }
 
 .page-title {
@@ -32,7 +34,8 @@
 
 .page-lede {
   max-width: 740px;
-  font-size: 1.08rem;
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-normal);
 }
 
 .section {
@@ -123,7 +126,7 @@
   position: relative;
   color: var(--text-muted);
   font-size: var(--fs-small);
-  font-weight: 560;
+  font-weight: var(--fw-semibold);
   transition: color var(--fast) var(--ease);
 }
 
@@ -184,7 +187,9 @@
 
 .hero-heading {
   font-size: var(--fs-hero);
-  line-height: 0.98;
+  font-weight: var(--fw-extrabold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
 }
 
 .hero-heading span {
@@ -194,12 +199,14 @@
 .hero-heading .intro {
   margin-bottom: var(--sp-2);
   color: var(--text-muted);
-  font-size: clamp(1.15rem, 2vw, 1.65rem);
-  font-weight: 520;
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-normal);
 }
 
 .hero-description {
-  font-size: 1.12rem;
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-normal);
 }
 
 .hero-socials,

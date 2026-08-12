@@ -3,14 +3,16 @@
   align-items: center;
   justify-content: center;
   gap: var(--sp-2);
-  min-height: 46px;
-  padding: 14px 28px;
+  min-height: 44px;
+  padding: 12px 26px;
   border: 1px solid var(--border);
   border-radius: 9999px;
   color: var(--text);
   background: transparent;
   font-size: var(--fs-small);
-  font-weight: 650;
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-none);
+  letter-spacing: var(--ls-normal);
   cursor: pointer;
   transition:
     transform var(--fast) var(--ease),
@@ -26,8 +28,10 @@
 }
 
 .button-large {
-  padding: 18px 42px;
-  font-size: 1.25rem;
+  min-height: 52px;
+  padding: 16px 36px;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
 }
 
 .button-primary {
@@ -117,12 +121,13 @@
 }
 
 .pill {
-  padding: 7px 16px;
+  padding: 6px 14px;
   border: 1px solid var(--border);
   color: var(--text-muted);
   background: var(--surface);
   font-size: var(--fs-small);
-  font-weight: 620;
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-none);
 }
 
 .pill:hover {
@@ -132,12 +137,14 @@
 }
 
 .tag {
-  padding: 3px 9px;
+  padding: 4px 10px;
   border: 1px solid var(--border);
   color: var(--text-muted);
   background: var(--bg-soft);
-  font-size: 0.75rem;
-  font-weight: 650;
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-wide);
+  line-height: var(--lh-none);
 }
 
 .tag-accent {
@@ -345,8 +352,9 @@
   display: grid;
   gap: 0;
   color: var(--text-soft);
-  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
-  font-size: 0.84rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  line-height: var(--lh-snug);
   background: rgba(11, 15, 20, 0.65);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 8px;
@@ -385,7 +393,7 @@
 
 .terminal-title {
   margin-left: 8px;
-  font-size: 0.72rem;
+  font-size: var(--fs-label);
   color: var(--text-muted);
   opacity: 0.7;
 }
@@ -533,7 +541,7 @@
 .field label {
   color: var(--text-soft);
   font-size: var(--fs-small);
-  font-weight: 650;
+  font-weight: var(--fw-semibold);
 }
 
 .field input,

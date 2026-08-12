@@ -148,18 +148,18 @@ async function loadPostList() {
               : ""
           }
           <div style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
-            ${(post.tags || []).map((tag) => `<span class="pill">${tag}</span>`).join("")}
+            ${(post.tags || []).map((tag) => `<span class="tag">${tag}</span>`).join("")}
           </div>
-          <h2 style="font-size: 1.3rem; margin-bottom: 10px; line-height: 1.3;">
+          <h2 style="font-size: var(--fs-h3); font-weight: var(--fw-bold); margin-bottom: 10px; line-height: var(--lh-snug);">
             <a href="/blogs/?post=${post.slug}" style="color: var(--text); text-decoration: none;">${post.title}</a>
           </h2>
-          <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px;">
+          <p style="color: var(--text-muted); font-size: var(--fs-body); line-height: var(--lh-normal); margin-bottom: 16px;">
             ${post.description || "Read full article..."}
           </p>
         </div>
-        <div style="display: flex; align-items: center; justify-content: space-between; font-size: var(--fz-xs); color: var(--text-muted); border-top: 1px solid var(--border); padding-top: 12px; margin-top: 16px;">
-          <span>${post.date} &bull; ${post.readingTime || "3 min read"}</span>
-          <a class="button button-outline button-small" href="/blogs/?post=${post.slug}">Read Blog &rarr;</a>
+        <div style="display: flex; align-items: center; justify-content: space-between; font-size: var(--fs-caption); color: var(--text-muted); border-top: 1px solid var(--border); padding-top: 12px; margin-top: 16px; flex-wrap: wrap; gap: 8px;">
+          <span style="font-size: var(--fs-caption); font-weight: var(--fw-med);">${post.date} &bull; ${post.readingTime || "3 min read"}</span>
+          <a class="button button-outline" href="/blogs/?post=${post.slug}" style="padding: 8px 16px; min-height: 36px; font-size: var(--fs-small);">Read Blog &rarr;</a>
         </div>
       </article>
     `
