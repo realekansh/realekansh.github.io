@@ -441,6 +441,8 @@
     right: 16px;
     display: grid;
     gap: var(--sp-2);
+    justify-items: center;
+    text-align: center;
     padding: var(--sp-3);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
@@ -464,13 +466,16 @@
   }
 
   .nav-link {
-    padding: 12px 14px;
+    display: inline-block;
+    padding: 8px 12px;
+    text-align: center;
   }
 
   .nav-link::after {
-    left: 14px;
-    right: auto;
-    width: 28px;
+    left: 12px;
+    right: 12px;
+    bottom: 2px;
+    width: auto;
   }
 }
 
