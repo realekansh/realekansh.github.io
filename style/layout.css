@@ -221,6 +221,9 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-inline: auto;
   gap: var(--sp-3);
   margin-top: var(--sp-5);
 }
@@ -399,7 +402,9 @@
   .hero-bottom-actions,
   .hero-socials,
   .pill-row {
+    width: 100%;
     justify-content: center;
+    margin-inline: auto;
   }
 
   .sticky-panel,
