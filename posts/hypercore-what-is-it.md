@@ -5,7 +5,7 @@ description: "A look at what HyperCore is, what it provideds, and how its archit
 date: "2026-08-18"
 updated: "2026-08-18"
 author: "Ekansh Bhavik"
-tags: ["HyperCore","Architecture","OpenSource","Python","Yelegram Bot"]
+tags: ["HyperCore","Architecture","OpenSource","Python"]
 status: "published"
 cover: ""
 ---
