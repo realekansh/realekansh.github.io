@@ -46,6 +46,10 @@ There is a lot more that changed between **v0.3.0 and v0.5.0** than just the ver
 
 The full changelog, commit history, and side-by-side comparison are available on GitHub, where you can see exactly what changed between the two releases—both from a feature perspective and inside the architecture itself.
 
-**Commits**: [Full commit history](https://github.com/HyperTechFoundation/HyperCore/commits) 
-**Repository**: [HyperTechFoundaion/HyperCore](https://github.com/HyperTechFoundation/HyperCore)
-**Latest Release**: [HyperCore v0.5.0](https://github.com/HyperTechFoundation/HyperCore/releases/tag/v0.5.0)
+### Related Links:
+
+[**Commit History**](https://github.com/HyperTechFoundation/HyperCore/commits)
+
+[**Repository**](https://github.com/HyperTechFoundation/HyperCore)
+
+[**Latest Release**](https://github.com/HyperTechFoundation/HyperCore/releases/tag/v0.5.0)
