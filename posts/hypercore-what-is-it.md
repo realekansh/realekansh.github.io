@@ -26,11 +26,11 @@ Since the project has changed quite a bit internally, this post focuses on what 
 
 ## What HyperCore Provides
 
-At its core, HyperCore is organised around a reusable runtime with support for **commands, events, plugins, configuration, and core services**.
+At its core, HyperCore is organized around a reusable runtime with support for **commands, events, plugins, configuration, and core services**.
 
 This allows individual projects to keep their own logic separate while relying on the same underlying systems. The architecture has also been evolving toward a more modular plugin runtime, making it easier to add functionality without turning the main core into one large codebase.
 
-### :-: Features:-
+### Features: -
 
 - **Command System** — A common structure for defining and handling commands.
 - **Event System** — Lets different parts of the project react to events through a shared system.
@@ -40,16 +40,14 @@ This allows individual projects to keep their own logic separate while relying o
 - **Extensible Design** — The core can grow without forcing every project to follow the same implementation.
 - **Bot & Userbot Support** — Designed as a foundation that can be used for both types of Telegram projects.
 
----
-
 There is a lot more that changed between **v0.3.0 and v0.5.0** than just the version number.
 
-The full changelog, commit history, and side-by-side comparison are available on GitHub, where you can see exactly what changed between the two releases—both from a feature perspective and inside the architecture itself.
+The full changelog amd commit history are available on [GitHub](https://github.com/HyperTechFoundation/HyperCore), where you can see exactly what changed between the two releases—both from a feature perspective and inside the architecture itself.
 
 ### Related Links:
 
-[**Commit History**](https://github.com/HyperTechFoundation/HyperCore/commits)
+**Commit**: [#2aa840b](https://github.com/HyperTechFoundation/HyperCore/commit/2aa840bb5dc7da93ff7aeb118a93707fdd6c996b)
 
-[**Repository**](https://github.com/HyperTechFoundation/HyperCore)
+**Release**: [HyperCore v0.5.0](https://github.com/HyperTechFoundation/HyperCore/releases/tag/v0.5.0)
 
-[**Latest Release**](https://github.com/HyperTechFoundation/HyperCore/releases/tag/v0.5.0)
+**Repository**: [HyperTechFoundation/HyperCore](https://github.com/HyperTechFoundation/HyperCore)
