@@ -171,47 +171,30 @@
 
       <!-- Single Post Reader View -->
       <div id="blog-post-view" style="display: none">
-        <section class="page-hero container reveal">
-          <a class="back-link" href="/blogs/" id="back-to-blogs">
-            <svg class="icon" aria-hidden="true">
-              <use href="/assets/icons/icons.svg#arrow-left"></use>
-            </svg>
-            <span>Back to All Posts</span>
-          </a>
-          <p class="page-kicker" id="post-category">Technical Essay</p>
-          <h1 class="page-title" id="post-title">Post Title</h1>
-          <div
-            class="post-meta"
-            style="
-              display: flex;
-              gap: 16px;
-              font-size: var(--fz-sm);
-              color: var(--text-muted);
-              margin-top: 12px;
-              flex-wrap: wrap;
-            "
-          >
-            <span id="post-date">Date</span>
-            <span>&bull;</span>
-            <span id="post-reading-time">5 min read</span>
-            <span>&bull;</span>
-            <span id="post-author">Ekansh Bhavik</span>
-          </div>
-        </section>
+        <article class="article-container reveal">
+          <header class="article-header">
+            <a class="back-link" href="/blogs/" id="back-to-blogs">
+              <svg class="icon" aria-hidden="true">
+                <use href="/assets/icons/icons.svg#arrow-left"></use>
+              </svg>
+              <span>Back to All Posts</span>
+            </a>
+            <p class="page-kicker" id="post-category">Technical Essay</p>
+            <h1 class="page-title" id="post-title">Post Title</h1>
+            <div class="article-meta" id="post-meta-container">
+              <span id="post-date">Date</span>
+              <span class="meta-dot">&bull;</span>
+              <span id="post-reading-time">5 min read</span>
+              <span class="meta-dot">&bull;</span>
+              <span id="post-author">Ekansh Bhavik</span>
+            </div>
+          </header>
 
-        <section class="section container">
-          <article
-            class="detail-content essay-body"
-            id="post-body-container"
-            style="max-width: 780px; margin-inline: auto"
-          >
+          <div class="article-content essay-body" id="post-body-container">
             <p>Loading article content...</p>
-          </article>
-          <div
-            id="post-nav-container"
-            style="max-width: 780px; margin-inline: auto"
-          ></div>
-        </section>
+          </div>
+          <div id="post-nav-container"></div>
+        </article>
       </div>
     </main>
 

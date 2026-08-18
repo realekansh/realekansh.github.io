@@ -100,148 +100,124 @@
     </header>
 
     <main class="main" id="main">
-      <section class="page-hero container reveal">
-        <a class="back-link" href="/projects/">
-          <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#arrow-left"></use></svg>
-          <span>Back to Projects</span>
-        </a>
-        <p class="page-kicker">Featured Project</p>
-        <h1 class="page-title">HyperCore</h1>
-        <p class="page-lede">
-          A minimal reusable core engine for building Telegram bots and userbots
-          with Python, Telethon, and python-telegram-bot.
-        </p>
-      </section>
+      <article class="article-container reveal">
+        <header class="article-header">
+          <a class="back-link" href="/projects/">
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons/icons.svg#arrow-left"></use></svg>
+            <span>Back to Projects</span>
+          </a>
+          <p class="page-kicker">Technical Overview</p>
+          <h1 class="page-title">HyperCore</h1>
+          <div class="article-meta">
+            <time datetime="2026-08-18">2026-08-18</time>
+            <span class="meta-dot">&bull;</span>
+            <span>4 min read</span>
+            <span class="meta-dot">&bull;</span>
+            <span>Ekansh Bhavik</span>
+            <span class="meta-dot">&bull;</span>
+            <span class="tag tag-accent">Python Core Engine</span>
+          </div>
+        </header>
 
-      <section class="section container">
-        <div class="detail-grid">
-          <article class="detail-content">
-            <section class="essay-section reveal">
-              <h2>Overview</h2>
-              <p>
-                HyperCore abstracts the repeated setup work around Telegram
-                automation so each bot can focus on its behavior instead of
-                rebuilding the same foundation.
-              </p>
-            </section>
-            <section class="essay-section reveal">
-              <h2>Problem Solved</h2>
-              <p>
-                Telegram projects often repeat plugin loading, command
-                registration, configuration, client setup, and utility patterns.
-                HyperCore turns those recurring pieces into one reusable layer.
-              </p>
-            </section>
-            <section class="essay-section reveal">
-              <h2>Screenshot</h2>
-              <figure
-                class="screenshot-panel"
-                aria-label="HyperCore technical preview"
-              >
-                <div class="visual-terminal">
-                  <div class="terminal-header">
-                    <span class="window-dot dot-close"></span>
-                    <span class="window-dot dot-minimize"></span>
-                    <span class="window-dot dot-maximize"></span>
-                    <span class="terminal-title">hypercore/client.py</span>
-                  </div>
-                  <div class="terminal-body">
-                    <div class="terminal-line">
-                      <span class="line-num">1</span
-                      ><span class="syntax-keyword">from</span> telethon
-                      <span class="syntax-keyword">import</span> TelegramClient
-                    </div>
-                    <div class="terminal-line">
-                      <span class="line-num">2</span
-                      ><span class="syntax-keyword">from</span>
-                      hypercore.plugins
-                      <span class="syntax-keyword">import</span> PluginLoader
-                    </div>
-                    <div class="terminal-line">
-                      <span class="line-num">3</span>
-                    </div>
-                    <div class="terminal-line">
-                      <span class="line-num">4</span>app = TelegramClient(<span
-                        class="syntax-string"
-                        >"hyper_session"</span
-                      >, API_ID, API_HASH)
-                    </div>
-                    <div class="terminal-line">
-                      <span class="line-num">5</span>loader = PluginLoader(app)
-                    </div>
-                    <div class="terminal-line">
-                      <span class="line-num">6</span
-                      >loader.register_all_modules()
-                    </div>
-                  </div>
+        <div class="article-content">
+          <p class="article-lead">
+            <strong>HyperCore</strong> is the foundation behind my Telegram bot and userbot projects. It is a minimal, reusable Python core engine built with Telethon and python-telegram-bot.
+          </p>
+
+          <section class="essay-section">
+            <h2>What is HyperCore?</h2>
+            <p>
+              HyperCore abstracts the repeated setup work around Telegram automation so each bot can focus on its behavior instead of rebuilding the same foundation.
+            </p>
+            <p>
+              By unifying client initialization, module loading, and event routing into a single infrastructure layer, HyperCore allows multiple Telegram projects to stay lightweight, consistent, and easy to maintain over time.
+            </p>
+          </section>
+
+          <section class="essay-section">
+            <h2>Why HyperCore Exists</h2>
+            <p>
+              Telegram bot and userbot projects often repeat plugin loading, command registration, configuration, client setup, and utility patterns across repositories.
+            </p>
+            <p>
+              HyperCore turns those recurring pieces into one reusable layer, eliminating duplicate setup code while establishing standard runtime behaviors and lifecycle safety across deployments.
+            </p>
+          </section>
+
+          <section class="essay-section">
+            <h2>What HyperCore Provides</h2>
+            <p>
+              The core engine delivers essential infrastructure for modern Telegram automation:
+            </p>
+            <ul class="detail-list">
+              <li><strong>Command System</strong> &mdash; A common structure for defining, registering, and handling commands with permission guards.</li>
+              <li><strong>Event System</strong> &mdash; Lets different parts of the project react to events through a shared, decoupled event bus.</li>
+              <li><strong>Plugin Loader</strong> &mdash; Isolated plugin structure that discovers modules and validates manifest requirements dynamically.</li>
+              <li><strong>Platform Integration</strong> &mdash; Unified integration points for Telethon and python-telegram-bot runtimes.</li>
+              <li><strong>Runtime &amp; Lifecycle Guard</strong> &mdash; Single-instance process lock, credential-free health checks, and graceful shutdown handling.</li>
+            </ul>
+          </section>
+
+          <section class="essay-section">
+            <h2>Architecture Preview</h2>
+            <figure class="screenshot-panel" aria-label="HyperCore technical preview">
+              <div class="visual-terminal">
+                <div class="terminal-header">
+                  <span class="window-dot dot-close"></span>
+                  <span class="window-dot dot-minimize"></span>
+                  <span class="window-dot dot-maximize"></span>
+                  <span class="terminal-title">hypercore/client.py</span>
                 </div>
-              </figure>
-            </section>
-            <section class="essay-section reveal">
-              <h2>Architecture</h2>
-              <ul class="detail-list">
-                <li>Python core layer for shared bot behavior.</li>
-                <li>Telethon and python-telegram-bot integration points.</li>
-                <li>Plugin-oriented structure for feature isolation.</li>
-                <li>Reusable utilities for community bot projects.</li>
-              </ul>
-            </section>
-            <section class="essay-section reveal">
-              <h2>Technical Decisions</h2>
-              <p>
-                The project favors a small core, explicit extension points, and
-                documentation over a heavy framework. That keeps the system
-                understandable for people building on top of it.
-              </p>
-            </section>
-            <section class="essay-section reveal">
-              <h2>Challenges</h2>
-              <p>
-                The main challenge is balancing reuse with flexibility: a core
-                engine should remove boilerplate without forcing every bot into
-                the same shape.
-              </p>
-            </section>
-            <section class="essay-section reveal">
-              <h2>Lessons Learned</h2>
-              <p>
-                Good infrastructure is quiet. It helps developers move faster
-                without becoming the center of the project.
-              </p>
-            </section>
-          </article>
-
-          <aside class="detail-aside reveal">
-            <div class="aside-card">
-              <h2>Project Facts</h2>
-              <ul class="stat-list">
-                <li><span>Status</span><strong>Active</strong></li>
-                <li><span>Stack</span><strong>Python, Telethon</strong></li>
-                <li><span>Type</span><strong>Open Source Core</strong></li>
-              </ul>
-            </div>
-            <div class="aside-card">
-              <h2>Links</h2>
-              <div class="card-actions">
-                <a
-                  class="button button-primary"
-                  href="https://github.com/realekansh/HyperCore"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Repository</a
-                >
-                <a
-                  class="button button-outline"
-                  href="https://github.com/realekansh/HyperCore/wiki"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Wiki</a
-                >
+                <div class="terminal-body">
+                  <div class="terminal-line"><span class="line-num">1</span><span class="syntax-keyword">from</span> telethon <span class="syntax-keyword">import</span> TelegramClient</div>
+                  <div class="terminal-line"><span class="line-num">2</span><span class="syntax-keyword">from</span> hypercore.plugins <span class="syntax-keyword">import</span> PluginLoader</div>
+                  <div class="terminal-line"><span class="line-num">3</span></div>
+                  <div class="terminal-line"><span class="line-num">4</span>app = TelegramClient(<span class="syntax-string">"hyper_session"</span>, API_ID, API_HASH)</div>
+                  <div class="terminal-line"><span class="line-num">5</span>loader = PluginLoader(app)</div>
+                  <div class="terminal-line"><span class="line-num">6</span>loader.register_all_modules()</div>
+                </div>
               </div>
+            </figure>
+          </section>
+
+          <section class="essay-section">
+            <h2>v0.3.0 &rarr; v0.5.0 Transition</h2>
+            <p>
+              The evolution from v0.3.0 to v0.5.0 refined the core from a Python-only framework into a polyglot-ready architecture. While the Python kernel remains the authoritative source of truth for command dispatch and event loop handling, v0.5.0 introduces an optional Node.js runtime bridge.
+            </p>
+            <p>
+              This allows external TypeScript plugins to communicate with the Python core over a versioned, line-delimited JSON IPC protocol without compromising internal security or requiring Python rewrites.
+            </p>
+          </section>
+
+          <section class="essay-section">
+            <h2>Further Reading</h2>
+            <div class="related-links-list">
+              <a href="https://github.com/realekansh/HyperCore/commits" target="_blank" rel="noopener noreferrer" class="related-link-item">
+                <div class="related-link-title">
+                  <strong>Commit History</strong>
+                  <svg class="icon icon-external" aria-hidden="true"><use href="/assets/icons/icons.svg#external"></use></svg>
+                </div>
+                <span class="related-link-desc">View the development history and architectural changes.</span>
+              </a>
+              <a href="https://github.com/realekansh/HyperCore" target="_blank" rel="noopener noreferrer" class="related-link-item">
+                <div class="related-link-title">
+                  <strong>Repository</strong>
+                  <svg class="icon icon-external" aria-hidden="true"><use href="/assets/icons/icons.svg#external"></use></svg>
+                </div>
+                <span class="related-link-desc">Explore the source code and project structure.</span>
+              </a>
+              <a href="https://github.com/realekansh/HyperCore/wiki" target="_blank" rel="noopener noreferrer" class="related-link-item">
+                <div class="related-link-title">
+                  <strong>Latest Release</strong>
+                  <svg class="icon icon-external" aria-hidden="true"><use href="/assets/icons/icons.svg#external"></use></svg>
+                </div>
+                <span class="related-link-desc">See the current HyperCore v0.5.0 release and wiki notes.</span>
+              </a>
             </div>
-          </aside>
+          </section>
         </div>
-      </section>
+      </article>
     </main>
 
     <footer class="site-footer">

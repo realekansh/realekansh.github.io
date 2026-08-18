@@ -1,43 +1,53 @@
-// Standard Markdown to HTML Renderer matching editor live preview 100%
+// Standard Markdown to HTML Renderer with clean semantic formatting
 export function renderMarkdown(md) {
   if (!md) return "";
 
-  let html = md
+  let cleaned = md
     .replace(/\r\n/g, "\n")
-    // Code blocks with inline styled code panel (Fixes Bug 1: Terminal popup artifact)
+    // Clean markdown heading alignment / decoration artifacts like :-: or :-
+    .replace(/^(#+)\s*[:\-\s]*([^:\-\n]+?)[:\-\s]*$/gim, (match, hashes, text) => {
+      const cleanText = text.replace(/^[:\-\s]+|[:\-\s]+$/g, "").trim();
+      return `${hashes} ${cleanText}`;
+    });
+
+  let html = cleaned
+    // Code blocks with code panel container
     .replace(/```([a-z0-9_+-]*)\n([\s\S]*?)```/g, (match, lang, code) => {
       const escapedCode = code
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
-      return `<figure class="article-code-block" style="margin-block: 24px; border: 1px solid var(--border); border-radius: var(--radius-md); background: #0d1117; overflow: hidden; position: relative; width: 100%; display: block;"><div style="display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: rgba(255, 255, 255, 0.04); border-bottom: 1px solid var(--border);"><span style="width: 9px; height: 9px; border-radius: 50%; background: #ef4444; display: inline-block;"></span><span style="width: 9px; height: 9px; border-radius: 50%; background: #eab308; display: inline-block;"></span><span style="width: 9px; height: 9px; border-radius: 50%; background: #22c55e; display: inline-block;"></span><span style="margin-left: 8px; font-family: 'Fira Code', monospace; font-size: 12px; color: var(--text-muted);">${lang || "code"}</span></div><div style="padding: 16px; overflow-x: auto;"><pre style="margin: 0; font-family: 'Fira Code', monospace; font-size: 13.5px; line-height: 1.6; color: #e2e8f0;"><code>${escapedCode}</code></pre></div></figure>`;
+      return `<figure class="article-code-block"><div class="code-header"><span class="window-dot dot-close"></span><span class="window-dot dot-minimize"></span><span class="window-dot dot-maximize"></span><span class="code-lang">${lang || "code"}</span></div><div class="code-body"><pre><code>${escapedCode}</code></pre></div></figure>`;
     })
     // Inline code
-    .replace(/`([^`]+)`/g, '<code style="background: var(--bg-soft); padding: 2px 6px; border-radius: 4px; font-family: \'Fira Code\', monospace; font-size: 0.9em;">$1</code>')
-    // Headings
-    .replace(/^### (.*$)/gim, '<h3 style="margin-top: 28px; margin-bottom: 12px; font-size: 1.25rem;">$1</h3>')
-    .replace(/^## (.*$)/gim, '<h3 style="margin-top: 32px; margin-bottom: 14px; font-size: 1.4rem;">$1</h3>')
-    .replace(/^# (.*$)/gim, '<h2 style="margin-top: 36px; margin-bottom: 16px; font-size: 1.75rem;">$1</h2>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    // Headings (Clean H2 and H3 semantics)
+    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+    .replace(/^# (.*$)/gim, '<h2>$1</h2>')
     // Blockquotes
-    .replace(/^\> (.*$)/gim, '<blockquote style="border-left: 3px solid var(--accent); padding-left: 16px; margin-block: 20px; color: var(--text-muted); font-style: italic;">$1</blockquote>')
+    .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
     // Horizontal Rule
-    .replace(/^---$/gim, '<hr style="border: none; border-top: 1px solid var(--border); margin-block: 32px;">')
+    .replace(/^---$/gim, '<hr>')
     // Images
-    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<figure style="margin-block: 24px;"><img src="$2" alt="$1" style="width: 100%; border-radius: var(--radius-md); border: 1px solid var(--border); display: block;" loading="lazy"><figcaption style="margin-top: 8px; font-size: var(--fz-xs); color: var(--text-muted); text-align: center;">$1</figcaption></figure>')
+    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<figure class="article-figure"><img src="$2" alt="$1" loading="lazy"><figcaption>$1</figcaption></figure>')
     // Links
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: underline;">$1</a>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
     // Bold, Italic, Strikethrough
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
     .replace(/~~([^~]+)~~/g, '<s>$1</s>')
     .replace(/\*([^*]+)\*/g, '<em>$1</em>')
     // Task lists
-    .replace(/^\s*[\-\*] \[ \] (.*$)/gim, '<li style="margin-bottom: 6px; list-style: none;"><input type="checkbox" disabled style="margin-right: 8px;">$1</li>')
-    .replace(/^\s*[\-\*] \[x\] (.*$)/gim, '<li style="margin-bottom: 6px; list-style: none;"><input type="checkbox" checked disabled style="margin-right: 8px;">$1</li>')
+    .replace(/^\s*[\-\*] \[ \] (.*$)/gim, '<li class="task-item"><input type="checkbox" disabled>$1</li>')
+    .replace(/^\s*[\-\*] \[x\] (.*$)/gim, '<li class="task-item"><input type="checkbox" checked disabled>$1</li>')
     // Unordered lists
-    .replace(/^\s*[\-\*] (.*$)/gim, '<li style="margin-bottom: 6px;">$1</li>')
+    .replace(/^\s*[\-\*] (.*$)/gim, '<li>$1</li>')
     // Ordered lists
-    .replace(/^\s*\d+\.\s+(.*$)/gim, '<li style="margin-bottom: 6px;">$1</li>')
-    // Paragraphs
+    .replace(/^\s*\d+\.\s+(.*$)/gim, '<li>$1</li>');
+
+  let isFirstPara = true;
+
+  html = html
     .split(/\n\n+/)
     .map((block) => {
       block = block.trim();
@@ -53,13 +63,17 @@ export function renderMarkdown(md) {
         return block;
       }
       if (block.startsWith("<li")) {
-        return `<ul style="padding-left: 20px; margin-block: 16px;">${block}</ul>`;
+        return `<ul>${block}</ul>`;
       }
-      return `<p style="line-height: 1.8; margin-bottom: 20px; color: var(--text); font-size: 1.05rem;">${block}</p>`;
+      if (isFirstPara) {
+        isFirstPara = false;
+        return `<p class="article-lead">${block}</p>`;
+      }
+      return `<p>${block}</p>`;
     })
     .join("\n");
 
-  return html;
+  return `<div class="article-content">${html}</div>`;
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
