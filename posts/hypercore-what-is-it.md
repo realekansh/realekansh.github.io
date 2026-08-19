@@ -3,9 +3,9 @@ title: "HyperCore - What is it?"
 slug: "hypercore-what-is-it"
 description: "A look at what HyperCore is, what it provideds, and how its architecture was built."
 date: "2026-08-18"
-updated: "2026-08-18"
+updated: "2026-08-19"
 author: "Ekansh Bhavik"
-tags: ["HyperCore","Architecture","OpenSource","Python"]
+tags: ["HyperCore","Architecture","Open Source","Python"]
 status: "published"
 cover: ""
 ---
