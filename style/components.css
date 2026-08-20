@@ -208,6 +208,32 @@
   gap: var(--sp-1);
 }
 
+.identity-name {
+  margin: 0 0 var(--sp-2);
+  font-size: 1.25rem;
+  font-weight: var(--fw-bold);
+  color: var(--text);
+}
+
+.identity-list {
+  display: grid;
+  gap: var(--sp-2);
+  text-align: left;
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+}
+
+.identity-list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.identity-list-item .icon {
+  color: var(--text-soft);
+  flex-shrink: 0;
+}
+
 .identity-socials {
   display: flex;
   gap: var(--sp-2);

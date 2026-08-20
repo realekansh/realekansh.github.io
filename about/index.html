@@ -83,33 +83,27 @@
           <div class="identity-card">
             <img src="/assets/avatar.jpg" alt="Ekansh Bhavik avatar" width="124" height="124" loading="lazy" />
             <div class="identity-meta">
-              <h2 class="accent" style="margin-bottom: 12px; font-size: 1.25rem">
+              <h2 class="identity-name accent">
                 Ekansh Bhavik
               </h2>
-              <div style="
-                    display: grid;
-                    gap: 8px;
-                    text-align: left;
-                    color: var(--text-muted);
-                    font-size: 0.9rem;
-                  ">
-                <div style="display: flex; gap: 8px; align-items: center">
-                  <svg class="icon" aria-hidden="true" style="color: var(--text-soft)">
+              <div class="identity-list">
+                <div class="identity-list-item">
+                  <svg class="icon" aria-hidden="true">
                     <use href="/assets/icons/icons.svg#map-pin"></use>
                   </svg>
-                  Uttar Pradesh, India
+                  <span>Uttar Pradesh, India</span>
                 </div>
-                <div style="display: flex; gap: 8px; align-items: center">
-                  <svg class="icon" aria-hidden="true" style="color: var(--text-soft)">
+                <div class="identity-list-item">
+                  <svg class="icon" aria-hidden="true">
                     <use href="/assets/icons/icons.svg#calendar"></use>
                   </svg>
-                  16 Years old
+                  <span>16 Years old</span>
                 </div>
-                <div style="display: flex; gap: 8px; align-items: center">
-                  <svg class="icon" aria-hidden="true" style="color: var(--text-soft)">
+                <div class="identity-list-item">
+                  <svg class="icon" aria-hidden="true">
                     <use href="/assets/icons/icons.svg#terminal"></use>
                   </svg>
-                  Open Source Enthusiast
+                  <span>Open Source Enthusiast</span>
                 </div>
               </div>
             </div>
@@ -137,13 +131,13 @@
               <svg class="icon" aria-hidden="true">
                 <use href="/assets/icons/icons.svg#mail"></use>
               </svg>
-              Send me a message
+              <span>Send me a message</span>
             </a>
           </div>
         </aside>
 
         <article class="essay">
-          <section style="display: grid; gap: var(--sp-3)">
+          <section class="essay-section">
             <h2>Introduction</h2>
             <div class="essay-card reveal">
               <p>
@@ -156,7 +150,7 @@
             </div>
           </section>
 
-          <section style="display: grid; gap: var(--sp-3)">
+          <section class="essay-section">
             <h2>Who Am I?</h2>
             <div class="essay-card reveal">
               <p>
@@ -173,7 +167,7 @@
             </div>
           </section>
 
-          <section style="display: grid; gap: var(--sp-3)">
+          <section class="essay-section">
             <h2>How It Started?</h2>
             <div class="essay-card reveal">
               <p>
@@ -191,7 +185,7 @@
             </div>
           </section>
 
-          <section style="display: grid; gap: var(--sp-3)">
+          <section class="essay-section">
             <h2>What I Do?</h2>
             <div class="essay-card reveal">
               <p>
@@ -204,7 +198,7 @@
             </div>
           </section>
 
-          <section style="display: grid; gap: var(--sp-3)">
+          <section class="essay-section">
             <h2>Why I Started?</h2>
             <div class="essay-card reveal">
               <p>
@@ -216,7 +210,7 @@
             </div>
           </section>
 
-          <section style="display: grid; gap: var(--sp-3)">
+          <section class="essay-section">
             <h2>My Philosophy</h2>
             <div class="essay-card reveal">
               <p>
@@ -228,11 +222,11 @@
             </div>
           </section>
 
-          <section style="display: grid; gap: var(--sp-3)">
+          <section class="essay-section">
             <h2>Tech Stack</h2>
             <div class="essay-card reveal">
               <div class="tech-stack">
-                <div>
+                <div class="tech-group">
                   <h3>Languages</h3>
                   <div class="pill-row">
                     <span class="pill">Python</span>
@@ -240,10 +234,13 @@
                     <span class="pill">JavaScript</span>
                     <span class="pill">Java</span>
                     <span class="pill">Bash</span>
+                    <span class="pill">HTML</span>
+                    <span class="pill">CSS</span>
                   </div>
                 </div>
-                <div>
-                  <h3>Frontend</h3>
+
+                <div class="tech-group">
+                  <h3>Frontend Engineering</h3>
                   <div class="pill-row">
                     <span class="pill">React</span>
                     <span class="pill">Next.js</span>
@@ -251,43 +248,86 @@
                     <span class="pill">CSS</span>
                   </div>
                 </div>
-                <div>
-                  <h3>Backend</h3>
+
+                <div class="tech-group">
+                  <h3>Backend Engineering</h3>
                   <div class="pill-row">
+                    <span class="pill">Java</span>
+                    <span class="pill">Python</span>
                     <span class="pill">FastAPI</span>
                     <span class="pill">Flask</span>
                     <span class="pill">Node.js</span>
+                  </div>
+                </div>
+
+                <div class="tech-group">
+                  <h3>Databases & Data</h3>
+                  <div class="pill-row">
                     <span class="pill">PostgreSQL</span>
                     <span class="pill">MongoDB</span>
                     <span class="pill">SQLite</span>
                     <span class="pill">Redis</span>
+                    <span class="pill">Firebase</span>
+                    <span class="pill">Supabase</span>
                   </div>
                 </div>
-                <div>
-                  <h3>Linux / FOSS</h3>
+
+                <div class="tech-group">
+                  <h3>Cloud & Infrastructure</h3>
                   <div class="pill-row">
-                    <span class="pill">Linux</span>
-                    <span class="pill">Hyprland</span>
-                    <span class="pill">FOSS</span>
-                    <span class="pill">Open Source</span>
+                    <span class="pill">AWS</span>
+                    <span class="pill">Google Cloud</span>
+                    <span class="pill">Oracle Cloud</span>
+                    <span class="pill">Azure</span>
+                    <span class="pill">Cloudflare</span>
+                    <span class="pill">Docker</span>
                   </div>
                 </div>
-                <div>
-                  <h3>Tooling</h3>
+
+                <div class="tech-group">
+                  <h3>Deployment & Hosting</h3>
+                  <div class="pill-row">
+                    <span class="pill">Vercel</span>
+                    <span class="pill">Netlify</span>
+                    <span class="pill">Railway</span>
+                    <span class="pill">Render</span>
+                    <span class="pill">Koyeb</span>
+                    <span class="pill">Heroku</span>
+                  </div>
+                </div>
+
+                <div class="tech-group">
+                  <h3>Developer Tooling</h3>
                   <div class="pill-row">
                     <span class="pill">Git</span>
-                    <span class="pill">Docker</span>
-                    <span class="pill">Cloudflare</span>
-                    <span class="pill">AWS</span>
-                    <span class="pill">Vercel</span>
+                    <span class="pill">CLI Tooling</span>
+                    <span class="pill">GitHub</span>
+                    <span class="pill">Shell scripting</span>
+                    <span class="pill">Automation</span>
+                    <span class="pill">APIs</span>
                   </div>
                 </div>
-                <div>
-                  <h3>Design</h3>
+
+                <div class="tech-group">
+                  <h3>Linux & Systems</h3>
                   <div class="pill-row">
-                    <span class="pill">Readable UI</span>
-                    <span class="pill">Systems Thinking</span>
-                    <span class="pill">Editorial Layouts</span>
+                    <span class="pill">Linux</span>
+                    <span class="pill">Wayland</span>
+                    <span class="pill">Hyprland</span>
+                    <span class="pill">System configuration</span>
+                    <span class="pill">Desktop tooling</span>
+                  </div>
+                </div>
+
+                <div class="tech-group">
+                  <h3>UI/UX & Design</h3>
+                  <div class="pill-row">
+                    <span class="pill">Figma</span>
+                    <span class="pill">Canva</span>
+                    <span class="pill">UI/UX Design</span>
+                    <span class="pill">Design systems</span>
+                    <span class="pill">Interface architecture</span>
+                    <span class="pill">Prototyping</span>
                   </div>
                 </div>
               </div>
