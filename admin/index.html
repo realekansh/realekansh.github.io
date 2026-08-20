@@ -8,22 +8,22 @@
     <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/style/base.css" />
     <link rel="stylesheet" href="/style/themes.css" />
     <link rel="stylesheet" href="/style/layout.css" />
     <link rel="stylesheet" href="/style/components.css" />
+    <link rel="stylesheet" href="/style/blog.css" />
   </head>
   <body data-page="admin">
     <header class="site-header">
-      <div
-        class="container nav-shell"
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        "
-      >
-        <div style="display: flex; align-items: center; gap: 16px">
+      <div class="container nav-shell">
+        <div style="display: flex; align-items: center; gap: 14px">
           <a class="brand-mark" href="/" aria-label="Ekansh Bhavik home">
             <img
               src="/assets/avatar.jpg"
@@ -32,32 +32,17 @@
               height="44"
             />
           </a>
-          <div
-            style="
-              font-weight: var(--fw-bold);
-              font-size: var(--fz-md);
-              white-space: nowrap;
-            "
-          >
+          <span style="font-weight: var(--fw-bold); font-size: var(--fs-small); color: var(--text); white-space: nowrap;">
             Blog Publishing Console
-          </div>
+          </span>
         </div>
+        <div></div>
         <div
           class="nav-actions"
           id="admin-header-actions"
-          style="display: none; align-items: center; gap: 12px"
+          style="display: none; align-items: center; gap: 10px"
         >
-          <span
-            id="user-badge"
-            style="
-              font-size: var(--fz-xs);
-              color: var(--text-muted);
-              padding: 4px 10px;
-              background: var(--bg-soft);
-              border-radius: var(--radius-full);
-              border: 1px solid var(--border);
-            "
-          ></span>
+          <span id="user-badge" class="tag"></span>
           <button
             class="button button-outline button-small"
             type="button"
@@ -107,7 +92,7 @@
             href="/api/auth/login"
             style="width: 100%; justify-content: center"
           >
-            <svg class="icon" aria-hidden="true">
+            <svg class="icon" aria-hidden="true" style="width: 18px; height: 18px;">
               <use href="/assets/icons/icons.svg#github"></use>
             </svg>
             <span>Log in with GitHub</span>
@@ -164,52 +149,49 @@
             id="forbidden-logout-btn"
             style="width: 100%; justify-content: center"
           >
-            Log Out & Return
+            Log Out &amp; Return
           </button>
         </div>
       </div>
 
-      <!-- Authenticated Owner (realekansh) Admin Dashboard View -->
-      <div id="dashboard-view" class="container" style="display: none">
-        <section class="page-hero container" style="padding-bottom: 16px">
+      <!-- Authenticated Owner Admin Dashboard View -->
+      <div id="dashboard-view" style="display: none">
+        <section class="page-hero container" style="padding-top: var(--sp-4); padding-bottom: var(--sp-4);">
           <div
             style="
               display: flex;
               justify-content: space-between;
-              align-items: flex-start;
+              align-items: center;
               flex-wrap: wrap;
               gap: 16px;
               width: 100%;
             "
           >
             <div>
-              <p class="page-kicker">Personal Publishing Console</p>
-              <h1 class="page-title">Articles & Drafts</h1>
+              <p class="page-kicker" style="margin-bottom: 4px;">Personal Publishing Console</p>
+              <h1 class="page-title" style="margin-bottom: 0;">Articles &amp; Drafts</h1>
             </div>
             <a
-              class="button button-primary button-large"
+              class="button button-primary"
               href="/admin/editor.html"
+              style="display: inline-flex; align-items: center; gap: 8px;"
             >
-              <svg class="icon" aria-hidden="true">
-                <use href="/assets/icons/icons.svg#check"></use>
+              <svg viewBox="0 0 16 16" fill="currentColor" width="16" height="16">
+                <path d="M7.75 2a.75.75 0 0 1 .75.75V7h4.25a.75.75 0 0 1 0 1.5H8.5v4.25a.75.75 0 0 1-1.5 0V8.5H2.75a.75.75 0 0 1 0-1.5H7V2.75A.75.75 0 0 1 7.75 2Z"/>
               </svg>
-              <span>+ New Post</span>
+              <span>New Post</span>
             </a>
           </div>
         </section>
 
-        <!-- Filter Tabs -->
-        <section class="section container" style="padding-top: 0">
+        <!-- Filter Tabs & Post Table -->
+        <section class="section container" style="padding-top: var(--sp-2);">
           <div
-            style="
-              display: flex;
-              gap: 8px;
-              margin-bottom: 20px;
-              border-bottom: 1px solid var(--border);
-              padding-bottom: 12px;
-            "
+            class="blog-filters"
+            id="admin-tabs"
+            style="margin-bottom: var(--sp-4); padding: 0;"
           >
-            <button class="pill active" id="tab-all" data-tab="all">
+            <button class="pill is-active" id="tab-all" data-tab="all">
               All Posts (<span id="count-all">0</span>)
             </button>
             <button class="pill" id="tab-published" data-tab="published">
@@ -220,30 +202,15 @@
             </button>
           </div>
 
-          <div class="aside-card" style="padding: 24px; overflow-x: auto">
-            <table
-              style="
-                width: 100%;
-                border-collapse: collapse;
-                text-align: left;
-                font-size: 0.95rem;
-              "
-            >
+          <div class="admin-table-wrap">
+            <table class="admin-table">
               <thead>
-                <tr
-                  style="
-                    border-bottom: 1px solid var(--border);
-                    color: var(--text-muted);
-                    font-size: var(--fz-xs);
-                    text-transform: uppercase;
-                    letter-spacing: 0.05em;
-                  "
-                >
-                  <th style="padding: 12px">Title</th>
-                  <th style="padding: 12px">Status</th>
-                  <th style="padding: 12px">Publish Date</th>
-                  <th style="padding: 12px">Tags</th>
-                  <th style="padding: 12px; text-align: right">Actions</th>
+                <tr>
+                  <th style="min-width: 240px;">Title</th>
+                  <th style="min-width: 110px;">Status</th>
+                  <th style="min-width: 120px;">Publish Date</th>
+                  <th style="min-width: 160px;">Tags</th>
+                  <th style="min-width: 260px; text-align: right;">Actions</th>
                 </tr>
               </thead>
               <tbody id="posts-table-body">
@@ -251,7 +218,7 @@
                   <td
                     colspan="5"
                     style="
-                      padding: 24px;
+                      padding: 32px;
                       text-align: center;
                       color: var(--text-muted);
                     "
@@ -271,18 +238,12 @@
         const loginView = document.getElementById("login-view");
         const forbiddenView = document.getElementById("forbidden-view");
         const dashboardView = document.getElementById("dashboard-view");
-        const adminHeaderActions = document.getElementById(
-          "admin-header-actions",
-        );
+        const adminHeaderActions = document.getElementById("admin-header-actions");
         const userBadge = document.getElementById("user-badge");
-        const forbiddenUserName = document.getElementById(
-          "forbidden-user-name",
-        );
+        const forbiddenUserName = document.getElementById("forbidden-user-name");
         const tableBody = document.getElementById("posts-table-body");
         const logoutBtn = document.getElementById("logout-btn");
-        const forbiddenLogoutBtn = document.getElementById(
-          "forbidden-logout-btn",
-        );
+        const forbiddenLogoutBtn = document.getElementById("forbidden-logout-btn");
 
         let currentTab = "all";
         let allFetchedPosts = [];
@@ -339,18 +300,16 @@
             (p) => p.status === "draft",
           ).length;
 
-          document.getElementById("count-all").textContent =
-            allFetchedPosts.length;
-          document.getElementById("count-published").textContent =
-            publishedCount;
+          document.getElementById("count-all").textContent = allFetchedPosts.length;
+          document.getElementById("count-published").textContent = publishedCount;
           document.getElementById("count-drafts").textContent = draftsCount;
 
-          document.querySelectorAll("[data-tab]").forEach((tabBtn) => {
+          document.querySelectorAll("#admin-tabs .pill").forEach((tabBtn) => {
             tabBtn.addEventListener("click", () => {
               document
-                .querySelectorAll("[data-tab]")
-                .forEach((b) => b.classList.remove("active"));
-              tabBtn.classList.add("active");
+                .querySelectorAll("#admin-tabs .pill")
+                .forEach((b) => b.classList.remove("is-active"));
+              tabBtn.classList.add("is-active");
               currentTab = tabBtn.getAttribute("data-tab");
               renderTable();
             });
@@ -360,17 +319,17 @@
 
           function renderTable() {
             let displayed = allFetchedPosts;
-            if (currentTab === "published")
-              displayed = allFetchedPosts.filter(
-                (p) => p.status === "published",
-              );
-            if (currentTab === "drafts")
+            if (currentTab === "published") {
+              displayed = allFetchedPosts.filter((p) => p.status === "published");
+            }
+            if (currentTab === "drafts") {
               displayed = allFetchedPosts.filter((p) => p.status === "draft");
+            }
 
             if (!displayed || displayed.length === 0) {
               tableBody.innerHTML = `
               <tr>
-                <td colspan="5" style="padding: 32px; text-align: center; color: var(--text-muted);">
+                <td colspan="5" style="padding: 40px; text-align: center; color: var(--text-muted);">
                   No articles found in <strong>${currentTab}</strong>. Click <strong>+ New Post</strong> to write one.
                 </td>
               </tr>
@@ -381,25 +340,30 @@
             tableBody.innerHTML = displayed
               .map(
                 (post) => `
-            <tr style="border-bottom: 1px solid var(--border);">
-              <td style="padding: 16px 12px; font-weight: var(--fw-semibold);">
-                <a href="/blogs/?post=${post.slug}" target="_blank" style="color: var(--text); text-decoration: none;">${post.title}</a>
+            <tr>
+              <td>
+                <a class="admin-post-title" href="/blogs/?post=${post.slug}" target="_blank">${post.title}</a>
+                <div class="admin-post-slug">/blogs/?post=${post.slug}</div>
               </td>
-              <td style="padding: 16px 12px;">
-                <span class="pill" style="${post.status === "draft" ? "background: rgba(234, 179, 8, 0.15); color: #eab308;" : "background: rgba(34, 197, 94, 0.15); color: #22c55e;"}">
+              <td>
+                <span class="admin-status-badge ${post.status === "draft" ? "admin-status-badge--draft" : "admin-status-badge--published"}">
                   ${post.status.toUpperCase()}
                 </span>
               </td>
-              <td style="padding: 16px 12px; color: var(--text-muted); font-size: var(--fz-xs);">${post.date}</td>
-              <td style="padding: 16px 12px; font-size: var(--fz-xs); color: var(--text-muted);">${(post.tags || []).join(", ")}</td>
-              <td style="padding: 16px 12px; text-align: right;">
-                <div style="display: inline-flex; gap: 6px; flex-wrap: nowrap; align-items: center; justify-content: flex-end;">
+              <td style="color: var(--text-muted); font-size: var(--fs-caption); white-space: nowrap;">${post.date || "—"}</td>
+              <td style="font-size: var(--fs-caption); color: var(--text-muted);">
+                <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+                  ${(post.tags || []).map((t) => `<span class="tag" style="font-size: 11px; padding: 2px 8px; min-height: 22px;">${t}</span>`).join("") || "—"}
+                </div>
+              </td>
+              <td style="text-align: right;">
+                <div class="admin-actions">
                   <a class="button button-outline button-small" href="/admin/editor.html?edit=${post.slug}">Edit</a>
                   <a class="button button-outline button-small" href="/blogs/?post=${post.slug}" target="_blank">Preview</a>
                   ${
                     post.status === "draft"
                       ? `<button class="button button-outline button-small publish-btn" data-slug="${post.slug}" style="color: #22c55e; border-color: rgba(34, 197, 94, 0.4);">Publish</button>`
-                      : `<button class="button button-outline button-small unpublish-btn" data-slug="${post.slug}" style="color: #eab308; border-color: rgba(234, 179, 8, 0.4);">Unpublish</button>`
+                      : `<button class="button button-outline button-small unpublish-btn" data-slug="${post.slug}" style="color: #f59e0b; border-color: rgba(245, 158, 11, 0.4);">Unpublish</button>`
                   }
                   <button class="button button-outline button-small delete-btn" data-slug="${post.slug}" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.4);">Delete</button>
                 </div>
@@ -435,7 +399,6 @@
               });
             });
 
-            // Fixes Bug 2: POST /api/posts/delete with JSON body { slug }
             tableBody.querySelectorAll(".delete-btn").forEach((btn) => {
               btn.addEventListener("click", async () => {
                 const slug = btn.getAttribute("data-slug");

@@ -4,909 +4,211 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0b0f14" />
-    <title>Writing Workspace &mdash; Personal Publishing Console</title>
+    <title>Writing Workspace &mdash; Ekansh Bhavik</title>
     <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/style/base.css" />
     <link rel="stylesheet" href="/style/themes.css" />
     <link rel="stylesheet" href="/style/layout.css" />
     <link rel="stylesheet" href="/style/components.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="/style/blog.css" />
+    <link rel="stylesheet" href="/style/editor.css" />
   </head>
   <body data-page="admin-editor">
-    <!-- Clean Top Bar Workspace Header -->
-    <header class="site-header" style="border-bottom: 1px solid var(--border)">
-      <div class="container nav-shell" style="max-width: 1200px">
-        <div style="display: flex; align-items: center; gap: 16px">
-          <a
-            class="button button-outline button-small"
-            href="/admin/"
-            id="back-btn"
-          >
-            <svg class="icon" aria-hidden="true">
-              <use href="/assets/icons/icons.svg#arrow-left"></use>
-            </svg>
-            <span>Back</span>
-          </a>
-          <div
-            style="font-weight: var(--fw-bold); font-size: var(--fz-md)"
-            id="editor-page-heading"
-          >
-            New Post
-          </div>
-          <span
-            class="pill"
-            id="post-status-badge"
-            style="
-              background: rgba(234, 179, 8, 0.15);
-              color: #eab308;
-              font-weight: var(--fw-semibold);
-            "
-            >DRAFT</span
-          >
-        </div>
-
-        <div style="display: flex; align-items: center; gap: 12px">
-          <button
-            type="button"
-            class="button button-outline"
-            id="save-draft-btn"
-          >
-            Save Draft
-          </button>
-          <button type="button" class="button button-primary" id="publish-btn">
-            <svg class="icon" aria-hidden="true">
-              <use href="/assets/icons/icons.svg#check"></use>
-            </svg>
-            <span id="publish-btn-text">Publish</span>
-          </button>
-        </div>
+    <!-- Editor Header -->
+    <header class="editor-header">
+      <div class="editor-header-left">
+        <a class="editor-back" href="/admin/" id="back-btn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.749.749 0 1 1 1.06 1.06L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.749.749 0 0 1-1.06 1.06Z"/>
+          </svg>
+          <span>Back</span>
+        </a>
+        <span id="editor-heading">New Post</span>
+        <span class="editor-status editor-status--draft" id="editor-status-badge">DRAFT</span>
+        <span class="editor-autosave" id="editor-autosave"></span>
+      </div>
+      <div class="editor-header-right">
+        <button
+          type="button"
+          class="editor-btn"
+          id="editor-preview-toggle"
+          aria-label="Toggle preview"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 2c1.981 0 3.671.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.671-.992-4.933-2.078C1.797 10.831.88 9.577.43 8.899a1.62 1.62 0 0 1 0-1.798c.45-.678 1.367-1.932 2.637-3.023C4.33 2.992 6.019 2 8 2ZM1.679 7.932a.12.12 0 0 0 0 .136c.411.622 1.241 1.75 2.366 2.717C5.176 11.758 6.527 12.5 8 12.5c1.473 0 2.825-.742 3.955-1.715 1.124-.967 1.954-2.096 2.366-2.717a.12.12 0 0 0 0-.136c-.412-.621-1.242-1.75-2.366-2.717C10.824 4.242 9.473 3.5 8 3.5c-1.473 0-2.824.742-3.955 1.715-1.124.967-1.954 2.096-2.366 2.717ZM8 10a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 10Z"/>
+          </svg>
+          <span id="editor-preview-text">Preview</span>
+        </button>
+        <button
+          type="button"
+          class="editor-btn editor-sidebar-toggle"
+          id="editor-sidebar-toggle"
+          aria-label="Toggle settings"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 0a8.2 8.2 0 0 1 .701.031C9.444.095 9.99.645 10.16 1.29l.288 1.107c.018.066.079.158.212.224.231.114.454.243.668.386.123.082.233.09.299.071l1.1-.303c.652-.18 1.37-.042 1.67.558.43.862.56 1.762.56 2.667 0 .905-.13 1.805-.56 2.667-.3.6-1.018.738-1.67.558l-1.1-.303c-.066-.018-.176-.01-.299.071a4.946 4.946 0 0 1-.668.386c-.133.066-.194.158-.212.224l-.288 1.107c-.17.645-.716 1.195-1.459 1.26a8.006 8.006 0 0 1-1.402 0c-.743-.065-1.289-.615-1.459-1.26l-.288-1.107c-.018-.066-.079-.158-.212-.224a5 5 0 0 1-.668-.386c-.123-.082-.233-.09-.299-.071l-1.1.303c-.652.18-1.37.042-1.67-.558C.16 11.805.03 10.905.03 10c0-.905.13-1.805.56-2.667.3-.6 1.018-.738 1.67-.558l1.1.303c.066.018.176.01.299-.071.214-.143.437-.272.668-.386.133-.066.194-.158.212-.224l.288-1.107C4.01.645 4.556.095 5.299.031 5.514.01 5.731 0 5.95 0H8Zm-.571 1.525c-.036.003-.071.007-.107.011a.612.612 0 0 0-.441.388l-.287 1.106a1.62 1.62 0 0 1-.88 1.008c-.171.084-.334.18-.487.286a1.62 1.62 0 0 1-1.303.235l-1.1-.303a.612.612 0 0 0-.562.154A6.67 6.67 0 0 0 1.826 6.1a.612.612 0 0 0 .12.546l.805.802a1.62 1.62 0 0 1 .42 1.252 4.558 4.558 0 0 0 0 .6 1.62 1.62 0 0 1-.42 1.252l-.805.802a.612.612 0 0 0-.12.546 6.67 6.67 0 0 0 .436 1.49.612.612 0 0 0 .562.154l1.1-.303a1.62 1.62 0 0 1 1.303.235c.153.106.316.202.487.286a1.62 1.62 0 0 1 .88 1.008l.287 1.106a.612.612 0 0 0 .441.388 7 7 0 0 0 1.142 0 .612.612 0 0 0 .441-.388l.288-1.106a1.62 1.62 0 0 1 .88-1.008c.17-.084.333-.18.486-.286a1.62 1.62 0 0 1 1.303-.235l1.1.303a.612.612 0 0 0 .562-.154 6.67 6.67 0 0 0 .436-1.49.612.612 0 0 0-.12-.546l-.805-.802a1.62 1.62 0 0 1-.42-1.252 4.56 4.56 0 0 0 0-.6 1.62 1.62 0 0 1 .42-1.252l.805-.802a.612.612 0 0 0 .12-.546 6.67 6.67 0 0 0-.436-1.49.612.612 0 0 0-.562-.154l-1.1.303a1.62 1.62 0 0 1-1.303-.235 5.006 5.006 0 0 0-.486-.286 1.62 1.62 0 0 1-.88-1.008l-.288-1.106a.612.612 0 0 0-.441-.388 7 7 0 0 0-1.142 0ZM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-1.5 0a1.5 1.5 0 1 0-3.001-.001A1.5 1.5 0 0 0 9.5 8Z"/>
+          </svg>
+        </button>
+        <button type="button" class="editor-btn" id="editor-save">Save Draft</button>
+        <button type="button" class="editor-btn editor-btn--primary" id="editor-publish">
+          <span id="editor-publish-text">Publish</span>
+        </button>
       </div>
     </header>
 
-    <main
-      class="main"
-      id="main"
-      style="padding-top: 80px; padding-bottom: 60px"
-    >
-      <div class="container" style="max-width: 1200px">
-        <!-- Article Title Header Input Area -->
-        <div style="margin-bottom: 24px">
-          <input
-            type="text"
-            id="post-title-input"
-            placeholder="Post title..."
-            style="
-              width: 100%;
-              padding: 12px 0;
-              background: transparent;
-              border: none;
-              border-bottom: 2px solid var(--border);
-              color: var(--text);
-              font-size: 2.2rem;
-              font-weight: 800;
-              outline: none;
-              line-height: 1.2;
-            "
-            required
-            autofocus
-          />
-          <div
-            style="
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              margin-top: 10px;
-              font-size: var(--fz-xs);
-              color: var(--text-muted);
-            "
-          >
-            <div>
-              URL:
-              <code
-                id="slug-preview"
-                style="
-                  background: var(--bg-soft);
-                  padding: 2px 6px;
-                  border-radius: 4px;
-                  color: var(--accent);
-                "
-                >/blogs/?post=...</code
-              >
-            </div>
-            <div id="word-count-badge">0 words &bull; 0 min read</div>
-          </div>
-        </div>
-
-        <!-- Main Editor & Live Preview Grid -->
-        <div class="editor-main-grid">
-          <!-- Left: Writing Area -->
-          <div
-            class="aside-card"
-            style="padding: 20px; display: flex; flex-direction: column"
-          >
-            <!-- Formatting Toolbar -->
-            <div
-              id="editor-toolbar"
-              style="
-                display: flex;
-                gap: 6px;
-                flex-wrap: wrap;
-                padding-bottom: 12px;
-                margin-bottom: 16px;
-                border-bottom: 1px solid var(--border);
-                align-items: center;
-              "
-            >
-              <button
-                type="button"
-                class="button button-outline button-small"
-                data-fmt="bold"
-                title="Bold (Ctrl+B)"
-              >
-                <strong>B</strong>
-              </button>
-              <button
-                type="button"
-                class="button button-outline button-small"
-                data-fmt="italic"
-                title="Italic (Ctrl+I)"
-              >
-                <em>I</em>
-              </button>
-              <button
-                type="button"
-                class="button button-outline button-small"
-                data-fmt="strike"
-                title="Strikethrough"
-              >
-                <s>S</s>
-              </button>
-              <span
-                style="
-                  border-right: 1px solid var(--border);
-                  height: 20px;
-                  margin-inline: 4px;
-                "
-              ></span>
-              <button
-                type="button"
-                class="button button-outline button-small"
-                data-fmt="h1"
-                title="Heading 1"
-              >
-                H1
-              </button>
-              <button
-                type="button"
-                class="button button-outline button-small"
-                data-fmt="h2"
-                title="Heading 2"
-              >
-                H2
-              </button>
-              <button
-                type="button"
-                class="button button-outline button-small"
-                data-fmt="h3"
-                title="Heading 3"
-              >
-                H3
-              </button>
-              <span
-                style="
-                  border-right: 1px solid var(--border);
-                  height: 20px;
-                  margin-inline: 4px;
-                "
-              ></span>
-              <button
-                type="button"
-                class="button button-outline button-small"
-                data-fmt="bullet"
-                title="Bullet List"
-              >
-                &bull; List
-              </button>
-              <button
-                type="button"
-                class="button button-outline button-small"
-                data-fmt="number"
-                title="Numbered List"
-              >
-                1. List
-              </button>
-              <button
-                type="button"
-                class="button button-outline button-small"
-                data-fmt="task"
-                title="Task List"
-              >
-                [ ] Task
-              </button>
-              <button
-                type="button"
-                class="button button-outline button-small"
-                data-fmt="quote"
-                title="Blockquote"
-              >
-                &ldquo;&rdquo;
-              </button>
-              <button
-                type="button"
-                class="button button-outline button-small"
-                data-fmt="code"
-                title="Inline Code"
-              >
-                `code`
-              </button>
-              <button
-                type="button"
-                class="button button-outline button-small"
-                data-fmt="codeblock"
-                title="Fenced Code Block"
-              >
-                ```
-              </button>
-              <button
-                type="button"
-                class="button button-outline button-small"
-                data-fmt="link"
-                title="Insert Link (Ctrl+K)"
-              >
-                Link
-              </button>
-              <button
-                type="button"
-                class="button button-outline button-small"
-                data-fmt="hr"
-                title="Horizontal Line"
-              >
-                &mdash;
-              </button>
-              <span
-                style="
-                  border-right: 1px solid var(--border);
-                  height: 20px;
-                  margin-inline: 4px;
-                "
-              ></span>
-              <label
-                class="button button-outline button-small"
-                style="
-                  cursor: pointer;
-                  display: inline-flex;
-                  align-items: center;
-                  gap: 4px;
-                  color: var(--accent);
-                "
-              >
-                <span>📷 Add Image</span>
-                <input
-                  type="file"
-                  id="image-upload-file"
-                  accept="image/*,.pdf,.txt,.md,.zip"
-                  style="display: none"
-                />
-              </label>
-            </div>
-
-            <!-- Markdown Writing Textarea -->
+    <!-- Editor Body -->
+    <div class="editor-page">
+      <div class="editor-body">
+        <!-- Writing Canvas -->
+        <div class="editor-canvas" id="editor-canvas">
+          <div class="editor-canvas-inner">
+            <!-- Title -->
             <textarea
-              id="markdown-input"
-              rows="26"
-              placeholder="Start writing your essay in Markdown here... (Drag & Drop or Paste images directly)"
-              style="
-                width: 100%;
-                padding: 14px;
-                background: var(--bg-soft);
-                border: 1px solid var(--border);
-                border-radius: var(--radius-sm);
-                color: var(--text);
-                font-family: &quot;Fira Code&quot;, monospace;
-                font-size: 0.92rem;
-                line-height: 1.6;
-                resize: vertical;
-                outline: none;
-              "
-              required
+              id="editor-title"
+              class="editor-title-input"
+              placeholder="Post title..."
+              rows="1"
+              autofocus
             ></textarea>
-          </div>
+            <span class="editor-slug-preview" id="editor-slug">/blogs/?post=...</span>
 
-          <!-- Right: Live Synchronized Preview & Metadata Panel -->
-          <div style="display: flex; flex-direction: column; gap: 20px">
-            <!-- Metadata Collapsible Drawer -->
-            <div class="aside-card" style="padding: 20px">
-              <h3
-                style="
-                  font-size: 1rem;
-                  margin-bottom: 14px;
-                  font-weight: var(--fw-bold);
-                "
-              >
-                Article Metadata
-              </h3>
+            <!-- Description -->
+            <textarea
+              id="editor-desc"
+              class="editor-desc-input"
+              placeholder="Short description (optional)"
+              rows="1"
+            ></textarea>
 
-              <div style="margin-bottom: 14px">
-                <label
-                  style="
-                    display: block;
-                    font-size: var(--fz-xs);
-                    font-weight: var(--fw-bold);
-                    color: var(--text-muted);
-                    margin-bottom: 6px;
-                    text-transform: uppercase;
-                  "
-                  >Description / Excerpt</label
-                >
-                <textarea
-                  id="post-desc-input"
-                  rows="2"
-                  placeholder="Brief summary for SEO and Open Graph social cards..."
-                  style="
-                    width: 100%;
-                    padding: 8px 12px;
-                    background: var(--bg-soft);
-                    border: 1px solid var(--border);
-                    border-radius: var(--radius-sm);
-                    color: var(--text);
-                    font-size: 0.88rem;
-                    font-family: inherit;
-                    resize: vertical;
-                  "
-                ></textarea>
-              </div>
-
-              <div class="metadata-fields-grid">
-                <div>
-                  <label
-                    style="
-                      display: block;
-                      font-size: var(--fz-xs);
-                      font-weight: var(--fw-bold);
-                      color: var(--text-muted);
-                      margin-bottom: 6px;
-                      text-transform: uppercase;
-                    "
-                    >Category / Tags</label
-                  >
-                  <input
-                    type="text"
-                    id="post-tags-input"
-                    placeholder="Architecture, Security"
-                    style="
-                      width: 100%;
-                      padding: 8px 12px;
-                      background: var(--bg-soft);
-                      border: 1px solid var(--border);
-                      border-radius: var(--radius-sm);
-                      color: var(--text);
-                      font-size: 0.88rem;
-                    "
-                  />
-                </div>
-                <div>
-                  <label
-                    style="
-                      display: block;
-                      font-size: var(--fz-xs);
-                      font-weight: var(--fw-bold);
-                      color: var(--text-muted);
-                      margin-bottom: 6px;
-                      text-transform: uppercase;
-                    "
-                    >Publish Date</label
-                  >
-                  <input
-                    type="date"
-                    id="post-date-input"
-                    style="
-                      width: 100%;
-                      padding: 8px 12px;
-                      background: var(--bg-soft);
-                      border: 1px solid var(--border);
-                      border-radius: var(--radius-sm);
-                      color: var(--text);
-                      font-size: 0.88rem;
-                    "
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label
-                  style="
-                    display: block;
-                    font-size: var(--fz-xs);
-                    font-weight: var(--fw-bold);
-                    color: var(--text-muted);
-                    margin-bottom: 6px;
-                    text-transform: uppercase;
-                  "
-                  >Cover Image URL</label
-                >
-                <input
-                  type="text"
-                  id="post-cover-input"
-                  placeholder="/assets/blog/my-slug/cover.webp"
-                  style="
-                    width: 100%;
-                    padding: 8px 12px;
-                    background: var(--bg-soft);
-                    border: 1px solid var(--border);
-                    border-radius: var(--radius-sm);
-                    color: var(--text);
-                    font-size: 0.88rem;
-                  "
-                />
-              </div>
-
-              <div
-                id="status-msg"
-                style="
-                  margin-top: 12px;
-                  font-size: var(--fz-xs);
-                  color: var(--text-muted);
-                  text-align: center;
-                "
-              ></div>
+            <!-- Formatting Toolbar -->
+            <div class="editor-toolbar">
+              <button class="editor-toolbar-btn" data-fmt="bold" title="Bold (Ctrl+B)"><strong>B</strong></button>
+              <button class="editor-toolbar-btn" data-fmt="italic" title="Italic (Ctrl+I)"><em>I</em></button>
+              <button class="editor-toolbar-btn" data-fmt="underline" title="Underline"><u>U</u></button>
+              <button class="editor-toolbar-btn" data-fmt="strike" title="Strikethrough"><s>S</s></button>
+              <span class="editor-toolbar-sep"></span>
+              <button class="editor-toolbar-btn" data-fmt="h1" title="Heading 1">H1</button>
+              <button class="editor-toolbar-btn" data-fmt="h2" title="Heading 2">H2</button>
+              <button class="editor-toolbar-btn" data-fmt="h3" title="Heading 3">H3</button>
+              <span class="editor-toolbar-sep"></span>
+              <button class="editor-toolbar-btn" data-fmt="bullet" title="Bullet List">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M2 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm3.75-1.5a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5Zm0 5a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5Zm0 5a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5ZM3 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-1 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/></svg>
+              </button>
+              <button class="editor-toolbar-btn" data-fmt="number" title="Numbered List">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M2.003 2.5a.5.5 0 0 0-.723-.447l-1.003.5a.5.5 0 0 0 .446.895l.28-.14V6H.5a.5.5 0 0 0 0 1h2.006a.5.5 0 1 0 0-1h-.503V2.5ZM5.75 2.5a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5Zm0 5a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5Zm0 5a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5ZM.924 10.32l.003-.004a.851.851 0 0 1 .144-.153A.66.66 0 0 1 1.5 10c.195 0 .306.068.374.146a.57.57 0 0 1 .128.376c0 .453-.269.682-.8 1.078l-.035.025C.692 11.973 0 12.495 0 13.5a.5.5 0 0 0 .5.5h2.003a.5.5 0 0 0 0-1H1.146c.132-.197.351-.372.654-.597l.047-.035c.47-.35 1.156-.858 1.156-1.845 0-.365-.118-.744-.377-1.038-.268-.303-.658-.485-1.126-.485-.48 0-.84.202-1.068.392a1.858 1.858 0 0 0-.348.384l-.007.011-.002.004-.001.002-.001.001a.5.5 0 0 0 .851.525Z"/></svg>
+              </button>
+              <button class="editor-toolbar-btn" data-fmt="task" title="Checklist">☑</button>
+              <span class="editor-toolbar-sep"></span>
+              <button class="editor-toolbar-btn" data-fmt="code" title="Inline Code (Ctrl+Shift+K)">&lt;&gt;</button>
+              <button class="editor-toolbar-btn" data-fmt="codeblock" title="Code Block">{/}</button>
+              <button class="editor-toolbar-btn" data-fmt="link" title="Link (Ctrl+K)">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"/></svg>
+              </button>
+              <button class="editor-toolbar-btn" data-fmt="image" title="Upload Image">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M16 13.25A1.75 1.75 0 0 1 14.25 15H1.75A1.75 1.75 0 0 1 0 13.25V2.75C0 1.784.784 1 1.75 1h12.5c.966 0 1.75.784 1.75 1.75ZM1.75 2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h.94l4.72-6.295a.75.75 0 0 1 1.18 0L12.31 13h1.94a.25.25 0 0 0 .25-.25V2.75a.25.25 0 0 0-.25-.25ZM5.5 6a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/></svg>
+              </button>
+              <span class="editor-toolbar-sep"></span>
+              <button class="editor-toolbar-btn" data-fmt="hr" title="Horizontal Rule">—</button>
             </div>
 
-            <!-- Live Rendered Preview Panel -->
-            <div class="aside-card" style="padding: 20px">
-              <h3
-                style="
-                  font-size: 1rem;
-                  margin-bottom: 14px;
-                  font-weight: var(--fw-bold);
-                  color: var(--text-muted);
-                  text-transform: uppercase;
-                "
-              >
-                Live Rendered Output
-              </h3>
-              <div
-                id="live-preview-box"
-                class="detail-content essay-body"
-                style="
-                  padding: 16px;
-                  background: var(--surface);
-                  border: 1px solid var(--border);
-                  border-radius: var(--radius-sm);
-                  min-height: 480px;
-                  max-height: 620px;
-                  overflow-y: auto;
-                "
-              >
-                <p style="color: var(--text-muted); font-style: italic">
-                  Rendered preview will appear as you type...
-                </p>
-              </div>
-            </div>
+            <!-- Markdown Textarea -->
+            <textarea
+              id="editor-textarea"
+              class="editor-textarea"
+              placeholder="Start writing... (type / for commands)"
+            ></textarea>
+
+            <!-- Word Count -->
+            <div class="editor-word-count" id="editor-word-count">0 words · 1 min read</div>
+
+            <!-- Preview (hidden by default, shown in preview mode) -->
+            <div class="editor-preview-content article-content essay-body" id="editor-preview-content"></div>
           </div>
         </div>
+
+        <!-- Sidebar -->
+        <div class="editor-sidebar-backdrop" id="editor-sidebar-backdrop"></div>
+        <aside class="editor-sidebar" id="editor-sidebar">
+          <!-- Document Settings -->
+          <div class="editor-section">
+            <div class="editor-section-header">
+              <span class="editor-section-title">Document Settings</span>
+              <svg class="editor-section-toggle" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"/></svg>
+            </div>
+            <div class="editor-section-body">
+              <div class="editor-field">
+                <label class="editor-label">Publish Date</label>
+                <input type="date" id="editor-date" class="editor-input" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Tags -->
+          <div class="editor-section">
+            <div class="editor-section-header">
+              <span class="editor-section-title">Tags</span>
+              <svg class="editor-section-toggle" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"/></svg>
+            </div>
+            <div class="editor-section-body">
+              <div class="editor-tags-list" id="editor-tags-list"></div>
+              <input
+                type="text"
+                id="editor-tags-input"
+                class="editor-input"
+                placeholder="Add tag and press Enter"
+              />
+            </div>
+          </div>
+
+          <!-- Cover Image -->
+          <div class="editor-section">
+            <div class="editor-section-header">
+              <span class="editor-section-title">Cover Image</span>
+              <svg class="editor-section-toggle" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"/></svg>
+            </div>
+            <div class="editor-section-body">
+              <input
+                type="text"
+                id="editor-cover-url"
+                class="editor-input"
+                placeholder="/assets/blog/slug/cover.webp"
+              />
+              <div class="editor-cover-preview" id="editor-cover-preview">
+                <span class="editor-cover-empty">No cover image</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Document Outline -->
+          <div class="editor-section">
+            <div class="editor-section-header">
+              <span class="editor-section-title">Document Outline</span>
+              <svg class="editor-section-toggle" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"/></svg>
+            </div>
+            <div class="editor-section-body">
+              <div class="editor-outline-list" id="editor-outline-list">
+                <span style="color: var(--text-muted); font-size: var(--fs-caption);">No headings yet</span>
+              </div>
+            </div>
+          </div>
+        </aside>
       </div>
-    </main>
+    </div>
 
-    <script type="module">
-      import { renderMarkdown } from "/script/blog.js";
+    <!-- Slash Command Menu (floating) -->
+    <div class="slash-menu" id="slash-menu"></div>
 
-      document.addEventListener("DOMContentLoaded", async () => {
-        // Server-Side Auth Check
-        const authRes = await fetch("/api/auth/user");
-        const authData = await authRes.json();
+    <!-- Hidden file input for image uploads -->
+    <input type="file" id="editor-image-upload" accept="image/*" style="display: none" />
 
-        if (!authData.authenticated || !authData.isOwner) {
-          window.location.href = "/admin/";
-          return;
-        }
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const editSlug = urlParams.get("edit");
-
-        const titleInput = document.getElementById("post-title-input");
-        const slugPreview = document.getElementById("slug-preview");
-        const dateInput = document.getElementById("post-date-input");
-        const descInput = document.getElementById("post-desc-input");
-        const tagsInput = document.getElementById("post-tags-input");
-        const coverInput = document.getElementById("post-cover-input");
-        const markdownInput = document.getElementById("markdown-input");
-        const previewBox = document.getElementById("live-preview-box");
-        const statusBadge = document.getElementById("post-status-badge");
-        const wordCountBadge = document.getElementById("word-count-badge");
-        const statusMsg = document.getElementById("status-msg");
-
-        const publishBtn = document.getElementById("publish-btn");
-        const saveDraftBtn = document.getElementById("save-draft-btn");
-        const imageFileInput = document.getElementById("image-upload-file");
-
-        let originalSlug = editSlug || "";
-        let currentPostStatus = "draft";
-
-        // Set default date
-        dateInput.value = new Date().toISOString().split("T")[0];
-
-        // Deterministic Slug Generator
-        function generateSlug(title) {
-          if (!title) return "untitled-post";
-          return title
-            .toLowerCase()
-            .trim()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .replace(/[^a-z0-9\s-]/g, "")
-            .replace(/\s+/g, "-")
-            .replace(/-+/g, "-")
-            .replace(/^-|-$/g, "");
-        }
-
-        // Title input -> auto update slug if NEW post
-        titleInput.addEventListener("input", () => {
-          if (!originalSlug) {
-            const derived = generateSlug(titleInput.value);
-            slugPreview.textContent = `/blogs/?post=${derived}`;
-          }
-          updatePreview();
-        });
-
-        markdownInput.addEventListener("input", updatePreview);
-
-        function updatePreview() {
-          const text = markdownInput.value;
-          previewBox.innerHTML =
-            renderMarkdown(text) ||
-            "<p style='color: var(--text-muted); font-style: italic;'>Rendered preview will appear as you type...</p>";
-
-          const wordCount = text.trim() ? text.trim().split(/\s+/).length : 0;
-          const readTime = Math.max(1, Math.ceil(wordCount / 200));
-          wordCountBadge.textContent = `${wordCount} words \u2022 ${readTime} min read`;
-        }
-
-        // Markdown auto-list continuation on Enter
-        markdownInput.addEventListener("keydown", (e) => {
-          if (e.key === "Enter") {
-            const pos = markdownInput.selectionStart;
-            const val = markdownInput.value;
-            const lineStart = val.lastIndexOf("\n", pos - 1) + 1;
-            const currentLine = val.substring(lineStart, pos);
-
-            const bulletMatch = currentLine.match(/^(\s*[\-\*]\s+)/);
-            const numberMatch = currentLine.match(/^(\s*(\d+)\.\s+)/);
-            const taskMatch = currentLine.match(/^(\s*[\-\*]\s+\[[\s\x]\]\s+)/);
-
-            if (taskMatch) {
-              e.preventDefault();
-              const insertText = "\n- [ ] ";
-              markdownInput.value =
-                val.slice(0, pos) + insertText + val.slice(pos);
-              markdownInput.selectionStart = markdownInput.selectionEnd =
-                pos + insertText.length;
-              updatePreview();
-            } else if (bulletMatch) {
-              e.preventDefault();
-              const prefix = bulletMatch[1];
-              const insertText = "\n" + prefix;
-              markdownInput.value =
-                val.slice(0, pos) + insertText + val.slice(pos);
-              markdownInput.selectionStart = markdownInput.selectionEnd =
-                pos + insertText.length;
-              updatePreview();
-            } else if (numberMatch) {
-              e.preventDefault();
-              const nextNum = parseInt(numberMatch[2], 10) + 1;
-              const insertText = `\n${nextNum}. `;
-              markdownInput.value =
-                val.slice(0, pos) + insertText + val.slice(pos);
-              markdownInput.selectionStart = markdownInput.selectionEnd =
-                pos + insertText.length;
-              updatePreview();
-            }
-          }
-
-          // Keyboard Shortcuts
-          if (e.ctrlKey || e.metaKey) {
-            if (e.key === "b" || e.key === "B") {
-              e.preventDefault();
-              applyFormat("bold");
-            } else if (e.key === "i" || e.key === "I") {
-              e.preventDefault();
-              applyFormat("italic");
-            } else if (e.key === "k" || e.key === "K") {
-              e.preventDefault();
-              applyFormat("link");
-            }
-          }
-        });
-
-        // Toolbar action handlers
-        document.querySelectorAll("[data-fmt]").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const type = btn.getAttribute("data-fmt");
-            applyFormat(type);
-          });
-        });
-
-        function applyFormat(type) {
-          const start = markdownInput.selectionStart;
-          const end = markdownInput.selectionEnd;
-          const text = markdownInput.value;
-          const selected = text.slice(start, end);
-          let inserted = "";
-
-          switch (type) {
-            case "bold":
-              inserted = `**${selected || "bold text"}**`;
-              break;
-            case "italic":
-              inserted = `*${selected || "italic text"}*`;
-              break;
-            case "strike":
-              inserted = `~~${selected || "strikethrough text"}~~`;
-              break;
-            case "h1":
-              inserted = `\n# ${selected || "Heading 1"}\n`;
-              break;
-            case "h2":
-              inserted = `\n## ${selected || "Heading 2"}\n`;
-              break;
-            case "h3":
-              inserted = `\n### ${selected || "Heading 3"}\n`;
-              break;
-            case "bullet":
-              inserted = `\n- ${selected || "List item"}\n`;
-              break;
-            case "number":
-              inserted = `\n1. ${selected || "List item"}\n`;
-              break;
-            case "task":
-              inserted = `\n- [ ] ${selected || "Task item"}\n`;
-              break;
-            case "quote":
-              inserted = `\n> ${selected || "Quote block"}\n`;
-              break;
-            case "code":
-              inserted = `\`${selected || "inline code"}\``;
-              break;
-            case "codeblock":
-              inserted = `\n\`\`\`javascript\n${selected || "// Code block"}\n\`\`\`\n`;
-              break;
-            case "hr":
-              inserted = `\n---\n`;
-              break;
-            case "link":
-              const url = prompt("Enter URL:", "https://");
-              if (url) inserted = `[${selected || "Link text"}](${url})`;
-              else return;
-              break;
-          }
-
-          markdownInput.value =
-            text.slice(0, start) + inserted + text.slice(end);
-          markdownInput.focus();
-          updatePreview();
-        }
-
-        // Drag & Drop / Paste Image Upload Handling
-        markdownInput.addEventListener("dragover", (e) => e.preventDefault());
-        markdownInput.addEventListener("drop", (e) => {
-          e.preventDefault();
-          if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-            uploadAndInsertFile(e.dataTransfer.files[0]);
-          }
-        });
-
-        markdownInput.addEventListener("paste", (e) => {
-          const items = (e.clipboardData || e.originalEvent.clipboardData)
-            .items;
-          for (let item of items) {
-            if (item.kind === "file") {
-              const blob = item.getAsFile();
-              uploadAndInsertFile(blob);
-            }
-          }
-        });
-
-        imageFileInput.addEventListener("change", (e) => {
-          if (e.target.files && e.target.files[0]) {
-            uploadAndInsertFile(e.target.files[0]);
-          }
-        });
-
-        async function uploadAndInsertFile(file) {
-          if (!file) return;
-
-          if (file.size > 5 * 1024 * 1024) {
-            const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
-            const errMsg = `File size (${sizeMB} MB) exceeds maximum allowed limit of 5 MB.`;
-            statusMsg.textContent = errMsg;
-            statusMsg.style.color = "#ef4444";
-            alert(errMsg);
-            return;
-          }
-
-          statusMsg.textContent = "Uploading asset securely...";
-          statusMsg.style.color = "var(--text-muted)";
-          const reader = new FileReader();
-
-          reader.onerror = () => {
-            const errMsg = "Failed to read local file.";
-            statusMsg.textContent = errMsg;
-            statusMsg.style.color = "#ef4444";
-            alert(errMsg);
-          };
-
-          reader.onload = async () => {
-            const base64Data = reader.result;
-            const currentSlug = originalSlug || generateSlug(titleInput.value);
-            const fileName = file.name || "pasted-image.png";
-            const fileType = file.type || "image/png";
-
-            try {
-              const uploadRes = await fetch("/api/upload/image", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  filename: fileName,
-                  contentType: fileType,
-                  base64Data,
-                  postSlug: currentSlug,
-                }),
-              });
-
-              let uploadData = {};
-              try {
-                uploadData = await uploadRes.json();
-              } catch (parseErr) {
-                uploadData = { message: await uploadRes.text() };
-              }
-
-              if (uploadRes.ok && uploadData.url) {
-                const isImg = fileType.startsWith("image") || /\.(png|jpe?g|webp|gif|svg)$/i.test(fileName);
-                const fileMD = isImg
-                  ? `\n![${fileName}](${uploadData.url})\n`
-                  : `\n[📎 Download ${fileName}](${uploadData.url})\n`;
-
-                const pos = markdownInput.selectionStart || 0;
-                markdownInput.value =
-                  markdownInput.value.slice(0, pos) +
-                  fileMD +
-                  markdownInput.value.slice(pos);
-                updatePreview();
-
-                if (!coverInput.value && isImg) {
-                  coverInput.value = uploadData.url;
-                }
-
-                statusMsg.textContent = "Asset uploaded successfully!";
-                statusMsg.style.color = "#22c55e";
-              } else {
-                const errMsg = uploadData.message || `HTTP ${uploadRes.status} Upload Error`;
-                statusMsg.textContent = "Upload failed: " + errMsg;
-                statusMsg.style.color = "#ef4444";
-                alert("Upload failed: " + errMsg);
-              }
-            } catch (err) {
-              console.error("Upload error:", err);
-              const errMsg = err.message || "Network request failed";
-              statusMsg.textContent = "Upload request failed: " + errMsg;
-              statusMsg.style.color = "#ef4444";
-              alert("Upload request failed: " + errMsg);
-            }
-          };
-          reader.readAsDataURL(file);
-        }
-
-        // Load post for editing if edit query parameter present
-        if (editSlug) {
-          document.getElementById("editor-page-heading").textContent =
-            "Edit Article";
-          originalSlug = editSlug;
-
-          try {
-            const getRes = await fetch(
-              `/api/posts/get?slug=${encodeURIComponent(editSlug)}`,
-            );
-            if (getRes.ok) {
-              const data = await getRes.json();
-              const fm = data.frontmatter || {};
-              titleInput.value = fm.title || editSlug;
-              slugPreview.textContent = `/blogs/?post=${editSlug}`;
-              dateInput.value = fm.date || "";
-              descInput.value = fm.description || "";
-              tagsInput.value = Array.isArray(fm.tags)
-                ? fm.tags.join(", ")
-                : "";
-              coverInput.value = fm.cover || "";
-              currentPostStatus = fm.status || "draft";
-              markdownInput.value = data.body || "";
-
-              statusBadge.textContent = currentPostStatus.toUpperCase();
-              if (currentPostStatus === "published") {
-                statusBadge.style.background = "rgba(34, 197, 94, 0.15)";
-                statusBadge.style.color = "#22c55e";
-                document.getElementById("publish-btn-text").textContent =
-                  "Update Published";
-              }
-              updatePreview();
-            }
-          } catch (err) {
-            console.error("Error loading article for editing:", err);
-          }
-        }
-
-        async function saveArticle(action) {
-          const title = titleInput.value.trim();
-          const content = markdownInput.value.trim();
-
-          if (!title || !content) {
-            const msg = "Please provide both a Post Title and Markdown content.";
-            statusMsg.textContent = msg;
-            statusMsg.style.color = "#eab308";
-            alert(msg);
-            return;
-          }
-
-          statusMsg.textContent =
-            action === "publish" ? "Publishing article..." : "Saving draft...";
-          statusMsg.style.color = "var(--text-muted)";
-          publishBtn.disabled = true;
-          saveDraftBtn.disabled = true;
-
-          try {
-            const saveRes = await fetch("/api/posts/save", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                title,
-                originalSlug,
-                description: descInput.value,
-                date: dateInput.value,
-                tags: tagsInput.value,
-                cover: coverInput.value,
-                content,
-                action, // "publish" or "draft"
-              }),
-            });
-
-            let resData = {};
-            try {
-              resData = await saveRes.json();
-            } catch (parseErr) {
-              resData = { message: await saveRes.text() };
-            }
-
-            if (saveRes.ok) {
-              statusMsg.textContent = "Saved successfully!";
-              statusMsg.style.color = "#22c55e";
-              setTimeout(() => {
-                window.location.href = "/admin/";
-              }, 600);
-            } else {
-              const errMsg = resData.message || `HTTP ${saveRes.status} Save Error`;
-              statusMsg.textContent = "Save failed: " + errMsg;
-              statusMsg.style.color = "#ef4444";
-              alert("Save failed: " + errMsg);
-              publishBtn.disabled = false;
-              saveDraftBtn.disabled = false;
-            }
-          } catch (err) {
-            console.error("Save article error:", err);
-            const errMsg = err.message || "Network error";
-            statusMsg.textContent = "Save request failed: " + errMsg;
-            statusMsg.style.color = "#ef4444";
-            alert("Save request failed: " + errMsg);
-            publishBtn.disabled = false;
-            saveDraftBtn.disabled = false;
-          }
-        }
-
-        publishBtn.addEventListener("click", () => saveArticle("publish"));
-        saveDraftBtn.addEventListener("click", () => saveArticle("draft"));
-      });
-    </script>
+    <script type="module" src="/script/editor.js"></script>
   </body>
 </html>
