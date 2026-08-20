@@ -78,8 +78,11 @@
   gap: var(--sp-4);
   min-height: 64px;
   padding: 0 16px;
-  border: 1px solid transparent;
+  border: 1px solid var(--border);
   border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--surface) 40%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   transition:
     min-height var(--medium) var(--ease),
     background var(--medium) var(--ease),
@@ -93,10 +96,9 @@
 
 .site-header.is-scrolled .nav-shell {
   min-height: 56px;
-  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  background: color-mix(in srgb, var(--surface) 40%, transparent);
   border-color: var(--border);
   box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(14px);
 }
 
 .brand-mark {
@@ -165,9 +167,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: calc(100vh - 80px);
-  padding: 140px 0 var(--sp-8);
-  gap: var(--sp-7);
+  padding: var(--sp-3) 0 var(--sp-6);
+  gap: var(--sp-5);
 }
 
 .hero-grid {
@@ -427,7 +428,15 @@
   }
 }
 
+body.nav-open {
+  overflow: hidden;
+}
+
 @media (max-width: 900px) {
+  .container {
+    width: min(100% - 40px, var(--container));
+  }
+
   .nav-shell {
     grid-template-columns: auto auto;
     justify-content: space-between;
@@ -480,7 +489,7 @@
 
 @media (max-width: 640px) {
   .container {
-    width: min(100% - 24px, var(--container));
+    width: min(100% - 40px, var(--container));
   }
 
   .main {

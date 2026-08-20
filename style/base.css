@@ -102,7 +102,8 @@ body {
   line-height: var(--lh-normal);
   color: var(--text);
   background:
-    linear-gradient(180deg, rgba(17, 24, 39, 0.58), rgba(11, 15, 20, 0) 420px),
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56, 189, 248, 0.12), transparent 70%),
+    linear-gradient(180deg, rgba(17, 24, 39, 0.65), rgba(11, 15, 20, 0) 480px),
     var(--bg);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -166,6 +167,7 @@ h3,
 h4 {
   color: var(--text);
   letter-spacing: var(--ls-tight);
+  text-wrap: balance;
 }
 
 h1 {
@@ -196,6 +198,7 @@ p {
   color: var(--text-muted);
   max-width: 72ch;
   line-height: var(--lh-normal);
+  text-wrap: pretty;
 }
 
 strong {

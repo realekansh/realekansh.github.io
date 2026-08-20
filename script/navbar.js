@@ -22,8 +22,19 @@ export function initNavbar() {
   }
 
   if (toggle && nav) {
+    const closeMenu = () => {
+      nav.classList.remove("is-open");
+      document.body.classList.remove("nav-open");
+      toggle.setAttribute("aria-expanded", "false");
+      const icon = toggle.querySelector("use");
+      if (icon) {
+        icon.setAttribute("href", "/assets/icons/icons.svg#menu");
+      }
+    };
+
     toggle.addEventListener("click", () => {
       const isOpen = nav.classList.toggle("is-open");
+      document.body.classList.toggle("nav-open", isOpen);
       toggle.setAttribute("aria-expanded", String(isOpen));
       const icon = toggle.querySelector("use");
       if (icon) {
@@ -32,14 +43,13 @@ export function initNavbar() {
     });
 
     links.forEach((link) => {
-      link.addEventListener("click", () => {
-        nav.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
-        const icon = toggle.querySelector("use");
-        if (icon) {
-          icon.setAttribute("href", "/assets/icons/icons.svg#menu");
-        }
-      });
+      link.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && nav.classList.contains("is-open")) {
+        closeMenu();
+      }
     });
   }
 
