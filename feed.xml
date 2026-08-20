@@ -8,5 +8,22 @@
     <language>en-us</language>
     <atom:link href="https://realekansh.xyz/feed.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title><![CDATA[HyperCore - What is it?]]></title>
+      <link>https://realekansh.xyz/blogs/?post=hypercore-what-is-it</link>
+      <guid isPermaLink="true">https://realekansh.xyz/blogs/?post=hypercore-what-is-it</guid>
+      <description><![CDATA[A look at what HyperCore is, what it provideds, and how its architecture was built.]]></description>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+      <author>Ekansh Bhavik</author>
+    </item>
+
+    <item>
+      <title><![CDATA[My Hyprland Setup Journey]]></title>
+      <link>https://realekansh.xyz/blogs/?post=my-hyprland-setup-journey</link>
+      <guid isPermaLink="true">https://realekansh.xyz/blogs/?post=my-hyprland-setup-journey</guid>
+      <description><![CDATA[A small story about how I discovered Hyprland, messed up my first setup, took a detour to Windows, and eventually came back to build something I actually like — this time with a bit more knowledge and a lot less blindly relying on AI.]]></description>
+      <pubDate>Tue, 11 Aug 2026 00:00:00 GMT</pubDate>
+      <author>Ekansh Bhavik</author>
+    </item>
   </channel>
 </rss>
