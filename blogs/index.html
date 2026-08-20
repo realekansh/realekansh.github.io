@@ -51,6 +51,7 @@
     <link rel="stylesheet" href="/style/layout.css" />
     <link rel="stylesheet" href="/style/components.css" />
     <link rel="stylesheet" href="/style/animations.css" />
+    <link rel="stylesheet" href="/style/blog.css" />
     <script type="module" src="/script/main.js"></script>
   </head>
   <body data-page="blogs">
@@ -116,85 +117,147 @@
 
     <main class="main" id="main">
       <!-- Post List View -->
-      <div id="blog-list-view">
+      <div id="blog-list-view" class="blog-listing">
         <section class="page-hero container reveal">
-          <p class="page-kicker">Writing & Blogs</p>
-          <h1 class="page-title">Technical Writing & System Notes</h1>
+          <p class="page-kicker">Blog</p>
+          <h1 class="page-title">Articles &amp; Insights</h1>
           <p class="page-lede">
-            Practical insights on software architecture, automation, Linux
-            environments, and building sustainable developer tools.
+            Thoughts on development, open source, Linux workflows, and building
+            sustainable developer tools.
           </p>
         </section>
 
         <section class="section container">
-          <div
-            class="blog-controls reveal"
-            style="
-              margin-bottom: 24px;
-              display: flex;
-              gap: 12px;
-              flex-wrap: wrap;
-              align-items: center;
-              justify-content: space-between;
-            "
-          >
-            <div
-              class="tag-filters"
-              id="tag-filters"
-              style="display: flex; gap: 8px; flex-wrap: wrap"
+          <!-- Search -->
+          <div class="blog-search" id="blog-search">
+            <svg class="blog-search-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true">
+              <path d="M10.68 11.74a6 6 0 1 1 1.06-1.06l3.04 3.04a.75.75 0 1 1-1.06 1.06l-3.04-3.04ZM11.5 7a4.5 4.5 0 1 0-9 0 4.5 4.5 0 0 0 9 0Z"/>
+            </svg>
+            <input
+              type="text"
+              id="blog-search-input"
+              class="blog-search-input"
+              placeholder="Search articles..."
+              autocomplete="off"
+            />
+            <button
+              class="blog-search-clear"
+              id="blog-search-clear"
+              type="button"
+              aria-label="Clear search"
             >
-              <button class="pill active" data-filter="all">All Posts</button>
-            </div>
-            <a
-              class="button button-outline button-small"
-              href="/feed.xml"
-              target="_blank"
-              rel="noopener noreferrer"
-              style="display: inline-flex; align-items: center; gap: 6px"
-            >
-              <svg
-                class="icon"
-                aria-hidden="true"
-                style="width: 14px; height: 14px"
-              >
-                <use href="/assets/icons/icons.svg#external"></use>
+              <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14">
+                <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.75.75 0 1 1 1.06 1.06L9.06 8l3.22 3.22a.75.75 0 1 1-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 0 1-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"/>
               </svg>
-              <span>RSS Feed</span>
-            </a>
+            </button>
           </div>
 
-          <div class="blog-posts-grid" id="posts-container">
-            <p class="text-muted">Loading posts...</p>
+          <!-- Tag Filters -->
+          <div class="blog-filters" id="tag-filters" role="group" aria-label="Filter by tag">
+            <button class="pill is-active" data-filter="all" aria-pressed="true">All</button>
+          </div>
+
+          <!-- Loading Skeleton -->
+          <div class="blog-grid" id="blog-loading" style="display: none">
+            <div class="blog-card blog-skeleton">
+              <div class="blog-card-image skeleton-block skeleton-image"></div>
+              <div class="blog-card-body">
+                <div class="skeleton-block skeleton-line" style="width: 40%"></div>
+                <div class="skeleton-block skeleton-line skeleton-line--title" style="width: 85%"></div>
+                <div class="skeleton-block skeleton-line" style="width: 100%"></div>
+                <div class="skeleton-block skeleton-line" style="width: 70%"></div>
+                <div class="skeleton-block skeleton-line" style="width: 50%; margin-top: auto"></div>
+              </div>
+            </div>
+            <div class="blog-card blog-skeleton">
+              <div class="blog-card-image skeleton-block skeleton-image"></div>
+              <div class="blog-card-body">
+                <div class="skeleton-block skeleton-line" style="width: 35%"></div>
+                <div class="skeleton-block skeleton-line skeleton-line--title" style="width: 90%"></div>
+                <div class="skeleton-block skeleton-line" style="width: 100%"></div>
+                <div class="skeleton-block skeleton-line" style="width: 60%"></div>
+                <div class="skeleton-block skeleton-line" style="width: 45%; margin-top: auto"></div>
+              </div>
+            </div>
+            <div class="blog-card blog-skeleton">
+              <div class="blog-card-image skeleton-block skeleton-image"></div>
+              <div class="blog-card-body">
+                <div class="skeleton-block skeleton-line" style="width: 45%"></div>
+                <div class="skeleton-block skeleton-line skeleton-line--title" style="width: 75%"></div>
+                <div class="skeleton-block skeleton-line" style="width: 95%"></div>
+                <div class="skeleton-block skeleton-line" style="width: 55%"></div>
+                <div class="skeleton-block skeleton-line" style="width: 40%; margin-top: auto"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Post Grid -->
+          <div class="blog-grid" id="posts-container" style="display: none"></div>
+
+          <!-- Empty State -->
+          <div class="blog-empty" id="blog-empty" style="display: none">
+            <div class="blog-empty-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+              </svg>
+            </div>
+            <p class="blog-empty-title">No published articles yet</p>
+            <p class="blog-empty-desc">Check back soon for technical essays and system notes.</p>
+            <button class="button button-outline blog-empty-clear" style="display: none" onclick="document.getElementById('blog-search-input').value='';document.getElementById('blog-search-input').dispatchEvent(new Event('input'));">
+              Clear search
+            </button>
+          </div>
+
+          <!-- Error State -->
+          <div class="blog-error" id="blog-error" style="display: none">
+            <div class="blog-error-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/>
+              </svg>
+            </div>
+            <p class="blog-error-title">Something went wrong</p>
+            <p class="blog-error-desc">Unable to load articles. Please try again.</p>
+            <button class="button button-outline" id="blog-retry">Retry</button>
           </div>
         </section>
       </div>
 
       <!-- Single Post Reader View -->
       <div id="blog-post-view" style="display: none">
-        <article class="article-container reveal">
-          <header class="article-header">
-            <a class="back-link" href="/blogs/" id="back-to-blogs">
-              <svg class="icon" aria-hidden="true">
-                <use href="/assets/icons/icons.svg#arrow-left"></use>
-              </svg>
-              <span>Back to All Posts</span>
-            </a>
-            <p class="page-kicker" id="post-category">Technical Essay</p>
-            <h1 class="page-title" id="post-title">Post Title</h1>
-            <div class="article-meta" id="post-meta-container">
-              <span id="post-date">Date</span>
-              <span class="meta-dot">&bull;</span>
-              <span id="post-reading-time">5 min read</span>
-              <span class="meta-dot">&bull;</span>
-              <span id="post-author">Ekansh Bhavik</span>
-            </div>
-          </header>
+        <div class="article-with-toc">
+          <article class="article-container reveal">
+            <header class="article-header">
+              <a class="back-link" href="/blogs/" id="back-to-blogs">
+                <svg class="icon" aria-hidden="true">
+                  <use href="/assets/icons/icons.svg#arrow-left"></use>
+                </svg>
+                <span>Back to Blog</span>
+              </a>
 
-          <div class="article-content essay-body" id="post-body-container">
-            <p>Loading article content...</p>
-          </div>
-          <div id="post-nav-container"></div>
-        </article>
+              <div class="blog-card-tags" id="post-tags-container" style="display: none; margin-bottom: var(--sp-3)"></div>
+
+              <h1 class="page-title" id="post-title">Post Title</h1>
+
+              <div class="article-meta" id="post-meta-container">
+                <span>Date</span>
+                <span class="meta-dot">&bull;</span>
+                <span>Author</span>
+                <span class="meta-dot">&bull;</span>
+                <span>5 min read</span>
+              </div>
+            </header>
+
+            <figure class="article-cover" id="post-cover-container" style="display: none"></figure>
+
+            <div class="article-content essay-body" id="post-body-container">
+              <p>Loading article content...</p>
+            </div>
+
+            <div id="post-nav-container"></div>
+          </article>
+
+          <aside class="article-toc" id="post-toc" style="display: none"></aside>
+        </div>
       </div>
     </main>
 

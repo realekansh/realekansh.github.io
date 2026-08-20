@@ -3,9 +3,9 @@ title: "HyperCore - What is it?"
 slug: "hypercore-what-is-it"
 description: "A look at what HyperCore is, what it provideds, and how its architecture was built."
 date: "2026-08-18"
-updated: "2026-08-19"
+updated: "2026-08-20"
 author: "Ekansh Bhavik"
-tags: ["HyperCore","Architecture","Open Source","Python"]
+tags: ["HyperCore","Architecture","Python","Open Source"]
 status: "published"
 cover: ""
 ---
@@ -46,8 +46,6 @@ The full changelog amd commit history are available on [GitHub](https://github.c
 
 ### Related Links:
 
-**Commit**: [#2aa840b](https://github.com/HyperTechFoundation/HyperCore/commit/2aa840bb5dc7da93ff7aeb118a93707fdd6c996b)
-
-**Release**: [HyperCore v0.5.0](https://github.com/HyperTechFoundation/HyperCore/releases/tag/v0.5.0)
-
-**Repository**: [HyperTechFoundation/HyperCore](https://github.com/HyperTechFoundation/HyperCore)
+- **Commit**: [#2aa840b](https://github.com/HyperTechFoundation/HyperCore/commit/2aa840bb5dc7da93ff7aeb118a93707fdd6c996b)
+- **Release**: [HyperCore v0.5.0](https://github.com/HyperTechFoundation/HyperCore/releases/tag/v0.5.0)
+- **Repository**: [HyperTechFoundation/HyperCore](https://github.com/HyperTechFoundation/HyperCore)
