@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/api/github-stats/badge",
+      "destination": "/api/github-stats-badge"
+    },
+    {
       "source": "/:path*",
       "has": [
         {

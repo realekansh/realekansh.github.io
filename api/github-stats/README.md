@@ -188,7 +188,7 @@ find api/github-stats -name '*.js' -print -exec node --check {} \;
 
 ## Deployment
 
-Deploy with the existing Vercel setup. No portfolio routing, pages, styles, scripts, or global configuration need to change for these endpoints.
+Deploy with the existing Vercel setup. No portfolio pages, styles, scripts, existing API handlers, or broad routing rules are changed for these endpoints.
 
 Expected production URLs:
 
@@ -196,6 +196,15 @@ Expected production URLs:
 https://realekansh.xyz/api/github-stats
 https://realekansh.xyz/api/github-stats/badge?metric=followers
 ```
+
+This repository uses two tiny top-level Vercel route adapters:
+
+```text
+api/github-stats.js
+api/github-stats-badge.js
+```
+
+The implementation still lives in this directory. The badge adapter is reached through one narrow `vercel.json` rewrite from `/api/github-stats/badge` to `/api/github-stats-badge`, because the deployed non-framework Vercel build did not expose the original `api/github-stats/` subtree as public routes.
 
 ## Known Limitations
 

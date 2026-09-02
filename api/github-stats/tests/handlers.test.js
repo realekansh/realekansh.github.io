@@ -1,6 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import badgeAdapter from "../../github-stats-badge.js";
 import badgeHandler from "../badge.js";
+import rawAdapter from "../../github-stats.js";
 import rawHandler from "../index.js";
 import { clearCache } from "../lib/cache.js";
 import { assertBadge, createMockResponse, jsonResponse, textResponse } from "./helpers.js";
@@ -121,6 +123,32 @@ test("badge endpoint sanitizes label and color customization", async () => {
     assertBadge(res.body);
     assert.equal(res.body.label, "followers x-bad: header");
     assert.equal(res.body.color, "blue");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("top-level Vercel adapters delegate to isolated handlers", async () => {
+  clearCache();
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => jsonResponse({
+    login: "realekansh",
+    followers: 342,
+    following: 87,
+    public_repos: 46,
+  });
+
+  try {
+    const rawRes = createMockResponse();
+    await rawAdapter({ method: "GET", query: { metric: "followers" } }, rawRes);
+    assert.equal(rawRes.statusCode, 200);
+    assert.equal(rawRes.body.metric.value, 342);
+
+    const badgeRes = createMockResponse();
+    await badgeAdapter({ method: "GET", query: { metric: "followers" } }, badgeRes);
+    assert.equal(badgeRes.statusCode, 200);
+    assertBadge(badgeRes.body);
+    assert.equal(badgeRes.body.message, "342");
   } finally {
     globalThis.fetch = originalFetch;
   }
