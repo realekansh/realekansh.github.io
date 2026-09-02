@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { formatCompact, formatInteger, formatMetricValue } from "../lib/format.js";
+import { formatCompact, formatInteger, formatMetricValue } from "../../lib/github-stats/format.js";
 
 test("formats integers with separators", () => {
   assert.equal(formatInteger(0), "0");

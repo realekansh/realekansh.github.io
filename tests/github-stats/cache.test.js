@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { clearCache, getOrSetCache } from "../lib/cache.js";
+import { clearCache, getOrSetCache } from "../../lib/github-stats/cache.js";
 
 test("returns cached values within ttl", async () => {
   clearCache();

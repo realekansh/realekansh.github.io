@@ -1,1 +1,1 @@
-export { default } from "./github-stats/badge.js";
+export { default } from "../lib/github-stats/badge.js";

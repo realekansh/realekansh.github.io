@@ -1,1 +1,1 @@
-export { default } from "./github-stats/index.js";
+export { default } from "../lib/github-stats/index.js";

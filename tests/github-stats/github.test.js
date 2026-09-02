@@ -6,7 +6,7 @@ import {
   fetchIssueSearchCount,
   fetchRepositorySummary,
   getGitHubUsername,
-} from "../lib/github.js";
+} from "../../lib/github-stats/github.js";
 import { jsonResponse } from "./helpers.js";
 
 test("fetchGitHubProfile returns validated public user counts", async () => {

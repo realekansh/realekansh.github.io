@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { parseKomarevCount } from "../lib/komarev.js";
+import { parseKomarevCount } from "../../lib/github-stats/komarev.js";
 
 test("parses Komarev count from accessible SVG title", () => {
   const svg = '<svg><title>Profile views: 12,847</title><text>Profile views</text><text>12,847</text></svg>';

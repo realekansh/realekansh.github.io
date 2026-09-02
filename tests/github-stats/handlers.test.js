@@ -1,10 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import badgeAdapter from "../../github-stats-badge.js";
-import badgeHandler from "../badge.js";
-import rawAdapter from "../../github-stats.js";
-import rawHandler from "../index.js";
-import { clearCache } from "../lib/cache.js";
+import badgeAdapter from "../../api/github-stats-badge.js";
+import badgeHandler from "../../lib/github-stats/badge.js";
+import rawAdapter from "../../api/github-stats.js";
+import rawHandler from "../../lib/github-stats/index.js";
+import { clearCache } from "../../lib/github-stats/cache.js";
 import { assertBadge, createMockResponse, jsonResponse, textResponse } from "./helpers.js";
 
 test("badge endpoint returns Shields JSON for a valid metric", async () => {

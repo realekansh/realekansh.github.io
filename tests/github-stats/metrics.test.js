@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { clearCache } from "../lib/cache.js";
-import { createMetricsContext, resolveMetric } from "../lib/metrics.js";
+import { clearCache } from "../../lib/github-stats/cache.js";
+import { createMetricsContext, resolveMetric } from "../../lib/github-stats/metrics.js";
 import { jsonResponse, textResponse } from "./helpers.js";
 
 test("resolves a valid GitHub metric through the registry", async () => {
